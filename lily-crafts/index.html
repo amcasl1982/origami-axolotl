@@ -1,0 +1,836 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lily's Craft Adventure</title>
+<meta name="description" content="Five homemade crafts for Lily and Pip the hedgehog. Read the words, make the picnic, and earn a star.">
+<meta name="theme-color" content="#F5F5F7">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='3.2' fill='%23FFE08A' stroke='%231A1A1A'/%3E%3Cpath stroke='%231A1A1A' stroke-linecap='round' d='M8 1.2v2.2M8 12.6v2.2M1.2 8h2.2M12.6 8h2.2'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Andika:wght@400;700&family=Inter:wght@400;500;600;700&family=Lexend:wght@500;600&display=swap" rel="stylesheet">
+<script>
+window.__errs=[];
+window.addEventListener('error',function(e){window.__errs.push(String(e.message||e.error||e));});
+window.addEventListener('unhandledrejection',function(e){window.__errs.push(String(e.reason));});
+</script>
+<style>
+:root{
+  --bg:#F5F5F7; --card:#FFFFFF; --ink:#1A1A1A; --muted:#4E4E55; --line:#E5E5EA;
+  --butter:#FFE08A; --blush:#FFD6E2; --pink:#FF9EBB; --mint:#D9F3E3; --peach:#FFE0CC; --sky:#D9E8F8;
+  --ease:cubic-bezier(.25,1,.5,1);
+}
+*{box-sizing:border-box}
+html{background:var(--bg);-webkit-text-size-adjust:100%}
+html,body{margin:0}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text",Inter,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  font-size:16px;line-height:1.45;color:var(--ink);background:var(--bg);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  -webkit-tap-highlight-color:transparent;
+}
+h1,h2,h3,p{margin:0}
+button,input{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none;padding:0}
+button,label{touch-action:manipulation}
+:focus{outline:none}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:12px}
+::selection{background:var(--butter)}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.app{max-width:1080px;margin:0 auto;padding:calc(18px + env(safe-area-inset-top)) 16px calc(28px + env(safe-area-inset-bottom))}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.home-title{font-size:30px;line-height:1.12;font-weight:600;letter-spacing:-.025em;margin-top:6px;text-wrap:balance}
+.lede{margin-top:10px;color:var(--muted);font-size:16px;line-height:1.45;max-width:38em}
+.starbar{display:flex;align-items:center;gap:3px;margin-top:14px;flex-wrap:wrap}
+.starbar .starcount{margin-left:8px;font-size:14px;font-weight:600}
+.howto{list-style:none;margin:16px 0 0;padding:0;display:flex;flex-direction:column;gap:10px}
+.howto li{display:flex;gap:10px;align-items:flex-start;font-size:15px;font-weight:500;line-height:1.35}
+.howto .n{flex:none;width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:13px;font-weight:600}
+.card{background:var(--card);border-radius:28px;border:1px solid rgba(0,0,0,.06);box-shadow:0 1px 2px rgba(0,0,0,.04),0 10px 30px rgba(0,0,0,.05)}
+.hero{overflow:hidden;margin-top:16px}
+.hero svg{display:block;width:100%;height:auto}
+.garden{margin-top:14px;padding:16px 12px 10px}
+.garden h2{font-size:18px;font-weight:600;letter-spacing:-.01em;padding:0 6px}
+.garden .hint{color:var(--muted);font-size:14px;margin:4px 6px 10px}
+.stops{position:relative;display:flex;flex-direction:column;gap:6px;list-style:none;margin:0;padding:0}
+.stops::before{content:"";position:absolute;left:35px;top:40px;bottom:40px;width:2px;background-image:radial-gradient(#C5C5CE 1.4px,transparent 1.6px);background-size:2px 11px;background-repeat:repeat-y;z-index:0}
+.stop{position:relative;z-index:1;display:flex;align-items:center;gap:12px;width:100%;min-height:76px;text-align:left;padding:8px 10px 8px 8px;border-radius:20px;background:#fff}
+.stop.current{box-shadow:inset 0 0 0 2px var(--ink)}
+.stop-copy{min-width:0;flex:1}
+.stop-name{display:block;font-size:16px;font-weight:600;letter-spacing:-.01em}
+.stop-sub{display:block;margin-top:2px;color:var(--muted);font-size:13px;line-height:1.3}
+.ico{width:56px;height:56px;border-radius:18px;display:grid;place-items:center;flex:none}
+.ico svg{width:36px;height:36px;display:block}
+.stop.locked .ico{opacity:.5}
+.go-pill,.lockpill{margin-left:auto;flex:none;border-radius:999px;font-size:12px;font-weight:700;line-height:1}
+.go-pill{background:var(--ink);color:#fff;padding:8px 12px;min-height:32px;display:inline-flex;align-items:center}
+.lockpill{color:var(--muted);padding:8px 2px}
+.badge-star{margin-left:auto;flex:none;display:inline-flex}
+.ready{margin-top:14px;padding:16px 16px 18px}
+.ready h2{font-size:20px;margin-top:4px}
+.ready p{margin-top:6px;color:var(--muted);font-size:15px}
+.ready .next{margin-top:14px}
+.grownup{margin-top:16px;padding:0 4px 8px}
+.save-note{color:var(--muted);font-size:13px;margin-top:8px}
+.texty{min-height:44px;padding:8px 2px;color:var(--muted);font-weight:600;font-size:14px;text-decoration:underline;text-underline-offset:3px}
+.resetbox{background:#fff;border:1px solid rgba(0,0,0,.06);border-radius:20px;padding:14px;margin-top:4px}
+.resetbox p{font-size:14px;margin-bottom:10px}
+.resetrow{display:flex;flex-wrap:wrap;gap:8px}
+.back{min-height:44px;padding:0 2px;color:var(--muted);font-weight:600;font-size:15px;display:inline-flex;align-items:center}
+.segs{display:flex;gap:4px;margin-top:8px}
+.segs i{flex:1;height:3px;border-radius:3px;background:var(--line);display:block}
+.segs i.on{background:var(--ink)}
+.segs i.cur{background:var(--ink);opacity:.4}
+.act-kicker{margin-top:2px}
+.act-title{font-size:28px;line-height:1.15;font-weight:600;letter-spacing:-.02em;margin-top:4px;text-wrap:balance}
+.act-sub{margin-top:6px;color:var(--muted);font-size:15px;max-width:40em}
+.pillrow{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.pill{font-size:12px;font-weight:600;border:1px solid var(--line);background:#fff;border-radius:999px;padding:6px 10px}
+.skip{position:absolute;left:12px;top:8px;transform:translateY(-160%);background:var(--ink);color:#fff;border-radius:999px;padding:10px 14px;z-index:20;font-weight:600}
+.skip:focus,.skip:focus-visible{transform:none}
+.stack{display:flex;flex-direction:column;gap:14px;margin-top:14px}
+.side{display:flex;flex-direction:column;gap:14px}
+.block{padding:16px}
+.block h2,.read h2{font-size:18px;font-weight:600;letter-spacing:-.01em}
+.read h2{margin-top:2px}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.phrases{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.tile{position:relative;min-height:108px;border-radius:20px;border:1.5px solid var(--line);background:#fff;padding:18px 6px 22px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+.phrases .tile{min-height:88px;padding:16px 36px 18px}
+.tile.speaking{box-shadow:inset 0 0 0 2px var(--ink)}
+.letters{font-family:Andika,Lexend,Verdana,sans-serif;font-weight:700;font-size:34px;line-height:1;color:var(--ink);letter-spacing:.01em}
+.phrases .letters{font-size:32px}
+.ch{border-radius:8px;padding:0 1px}
+.ch.on{background:var(--butter)}
+.sp{display:inline-block;width:.35em}
+.cap{display:flex;flex-wrap:wrap;gap:16px;justify-content:center;font-size:12px;font-weight:600;color:var(--muted);line-height:1.2}
+.ord{position:absolute;top:8px;left:10px;font-size:12px;font-weight:700;color:var(--muted)}
+.spk{position:absolute;top:8px;right:8px;width:16px;height:16px;display:block}
+.readnote{margin-top:10px;color:var(--muted);font-size:14px;line-height:1.4}
+.write{margin-top:10px;font-size:15px;line-height:1.45}
+.together-label{margin-top:14px}
+.sentence{display:block;width:100%;margin-top:8px;background:#FFF6D8;border-radius:16px;min-height:52px;padding:12px;font-family:Andika,Lexend,Verdana,sans-serif;font-size:22px;font-weight:700;line-height:1.2;color:var(--ink);text-align:center}
+.sentence.speaking{box-shadow:inset 0 0 0 2px var(--ink)}
+.need{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.need label{display:inline-flex;align-items:center;gap:8px;min-height:44px;max-width:100%;padding:6px 12px 6px 8px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-size:14px;font-weight:600;line-height:1.25;cursor:pointer}
+.need input{width:20px;height:20px;margin:0;accent-color:#1A1A1A;flex:none}
+.need label:has(input:checked){background:#FFF6D8;border-color:#E2C56A}
+.tip{background:#F6F1EA;border-radius:22px;padding:14px 16px 16px}
+.tip p{margin-top:6px;font-size:15px;line-height:1.45}
+.step{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--line)}
+.step:first-of-type{border-top:0;padding-top:12px}
+.ill{width:72px;height:72px;flex:none;border-radius:18px;display:grid;place-items:center}
+.ill svg{width:62px;height:62px;display:block}
+.step h3{font-size:16px;font-weight:600;letter-spacing:-.01em;display:flex;align-items:center;gap:8px}
+.step h3 span:last-child{flex:1}
+.step p{margin-top:4px;font-size:15px;line-height:1.45}
+.num{flex:none;width:24px;height:24px;border-radius:50%;background:var(--ink);color:#fff;font-size:12px;font-weight:600;display:grid;place-items:center}
+.finish{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:22px 0 4px}
+.finish p{color:var(--muted);font-size:14px}
+.next{display:inline-flex;align-items:center;justify-content:center;background:var(--ink);color:#fff;border-radius:999px;min-height:52px;padding:0 22px;font-size:16px;font-weight:600;line-height:1;box-shadow:0 6px 16px rgba(0,0,0,.14)}
+.next:active{transform:scale(.98)}
+.hear{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:0 16px;border-radius:999px;border:1.5px solid var(--line);background:#fff;font-weight:600;font-size:15px}
+.yay{min-height:calc(100svh - 48px);display:grid;place-items:center;position:relative;padding:12px 0 24px}
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.confetti i{position:absolute;left:50%;top:42%;width:8px;height:12px;border-radius:2px;opacity:0;animation:conf 1.7s var(--ease) forwards;animation-delay:var(--d)}
+@keyframes conf{
+  0%{opacity:0;transform:translate(-50%,-50%) rotate(0) scale(.6)}
+  12%{opacity:1}
+  100%{opacity:0;transform:translate(calc(-50% + var(--x2)),calc(-50% + var(--y2))) rotate(var(--r)) scale(1)}
+}
+.yay-card{position:relative;z-index:1;width:min(100%,420px);text-align:center;padding:28px 20px 22px}
+.sticker{width:112px;height:112px;margin:0 auto 14px;border-radius:28px;background:var(--butter);display:grid;place-items:center;box-shadow:0 10px 24px rgba(0,0,0,.08);transform:rotate(-6deg);animation:pop .55s var(--ease) both}
+@keyframes pop{from{transform:scale(.7) rotate(-6deg);opacity:0}to{transform:scale(1) rotate(-6deg);opacity:1}}
+.yay-card h1{font-size:28px;letter-spacing:-.02em;margin-top:4px}
+.yay-card p{margin-top:8px;color:var(--muted);font-size:16px}
+.yay-card .next{margin-top:18px}
+.finale-wrap{width:min(100%,640px);margin:0 auto;display:flex;flex-direction:column;align-items:stretch}
+.finale-actions{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:12px}
+.cert{padding:10px}
+.cert-inner{border:1.5px solid var(--ink);border-radius:18px;padding:26px 18px 18px;background:radial-gradient(140px 90px at 100% 0%,#FFE8A3 0%,transparent 72%),radial-gradient(160px 110px at 0% 100%,#FFD6E2 0%,transparent 72%),#fff}
+.cert-star{display:flex;justify-content:center}
+.cert-name{font-family:Andika,Lexend,Verdana,sans-serif;font-weight:700;font-size:34px;line-height:1.05;letter-spacing:-.02em;margin-top:8px;text-align:center}
+.cert-lead{margin-top:12px;font-size:15px;line-height:1.5;text-align:center}
+.awards{list-style:none;margin:16px 0 0;padding:0}
+.awards li{display:flex;align-items:center;gap:10px;min-height:44px;border-top:1px solid var(--line);font-weight:600}
+.mini{width:32px;height:32px;border-radius:10px;display:grid;place-items:center;flex:none}
+.mini svg{width:22px;height:22px;display:block}
+.awards .nm{flex:1}
+.cert-foot{display:flex;justify-content:space-between;gap:16px;align-items:flex-end;margin-top:16px}
+.when{font-size:13px;color:var(--muted);font-weight:600}
+.sign{text-align:right}
+.who{font-family:Andika,Lexend,Verdana,sans-serif;font-size:28px;font-weight:700;line-height:1}
+.role{font-size:13px;color:var(--muted);font-weight:600}
+.toast{position:fixed;z-index:40;left:50%;bottom:calc(16px + env(safe-area-inset-bottom));transform:translateX(-50%);max-width:min(92vw,440px);background:var(--ink);color:#fff;border-radius:999px;padding:12px 16px;font-size:14px;font-weight:600;text-align:center}
+.toast[hidden]{display:none}
+.noscript{padding:24px 16px;max-width:40em}
+@media(hover:hover){
+  .stop:hover{background:#FAFAFB}
+  .next:hover{transform:translateY(-1px)}
+  .hear:hover{border-color:var(--ink)}
+  .back:hover,.texty:hover{color:var(--ink)}
+}
+@media(max-width:959px){
+  .hero{margin-top:12px;height:118px}
+  .hero svg{height:118px;width:100%}
+  .lede{margin-top:6px}
+  .starbar{margin-top:10px}
+  .howto{margin-top:12px;gap:8px}
+  .garden{margin-top:10px;padding:12px 10px 6px}
+  .stop{min-height:64px;padding:6px 8px 6px 6px}
+  .ico{width:48px;height:48px;border-radius:16px}
+  .ico svg{width:30px;height:30px}
+  .stops::before{left:29px;top:34px;bottom:34px}
+}
+@media(min-width:960px){
+  .app{padding:40px 32px 56px}
+  .home-title{font-size:44px}
+  .home{display:grid;grid-template-columns:minmax(280px,.92fr) minmax(340px,1.08fr);grid-template-areas:"intro hero" "lead garden" "grownup garden";column-gap:36px;row-gap:14px;align-items:start}
+  .intro{grid-area:intro}
+  .lead{grid-area:lead}
+  .hero{grid-area:hero;margin-top:0}
+  .stage-slot{grid-area:garden;display:flex;flex-direction:column;gap:14px}
+  .garden{margin-top:0}
+  .ready{margin-top:0}
+  .grownup{grid-area:grownup;margin-top:0;align-self:end}
+  .stack{display:grid;grid-template-columns:minmax(300px,.9fr) minmax(340px,1.1fr);gap:18px;align-items:start}
+  .act-title{font-size:34px}
+  .finale-wrap{min-height:calc(100svh - 96px);justify-content:center}
+  .cert-name{font-size:42px}
+  .cert-inner{padding:32px 28px 24px}
+}
+@media(max-width:359px){
+  .letters{font-size:28px}
+  .tiles{gap:6px}
+}
+@media(prefers-reduced-motion:reduce){
+  .confetti{display:none!important}
+  .sticker{animation:none}
+  .next,.stop{transition:none}
+}
+@media print{
+  body{background:#fff!important}
+  .no-print,.toast,#bootlog,.skip{display:none!important}
+  .app{max-width:none;padding:0}
+  .finale-wrap{min-height:0;display:block}
+  .cert{box-shadow:none;border:none;width:100%}
+  .cert-inner{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@page{margin:14mm}
+</style>
+</head>
+<body>
+<div class="app" id="app"></div>
+<div id="live" class="sr" aria-live="polite"></div>
+<div id="toast" class="toast" role="status" hidden></div>
+<noscript><p class="noscript">Lily's Craft Adventure needs JavaScript so the words can speak, the stars can save, and the steps can open.</p></noscript>
+<script>
+setTimeout(function(){
+  var n=document.createElement('div');
+  n.id='bootlog'; n.className='sr';
+  n.textContent=window.__errs.length?window.__errs.join(' | '):'ok';
+  document.body.appendChild(n);
+},0);
+
+const KEY='lily-craft-adventure-v1';
+const params=new URLSearchParams(location.search);
+const demo=params.get('demo');
+let resetOpen=false;
+let preserveScroll=false;
+let speakToken=0;
+let timers=[];
+let warnedSpeak=false;
+
+function emptyState(){return{done:[false,false,false,false,false],checks:[[],[],[],[],[]],finishedAt:null}}
+function load(){
+  try{
+    const raw=localStorage.getItem(KEY);
+    if(!raw) return emptyState();
+    const s=JSON.parse(raw);
+    if(!s||!Array.isArray(s.done)||s.done.length!==5) return emptyState();
+    if(!Array.isArray(s.checks)) s.checks=[[],[],[],[],[]];
+    return s;
+  }catch(e){return emptyState()}
+}
+let state=load();
+function save(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+function isUnlocked(i,done){return i===0||!!done[i-1]}
+function allDone(done){return done.every(Boolean)}
+
+const SPK='<svg class="spk" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h4l5-4v12l-5-4H3z" fill="#1A1A1A"/><path d="M16 9a4.5 4.5 0 0 1 0 6" fill="none" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/></svg>';
+
+function starSVG(size,filled){
+  return '<svg viewBox="0 0 24 24" width="'+size+'" height="'+size+'" aria-hidden="true"><path d="M12 2.2l2.6 5.6 6.1.7-4.5 4.1 1.3 6-5.5-3.2-5.5 3.2 1.3-6L3.3 8.5l6.1-.7z" fill="'+(filled?'#FFE08A':'none')+'" stroke="#1A1A1A" stroke-width="1.6" stroke-linejoin="round"/></svg>';
+}
+function icon(name){
+  const s='stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"';
+  if(name==='sun') return '<svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="8" fill="#FFE08A" '+s+'/><path d="M24 6v6M24 36v6M6 24h6M36 24h6M11 11l4 4M33 33l4 4M11 37l4-4M33 15l4-4" fill="none" '+s+'/></svg>';
+  if(name==='cat') return '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M34 32q8 2 6 9" fill="none" '+s+'/><polygon points="14,24 18,12 24,22" fill="#FFD6E2" '+s+'/><polygon points="26,22 32,12 36,24" fill="#FFD6E2" '+s+'/><polygon points="18,20 26,8 34,20" fill="#F05454" '+s+'/><rect x="14" y="20" width="22" height="18" rx="9" fill="#fff" '+s+'/><circle cx="21" cy="27" r="1.5" fill="#1A1A1A"/><circle cx="29" cy="27" r="1.5" fill="#1A1A1A"/><path d="M23 31 q2 2 4 0" fill="none" '+s+'/><path d="M14 28h-5M36 28h5" fill="none" '+s+'/></svg>';
+  if(name==='flower') return '<svg viewBox="0 0 48 48" aria-hidden="true"><path d="M24 42 V24" fill="none" '+s+'/><ellipse cx="16" cy="32" rx="6" ry="3" transform="rotate(-40 16 32)" fill="#B7E4C7" '+s+'/><path d="M24 24c-6 0-8-8 0-12 8 4 6 12 0 12z" fill="#FF9EBB" '+s+'/></svg>';
+  if(name==='pip') return '<svg viewBox="0 0 48 48" aria-hidden="true"><polygon points="10,28 6,16 16,24" fill="#E8A56C" '+s+'/><polygon points="16,26 14,12 24,22" fill="#E8A56C" '+s+'/><polygon points="22,25 24,12 30,22" fill="#E8A56C" '+s+'/><ellipse cx="20" cy="32" rx="12" ry="9" fill="#F6C9A6" '+s+'/><circle cx="31" cy="27" r="7.5" fill="#F6C9A6" '+s+'/><circle cx="33.5" cy="26" r="1.4" fill="#1A1A1A"/><ellipse cx="37.5" cy="29" rx="2.4" ry="1.6" fill="#1A1A1A"/></svg>';
+  return '<svg viewBox="0 0 48 48" aria-hidden="true"><polygon points="8,22 24,8 40,22" fill="#FF9EBB" '+s+'/><rect x="12" y="21" width="24" height="18" rx="2" fill="#F6E6D4" '+s+'/><rect x="21" y="28" width="8" height="11" rx="1.5" fill="#fff" '+s+'/><rect x="15.5" y="25" width="6" height="6" fill="#D5E8F8" '+s+'/></svg>';
+}
+function ill(inner){return '<svg viewBox="0 0 80 80" aria-hidden="true">'+inner+'</svg>'}
+const INK='stroke="#1A1A1A" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"';
+
+const ACTIVITIES=[
+  {
+    title:'Sunny Plate', map:'A smiling paper sun', minutes:15, icon:'sun', paper:'#FFF3CC',
+    blurb:'Make a sun for the picnic, then hang it up.',
+    words:[
+      {say:'sun', parts:[{text:'sun', chunks:['s','u','n']}]},
+      {say:'red', parts:[{text:'red', chunks:['r','e','d']}]},
+      {say:'big', parts:[{text:'big', chunks:['b','i','g']}]}
+    ],
+    together:null,
+    ordered:false,
+    readNote:'Say each sound, then blend the word. s, u, n … sun.',
+    write:'Write sun in the middle, big on the longest ray, and red on the red cheek.',
+    need:['A paper plate','Yellow felt tip or crayon','Red felt tip or crayon','Plain paper','Glue stick','Safe scissors','String or wool'],
+    tip:'Scissors are a grown-up job, or you cut the rays together. A glue stick is kinder than runny glue.',
+    yay:'The sun is up. Pip can have a bright picnic.',
+    steps:[
+      {h:'Colour it yellow', d:'Colour the plate with a yellow felt tip or crayon. Leave a space in the middle for a face.', svg:ill('<circle cx="32" cy="44" r="20" fill="#FFE08A" '+INK+'/><g transform="rotate(28 60 30)"><rect x="52" y="14" width="12" height="28" rx="2" fill="#F6C453" '+INK+'/><rect x="52" y="36" width="12" height="6" fill="#F05454" '+INK+'/><polygon points="52,42 64,42 58,50" fill="#F6C453" '+INK+'/></g>')},
+      {h:'Give it a face', d:'Draw two eyes and a smile. Colour one cheek red.', svg:ill('<circle cx="40" cy="40" r="24" fill="#FFE08A" '+INK+'/><circle cx="31" cy="35" r="2.3" fill="#1A1A1A"/><circle cx="49" cy="35" r="2.3" fill="#1A1A1A"/><circle cx="52" cy="46" r="5" fill="#F05454"/><path d="M30 50 q10 9 20 0" fill="none" '+INK+'/>')},
+      {h:'Add the rays', d:'Cut about six fat rays from paper. Glue them around the rim.', svg:ill('<g fill="#FFE08A" '+INK+'><polygon points="40,4 47,18 33,18"/><polygon points="40,76 47,62 33,62"/><polygon points="4,40 18,33 18,47"/><polygon points="76,40 62,33 62,47"/><polygon points="14,14 26,20 18,30"/><polygon points="66,14 60,26 70,18"/></g><circle cx="40" cy="40" r="14" fill="#FFF6D0" '+INK+'/>')},
+      {h:'Write the words', d:'Write sun in the middle. Write big on the longest ray. Write red on the red cheek.', svg:ill('<circle cx="40" cy="40" r="26" fill="#FFE08A" '+INK+'/><text x="40" y="46" text-anchor="middle" font-family="Andika,Verdana,sans-serif" font-size="18" font-weight="700" fill="#1A1A1A">sun</text>')},
+      {h:'Hang it up', d:'Tape a loop of string to the back. Hang the sun where Pip can see it.', svg:ill('<path d="M40 2 v14" fill="none" '+INK+'/><circle cx="40" cy="46" r="20" fill="#FFE08A" '+INK+'/><path d="M40 22 v6M22 46 h6M52 46 h6M26 32 l4 4M54 54 l4 4" fill="none" '+INK+'/><circle cx="33" cy="44" r="2" fill="#1A1A1A"/><circle cx="47" cy="44" r="2" fill="#1A1A1A"/><path d="M33 52 q7 6 14 0" fill="none" '+INK+'/>')}
+    ]
+  },
+  {
+    title:'Cat in a Hat', map:'A cat in a red hat', minutes:20, icon:'cat', paper:'#FFE8EF',
+    blurb:'Make a cat to sit beside the sun. Give the cat a red hat.',
+    words:[
+      {say:'cat', parts:[{text:'cat', chunks:['c','a','t']}]},
+      {say:'hat', parts:[{text:'hat', chunks:['h','a','t']}]},
+      {say:'the', parts:[{text:'the', chunks:['the'], tricky:true}]}
+    ],
+    together:null,
+    ordered:false,
+    readNote:'cat and hat can be sounded out. the is a tricky word. Lily knows it by sight.',
+    write:'Write the cat on the tummy. Write hat on the red hat.',
+    need:['A toilet roll tube','Plain paper','Felt tips','A red felt tip or crayon','Glue stick','Safe scissors'],
+    tip:'Please help with the scissors. If you glue on a button nose, press it until it stays, and stay with Lily.',
+    yay:'The cat is here, red hat and all.',
+    steps:[
+      {h:'Colour the tube', d:'Colour the toilet roll tube. This is the cat’s body.', svg:ill('<rect x="26" y="12" width="28" height="56" rx="12" fill="#FFD6E2" '+INK+'/>')},
+      {h:'Draw the face', d:'Add round eyes, a nose, a smile, and three whiskers on each side.', svg:ill('<rect x="26" y="14" width="28" height="52" rx="12" fill="#fff" '+INK+'/><circle cx="35" cy="34" r="2.2" fill="#1A1A1A"/><circle cx="45" cy="34" r="2.2" fill="#1A1A1A"/><path d="M37 44 q3 4 6 0" fill="none" '+INK+'/><path d="M26 36 h-8M54 36 h8M26 42 h-10M54 42 h10M26 48 h-8M54 48 h8" fill="none" '+INK+'/>')},
+      {h:'Ears, tail, and a red hat', d:'Cut two triangle ears, a long tail, and a hat. Colour the hat red. Glue on the ears and the tail.', svg:ill('<polygon points="10,28 22,10 34,28" fill="#FFD6E2" '+INK+'/><polygon points="40,28 52,10 64,28" fill="#FFD6E2" '+INK+'/><polygon points="46,50 58,34 70,50" fill="#F05454" '+INK+'/><path d="M14 58 q16 16 28-2" fill="none" '+INK+'/>')},
+      {h:'Write the words', d:'Write the cat on the tummy. Write hat on the red hat.', svg:ill('<rect x="22" y="16" width="36" height="48" rx="14" fill="#fff" '+INK+'/><text x="40" y="44" text-anchor="middle" font-family="Andika,Verdana,sans-serif" font-size="14" font-weight="700" fill="#1A1A1A">cat</text>')},
+      {h:'Put the hat on', d:'Glue the hat on top. Stand the cat next to your sun.', svg:ill('<path d="M58 58 q12 2 8 12" fill="none" '+INK+'/><polygon points="24,34 32,16 42,34" fill="#FFD6E2" '+INK+'/><polygon points="42,34 52,16 60,34" fill="#FFD6E2" '+INK+'/><polygon points="30,30 42,10 54,30" fill="#F05454" '+INK+'/><rect x="26" y="32" width="32" height="36" rx="14" fill="#fff" '+INK+'/><circle cx="36" cy="46" r="2" fill="#1A1A1A"/><circle cx="48" cy="46" r="2" fill="#1A1A1A"/><path d="M38 54 q4 4 8 0" fill="none" '+INK+'/>')}
+    ]
+  },
+  {
+    title:'Button Garden', map:'Flowers with buttons', minutes:20, icon:'flower', paper:'#E5F8EC',
+    blurb:'Make a little garden of flowers with button middles.',
+    words:[
+      {say:'I', parts:[{text:'I', chunks:['I'], tricky:true}]},
+      {say:'can', parts:[{text:'can', chunks:['c','a','n']}]},
+      {say:'see', parts:[{text:'see', chunks:['s','ee']}]}
+    ],
+    together:'I can see',
+    ordered:false,
+    readNote:'Sound out can and see. I is a tricky word.',
+    write:'Write I can see on a paper sign. Stand the sign in the garden.',
+    need:['An egg carton','Buttons','Leaves or green paper','Glue stick','Felt tips','A piece of cardboard'],
+    tip:'Cutting an egg carton is a grown-up job, because the card can snap. Hold each button until the glue sticks.',
+    yay:'The garden is ready. Pip can see the flowers.',
+    steps:[
+      {h:'Three flower cups', d:'Ask a grown-up to cut three cups from the egg carton. Colour each cup like a flower.', svg:ill('<path d="M24 26 h32 l-6 34 H30 z" fill="#FFD6E2" '+INK+'/><path d="M24 26 q5 8 10 0 q6 8 12 0 q5 8 10 0" fill="none" '+INK+'/>')},
+      {h:'Button middles', d:'Glue a button in the middle of each flower.', svg:ill('<path d="M22 24 h36 l-7 36 H29 z" fill="#FFE08A" '+INK+'/><circle cx="40" cy="42" r="8" fill="#fff" '+INK+'/><circle cx="40" cy="42" r="2" fill="#1A1A1A"/><circle cx="36" cy="39" r="1.2" fill="#1A1A1A"/><circle cx="44" cy="39" r="1.2" fill="#1A1A1A"/><circle cx="37" cy="45" r="1.2" fill="#1A1A1A"/><circle cx="43" cy="45" r="1.2" fill="#1A1A1A"/>')},
+      {h:'Stalks and leaves', d:'Glue a leaf, or a strip of green paper, under each flower.', svg:ill('<path d="M40 74 V40" fill="none" '+INK+'/><ellipse cx="28" cy="58" rx="10" ry="5" transform="rotate(-40 28 58)" fill="#B7E4C7" '+INK+'/><circle cx="40" cy="28" r="16" fill="#FF9EBB" '+INK+'/><circle cx="40" cy="28" r="5" fill="#FFE08A" '+INK+'/>')},
+      {h:'A little garden', d:'Glue the flowers onto cardboard so they stand in a row.', svg:ill('<rect x="8" y="58" width="64" height="12" rx="2" fill="#F6E6D4" '+INK+'/><circle cx="22" cy="40" r="10" fill="#FF9EBB" '+INK+'/><circle cx="40" cy="34" r="12" fill="#FFE08A" '+INK+'/><circle cx="58" cy="40" r="10" fill="#E4D9F7" '+INK+'/><circle cx="22" cy="40" r="3" fill="#fff" '+INK+'/><circle cx="40" cy="34" r="3.4" fill="#fff" '+INK+'/><circle cx="58" cy="40" r="3" fill="#fff" '+INK+'/>')},
+      {h:'Write the words', d:'Write I can see on a small paper sign. Stand it in the garden.', svg:ill('<rect x="14" y="28" width="52" height="28" rx="4" fill="#fff" '+INK+'/><path d="M40 56 v14" fill="none" '+INK+'/><text x="40" y="47" text-anchor="middle" font-family="Andika,Verdana,sans-serif" font-size="11" font-weight="700" fill="#1A1A1A">I can see</text>')}
+    ]
+  },
+  {
+    title:'Meet Pip', map:'A sock hedgehog', minutes:25, icon:'pip', paper:'#FFF0E4',
+    blurb:'Make Pip from a sock, with pasta spines and a scarf to read.',
+    words:[
+      {say:'red hat', parts:[{text:'red', chunks:['r','e','d']},{text:'hat', chunks:['h','a','t']}]},
+      {say:'big cat', parts:[{text:'big', chunks:['b','i','g']},{text:'cat', chunks:['c','a','t']}]},
+      {say:'I see', parts:[{text:'I', chunks:['I'], tricky:true},{text:'see', chunks:['s','ee']}]}
+    ],
+    together:null,
+    ordered:false,
+    phrase:true,
+    readNote:'Say the sounds, then the whole phrase. These are things Pip can see.',
+    write:'Write red hat, big cat, and I see on a paper scarf. Tie it on Pip.',
+    need:['One sock','Scrap paper to stuff','Elastic band or tape','Dried pasta','Glue stick','Felt tips','Plain paper','Safe scissors'],
+    tip:'Help with the scissors and the glue. Pasta spines need a good blob of glue, then a little hold so they stay.',
+    yay:'Pip has arrived. The guest of honour.',
+    steps:[
+      {h:'Stuff a round head', d:'Push scrap paper into the toe of the sock until it is plump.', svg:ill('<path d="M22 18 h24 c8 0 12 6 12 14 v8 c6 4 10 12 6 20 c-6 10-22 12-30 6 c-6-4-8-12-6-18 v-16 c0-8 6-14 14-14z" fill="#F6C9A6" '+INK+'/><rect x="30" y="34" width="10" height="8" fill="#fff" '+INK+'/><rect x="44" y="36" width="8" height="6" fill="#fff" '+INK+'/>')},
+      {h:'Tie the neck', d:'Fasten it with an elastic band or tape so the stuffing stays in. The rest of the sock is Pip’s body.', svg:ill('<path d="M24 16 h22 c10 0 16 8 16 18 c8 6 10 20 2 26 c-10 8-26 6-32 0 c-4-4-6-8-6-14 V28 c0-8 4-12 12-12z" fill="#F6C9A6" '+INK+'/><path d="M30 40 h22" fill="none" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>')},
+      {h:'Face and pasta spines', d:'Draw two eyes and a nose. Glue dried pasta on the back for spines.', svg:ill('<ellipse cx="34" cy="48" rx="18" ry="16" fill="#F6C9A6" '+INK+'/><circle cx="50" cy="40" r="12" fill="#F6C9A6" '+INK+'/><circle cx="54" cy="38" r="1.6" fill="#1A1A1A"/><ellipse cx="58" cy="42" rx="2.2" ry="1.5" fill="#1A1A1A"/><g fill="#F0D090" '+INK+'><rect x="14" y="30" width="14" height="7" rx="3" transform="rotate(-30 21 33)"/><rect x="18" y="42" width="14" height="7" rx="3" transform="rotate(-10 25 45)"/><rect x="16" y="54" width="14" height="7" rx="3" transform="rotate(12 23 57)"/></g>')},
+      {h:'Write a scarf', d:'Cut a strip of paper. Write red hat, big cat, and I see. That is what Pip can see.', svg:ill('<path d="M10 34 h60 v16 H10 z" fill="#fff" '+INK+'/><path d="M16 40 h22 M16 46 h16" fill="none" '+INK+'/><text x="44" y="46" font-family="Andika,Verdana,sans-serif" font-size="9" font-weight="700" fill="#1A1A1A">I see</text>')},
+      {h:'Picnic time', d:'Tie the scarf on Pip. Sit Pip with the cat, under the sun, by the flowers.', svg:ill('<polygon points="18,40 12,24 26,36" fill="#E8A56C" '+INK+'/><polygon points="26,38 24,20 36,34" fill="#E8A56C" '+INK+'/><ellipse cx="34" cy="50" rx="18" ry="14" fill="#F6C9A6" '+INK+'/><circle cx="50" cy="42" r="11" fill="#F6C9A6" '+INK+'/><circle cx="54" cy="40" r="1.5" fill="#1A1A1A"/><path d="M28 48 h20" fill="none" stroke="#F05454" stroke-width="4" stroke-linecap="round"/>')}
+    ]
+  },
+  {
+    title:"Pip's House", map:'A house for Pip', minutes:30, icon:'house', paper:'#E8F2FC',
+    blurb:'Build a little house. Write a sentence on the door.',
+    words:[
+      {say:'I can', parts:[{text:'I', chunks:['I'], tricky:true},{text:'can', chunks:['c','a','n']}]},
+      {say:'see the', parts:[{text:'see', chunks:['s','ee']},{text:'the', chunks:['the'], tricky:true}]},
+      {say:'big sun', parts:[{text:'big', chunks:['b','i','g']},{text:'sun', chunks:['s','u','n']}]}
+    ],
+    together:'I can see the big sun.',
+    ordered:true,
+    phrase:true,
+    readNote:'Read the three lines from the top. I and the are tricky words. Then say the whole sentence.',
+    write:'Write this on the door: I can see the big sun.',
+    need:['A small cardboard box','Plain paper','Tape','Safe scissors','Felt tips','Leaves or green paper','Glue stick'],
+    tip:'Cutting a cardboard door is a grown-up job. Tape is safer than lots of glue for the roof.',
+    yay:'The house is done. The picnic can begin.',
+    steps:[
+      {h:'A sturdy box', d:'Tape the flaps shut so the box is strong. This is Pip’s house.', svg:ill('<path d="M16 28 h36 v32 H16 z" fill="#F6E6D4" '+INK+'/><path d="M52 28 l12 6 v32 l-12-6 z" fill="#E7D3BC" '+INK+'/><path d="M16 28 l12-8 h36 l-12 8" fill="#fff" '+INK+'/>')},
+      {h:'Door and windows', d:'Draw two windows. Cut a door that opens, or glue on a paper door.', svg:ill('<rect x="18" y="22" width="44" height="40" rx="2" fill="#F6E6D4" '+INK+'/><rect x="24" y="28" width="10" height="10" fill="#D5E8F8" '+INK+'/><rect x="46" y="28" width="10" height="10" fill="#D5E8F8" '+INK+'/><rect x="34" y="40" width="12" height="22" rx="2" fill="#fff" '+INK+'/>')},
+      {h:'Add a roof', d:'Cut paper a little bigger than the top. Colour it, then tape it on.', svg:ill('<polygon points="12,36 40,12 68,36" fill="#FF9EBB" '+INK+'/><rect x="20" y="36" width="40" height="30" fill="#F6E6D4" '+INK+'/><rect x="34" y="48" width="12" height="18" fill="#fff" '+INK+'/>')},
+      {h:'A leaf path', d:'Lay leaves, or green paper leaves, from the flowers to the door.', svg:ill('<polygon points="40,18 58,34 22,34" fill="#FF9EBB" '+INK+'/><rect x="26" y="34" width="28" height="22" fill="#F6E6D4" '+INK+'/><ellipse cx="18" cy="64" rx="8" ry="4" transform="rotate(-30 18 64)" fill="#8FCB9A" '+INK+'/><ellipse cx="36" cy="66" rx="8" ry="4" transform="rotate(20 36 66)" fill="#B7E4C7" '+INK+'/><ellipse cx="54" cy="64" rx="8" ry="4" transform="rotate(-16 54 64)" fill="#8FCB9A" '+INK+'/>')},
+      {h:'Write the sentence', d:'Read the lines in order. Write I can see the big sun. on the door. Tuck Pip inside.', svg:ill('<polygon points="14,32 40,12 66,32" fill="#FF9EBB" '+INK+'/><rect x="22" y="32" width="36" height="32" fill="#F6E6D4" '+INK+'/><rect x="30" y="44" width="20" height="20" rx="2" fill="#fff" '+INK+'/><text x="40" y="56" text-anchor="middle" font-family="Andika,Verdana,sans-serif" font-size="7" font-weight="700" fill="#1A1A1A">I can see</text>')}
+    ]
+  }
+];
+
+function selfCheck(){
+  if(ACTIVITIES.length!==5) window.__errs.push('expected 5 activities');
+  ACTIVITIES.forEach(function(a){
+    if(a.words.length<3||a.words.length>5) window.__errs.push('words '+a.title);
+    if(a.steps.length<4||a.steps.length>6) window.__errs.push('steps '+a.title);
+    if(!a.tip) window.__errs.push('tip '+a.title);
+    a.words.forEach(function(w){
+      var joined=w.parts.map(function(p){return p.chunks.join('')}).join('');
+      var said=w.say.replace(/\s+/g,'');
+      if(joined!==said) window.__errs.push('chunk '+w.say+' vs '+joined);
+    });
+  });
+}
+selfCheck();
+if(window.__errs.length) console.error(window.__errs.join(' | '));
+
+function flower(fill,cx){
+  return '<g transform="translate('+cx+',168)">'+
+    '<path d="M30 108 V62" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round"/>'+
+    '<ellipse cx="14" cy="84" rx="12" ry="6" transform="rotate(-36 14 84)" fill="#B7E4C7" stroke="#1A1A1A" stroke-width="2"/>'+
+    '<circle cx="30" cy="46" r="16" fill="'+fill+'" stroke="#1A1A1A" stroke-width="2.5"/>'+
+    '<circle cx="30" cy="46" r="5.5" fill="#FFE08A" stroke="#1A1A1A" stroke-width="2"/>'+
+  '</g>';
+}
+const HERO='<svg viewBox="0 0 640 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">'+
+  '<ellipse cx="330" cy="268" rx="280" ry="22" fill="#E3F6EA"/>'+
+  '<circle cx="86" cy="64" r="48" fill="#FFF6D8"/>'+
+  '<g fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round">'+
+    '<circle cx="86" cy="64" r="22" fill="#FFE08A"/>'+
+    '<path d="M86 28v12M86 90v12M50 64h12M110 64h12M58 38l8 8M106 86l8 8M58 90l8-8M106 42l8-8"/>'+
+  '</g>'+
+  '<rect x="536" y="112" width="16" height="28" rx="2" fill="#F6E6D4" stroke="#1A1A1A" stroke-width="2.5"/>'+
+  '<polygon points="458,168 540,104 622,168" fill="#FF9EBB" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>'+
+  '<rect x="476" y="168" width="128" height="92" rx="4" fill="#F6E6D4" stroke="#1A1A1A" stroke-width="2.5"/>'+
+  '<rect x="524" y="206" width="32" height="54" rx="6" fill="#fff" stroke="#1A1A1A" stroke-width="2.5"/>'+
+  '<rect x="494" y="186" width="22" height="20" rx="3" fill="#D5E8F8" stroke="#1A1A1A" stroke-width="2.5"/>'+
+  '<path d="M505 186v20M494 196h22" stroke="#1A1A1A" stroke-width="2"/>'+
+  '<path d="M400 210 q28 8 14 36" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round"/>'+
+  '<polygon points="308,172 326,128 354,168" fill="#FFD6E2" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>'+
+  '<polygon points="382,168 412,126 436,172" fill="#FFD6E2" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>'+
+  '<polygon points="344,156 368,112 394,156" fill="#F05454" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>'+
+  '<rect x="332" y="152" width="72" height="12" rx="5" fill="#F05454" stroke="#1A1A1A" stroke-width="2.5"/>'+
+  '<rect x="338" y="162" width="60" height="80" rx="26" fill="#fff" stroke="#1A1A1A" stroke-width="2.5"/>'+
+  '<circle cx="356" cy="190" r="3" fill="#1A1A1A"/>'+
+  '<circle cx="380" cy="190" r="3" fill="#1A1A1A"/><path d="M366 200 l4 5 4-5" fill="#F05454" stroke="#1A1A1A" stroke-width="1.6" stroke-linejoin="round"/>'+
+  '<path d="M362 208 q8 7 16 0" fill="none" stroke="#1A1A1A" stroke-width="2.2" stroke-linecap="round"/>'+
+  '<path d="M338 198 h-14M398 198 h14M338 208 h-16M398 208 h16" stroke="#1A1A1A" stroke-width="2" stroke-linecap="round"/>'+
+  '<polygon points="118,198 98,156 146,184" fill="#E8A56C" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>'+
+  '<polygon points="146,188 140,142 184,176" fill="#E8A56C" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>'+
+  '<polygon points="176,184 188,140 220,174" fill="#E8A56C" stroke="#1A1A1A" stroke-width="2.5" stroke-linejoin="round"/>'+
+  '<ellipse cx="164" cy="222" rx="70" ry="40" fill="#F6C9A6" stroke="#1A1A1A" stroke-width="2.5"/>'+
+  '<circle cx="222" cy="192" r="28" fill="#F6C9A6" stroke="#1A1A1A" stroke-width="2.5"/>'+
+  '<ellipse cx="210" cy="168" rx="7" ry="10" fill="#F6C9A6" stroke="#1A1A1A" stroke-width="2.5"/>'+
+  '<circle cx="232" cy="188" r="3" fill="#1A1A1A"/>'+
+  '<ellipse cx="246" cy="196" rx="5" ry="3.2" fill="#1A1A1A"/>'+
+  '<path d="M226 204 q12 8 18 0" fill="none" stroke="#1A1A1A" stroke-width="2.2" stroke-linecap="round"/>'+
+  '<circle cx="242" cy="202" r="4.5" fill="#FF9EBB"/>'+
+  '<g transform="translate(278,190)">'+
+    '<path d="M16 76 V44" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round"/>'+
+    '<ellipse cx="4" cy="58" rx="10" ry="5" transform="rotate(-40 4 58)" fill="#B7E4C7" stroke="#1A1A1A" stroke-width="2"/>'+
+    '<circle cx="16" cy="30" r="13" fill="#FFE08A" stroke="#1A1A1A" stroke-width="2.5"/>'+
+    '<circle cx="16" cy="30" r="4.5" fill="#fff" stroke="#1A1A1A" stroke-width="2"/>'+
+  '</g>'+
+  '<g transform="translate(438,198)">'+
+    '<path d="M16 68 V40" fill="none" stroke="#1A1A1A" stroke-width="2.5" stroke-linecap="round"/>'+
+    '<ellipse cx="30" cy="52" rx="10" ry="5" transform="rotate(28 30 52)" fill="#B7E4C7" stroke="#1A1A1A" stroke-width="2"/>'+
+    '<circle cx="16" cy="26" r="12" fill="#E4D9F7" stroke="#1A1A1A" stroke-width="2.5"/>'+
+    '<circle cx="16" cy="26" r="4" fill="#FFE08A" stroke="#1A1A1A" stroke-width="2"/>'+
+  '</g>'+
+'</svg>';
+
+function parseView(){
+  const h=(location.hash||'').replace(/^#/,'');
+  const src=h||demo||'map';
+  if(src==='finale') return {name:'finale', viaDemo:!h && demo==='finale'};
+  if(src==='map') return {name:'map'};
+  let m=/^yay\/([1-5])$/.exec(src);
+  if(m) return {name:'yay', i:Number(m[1])-1};
+  m=/^(?:a\/)?([1-5])$/.exec(src);
+  if(m) return {name:'activity', i:Number(m[1])-1, viaDemo:!h && !!demo};
+  return {name:'map'};
+}
+function go(hash){
+  if(location.hash==='#'+hash) render();
+  else location.hash=hash;
+}
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.hidden=false;
+  clearTimeout(toast._t);
+  toast._t=setTimeout(function(){t.hidden=true},2800);
+}
+function clearTimers(){timers.forEach(clearTimeout); timers=[]}
+function stopSpeak(){
+  speakToken++;
+  clearTimers();
+  document.querySelectorAll('.ch.on,.speaking').forEach(function(el){el.classList.remove('on','speaking')});
+  if(window.speechSynthesis){
+    try{speechSynthesis.cancel()}catch(e){}
+  }
+}
+function chooseVoice(){
+  if(!window.speechSynthesis) return null;
+  const list=speechSynthesis.getVoices()||[];
+  return list.find(function(v){return /en-GB/i.test(v.lang)})||list.find(function(v){return /^en/i.test(v.lang)})||null;
+}
+function speak(lines){
+  if(!window.speechSynthesis){
+    if(!warnedSpeak){warnedSpeak=true; toast('No speaker on this device. Sound the chunks out together.')}
+    return;
+  }
+  const voice=chooseVoice();
+  setTimeout(function(){
+    lines.forEach(function(line){
+      const u=new SpeechSynthesisUtterance(line);
+      u.lang='en-GB';
+      u.rate=0.84;
+      if(voice) u.voice=voice;
+      try{speechSynthesis.speak(u)}catch(err){window.__errs.push(String(err))}
+    });
+  },40);
+}
+if(window.speechSynthesis){
+  try{speechSynthesis.getVoices()}catch(e){}
+  speechSynthesis.addEventListener('voiceschanged',function(){try{speechSynthesis.getVoices()}catch(e){}});
+}
+function playChunks(groups){
+  stopSpeak();
+  const token=speakToken;
+  let t=30;
+  const says=[];
+  groups.forEach(function(g){
+    const per=g.chunks.length>5?300:400;
+    g.chunks.forEach(function(c,ci){
+      const at=t+ci*per;
+      timers.push(setTimeout(function(){
+        if(token!==speakToken) return;
+        document.querySelectorAll('.ch.on').forEach(function(x){x.classList.remove('on')});
+        document.querySelectorAll('.speaking').forEach(function(x){x.classList.remove('speaking')});
+        c.classList.add('on');
+        if(g.btn) g.btn.classList.add('speaking');
+      },at));
+    });
+    t+=g.chunks.length*per+220;
+    if(g.say) says.push(g.say);
+  });
+  timers.push(setTimeout(function(){
+    if(token!==speakToken) return;
+    document.querySelectorAll('.ch.on,.speaking').forEach(function(el){el.classList.remove('on','speaking')});
+  },t));
+  speak(says);
+}
+function playWord(btn){
+  playChunks([{btn:btn, chunks:[].slice.call(btn.querySelectorAll('.ch')), say:btn.dataset.say}]);
+}
+function playAll(i){
+  const root=document.querySelector('[data-read]');
+  if(!root) return;
+  const cards=[].slice.call(root.querySelectorAll('[data-wi]'));
+  const sentence=root.querySelector('.sentence');
+  const groups=cards.map(function(card){
+    return {btn:card, chunks:[].slice.call(card.querySelectorAll('.ch')), say:card.dataset.say};
+  });
+  if(sentence){
+    /* highlight cards, then keep the sentence button marked while it is the last beat */
+  }
+  stopSpeak();
+  const token=speakToken;
+  let t=30;
+  const says=[];
+  groups.forEach(function(g){
+    const per=g.chunks.length>5?280:360;
+    g.chunks.forEach(function(c,ci){
+      const at=t+ci*per;
+      timers.push(setTimeout(function(){
+        if(token!==speakToken) return;
+        document.querySelectorAll('.ch.on,.speaking').forEach(function(x){x.classList.remove('on','speaking')});
+        c.classList.add('on');
+        g.btn.classList.add('speaking');
+      },at));
+    });
+    t+=g.chunks.length*per+200;
+    says.push(g.say);
+  });
+  if(ACTIVITIES[i].together) says.push(ACTIVITIES[i].together.replace(/\.$/,''));
+  timers.push(setTimeout(function(){
+    if(token!==speakToken) return;
+    document.querySelectorAll('.ch.on,.speaking').forEach(function(el){el.classList.remove('on','speaking')});
+    if(sentence) sentence.classList.add('speaking');
+  },t));
+  timers.push(setTimeout(function(){
+    if(token!==speakToken) return;
+    if(sentence) sentence.classList.remove('speaking');
+  },t+700));
+  speak(says);
+}
+function captionHTML(w){
+  if(w.parts.length===1 && w.parts[0].tricky) return '<span class="cap"><span>tricky word</span></span>';
+  return '<span class="cap">'+w.parts.map(function(p){
+    return '<span>'+(p.tricky?p.text:p.chunks.join(' · '))+'</span>';
+  }).join('')+'</span>';
+}
+function lettersHTML(w){
+  return w.parts.map(function(p,pi){
+    const chunks=p.chunks.map(function(c){return '<span class="ch">'+c+'</span>'}).join('');
+    return (pi?'<span class="sp"></span>':'')+chunks;
+  }).join('');
+}
+function ariaWord(w,index,ordered){
+  const sounds=w.parts.map(function(p){
+    return p.tricky?p.text+', tricky word':p.chunks.join(', ');
+  }).join(', then ');
+  const line=ordered?('Line '+(index+1)+'. '):'';
+  return line+'Play '+w.say+'. Sounds '+sounds+'.';
+}
+function wordCards(a,i){
+  const cls=a.phrase?'phrases':'tiles';
+  const cards=a.words.map(function(w,wi){
+    return '<button type="button" class="tile" data-wi="'+wi+'" data-say="'+w.say+'" aria-label="'+ariaWord(w,wi,a.ordered)+'">'+
+      (a.ordered?'<span class="ord">'+(wi+1)+'</span>':'')+
+      '<span class="letters">'+lettersHTML(w)+'</span>'+
+      captionHTML(w)+SPK+'</button>';
+  }).join('');
+  const hearLabel=a.phrase?'Hear all the phrases':'Hear all the words';
+  const together=a.together?('<p class="eyebrow together-label">Together</p><button type="button" class="sentence" data-hear="'+i+'" aria-label="Play the whole line. '+a.together+'">'+a.together+'</button>'):
+    '<button type="button" class="hear" data-hear="'+i+'" style="margin-top:12px;width:100%">'+hearLabel+'</button>';
+  return '<section class="card block read" data-read><p class="eyebrow">Read together</p><h2>Tap a word. Say it.</h2><div class="'+cls+'">'+cards+'</div><p class="readnote">'+a.readNote+'</p><p class="write">'+a.write+'</p>'+together+'</section>';
+}
+function fmt(ts){
+  try{return new Date(ts).toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'})}
+  catch(e){return ''}
+}
+function render(){
+  try{ renderView(); }
+  catch(err){
+    window.__errs.push(String(err&&err.message||err));
+    console.error(err);
+  }
+}
+function renderView(){
+  stopSpeak();
+  let v=parseView();
+  if(v.name==='activity' && !v.viaDemo && !isUnlocked(v.i,state.done)){
+    toast('Finish the stop before this one first.');
+    if(location.hash){ location.hash='map'; return; }
+    v={name:'map'};
+  }
+  if(v.name==='yay' && !state.done[v.i]){
+    if(location.hash){ location.hash='map'; return; }
+    v={name:'map'};
+  }
+  if(v.name==='finale' && !allDone(state.done) && !v.viaDemo){
+    if(location.hash){ location.hash='map'; return; }
+    v={name:'map'};
+  }
+  const y=preserveScroll?window.scrollY:0;
+  const app=document.getElementById('app');
+  if(v.name==='map') app.innerHTML=htmlMap();
+  else if(v.name==='activity') app.innerHTML=htmlActivity(v.i);
+  else if(v.name==='yay') app.innerHTML=htmlYay(v.i);
+  else app.innerHTML=htmlFinale(v.viaDemo);
+  document.title = v.name==='activity' ? ACTIVITIES[v.i].title+" · Lily's Craft Adventure" :
+    v.name==='finale' ? "Lily's Craft Star" :
+    v.name==='yay' ? "A star for Lily" : "Lily's Craft Adventure";
+  if(!preserveScroll) window.scrollTo(0,0);
+  else window.scrollTo(0,y);
+  preserveScroll=false;
+  if(v.name==='yay'){
+    spawnConfetti(document.getElementById('confetti'));
+    const btn=document.querySelector('.yay .next');
+    if(btn) btn.focus();
+  }
+  if(resetOpen){
+    const yes=document.querySelector('[data-reset="yes"]');
+    if(yes) yes.focus();
+  }
+}
+function htmlMap(){
+  const done=state.done;
+  const n=done.filter(Boolean).length;
+  const next=done.findIndex(function(d){return !d});
+  const stars=[0,1,2,3,4].map(function(k){return starSVG(18,k<n)}).join('');
+  const stops=ACTIVITIES.map(function(a,i){
+    let status, extra, cls='stop';
+    if(done[i]){ status='Star earned'; extra='<span class="badge-star">'+starSVG(22,true)+'</span>'; }
+    else if(i===next){ status='Start here'; extra='<span class="go-pill">Start</span>'; cls+=' current'; }
+    else { status='Locked. Finish the stop before this.'; extra='<span class="lockpill">Locked</span>'; cls+=' locked'; }
+    return '<li><button type="button" class="'+cls+'" data-open="'+i+'"'+(i===next?' aria-current="step"':'')+' aria-label="'+(i+1)+'. '+a.title+'. '+a.map+'. '+status+'">'+
+      '<span class="ico" style="background:'+['#FFE8A3','#FFD6E2','#D9F3E3','#FFE0CC','#D9E8F8'][i]+'">'+icon(a.icon)+'</span>'+
+      '<span class="stop-copy"><span class="stop-name">'+a.title+'</span><span class="stop-sub">'+a.map+'</span></span>'+
+      extra+'</button></li>';
+  }).join('');
+  const ready=allDone(done)?('<section class="card ready"><p class="eyebrow">All five stars</p><h2>The picnic is ready</h2><p>Pip has a sun, a friend, a garden, and a house.</p><button class="next" type="button" data-go="finale">See Lily’s certificate</button></section>'):'';
+  const reset=resetOpen?('<div class="resetbox"><p>Clear every star and start the path again?</p><div class="resetrow"><button type="button" class="next" data-reset="yes">Reset</button><button type="button" class="hear" data-reset="no">Keep stars</button></div></div>'):'';
+  return '<div class="home">'+
+    '<header class="intro"><p class="eyebrow">A garden picnic</p><h1 class="home-title">Lily’s Craft Adventure</h1>'+
+    '<p class="lede">Pip the hedgehog wants a garden picnic. The sun is not up, the flowers are not out, and Pip has no house. You can help.</p></header>'+
+    '<div class="hero card" role="img" aria-label="Pip the hedgehog in a garden with a sun, a cat in a red hat, button flowers, and a little house.">'+HERO+'</div>'+
+    '<div class="lead"><div class="starbar" role="img" aria-label="'+n+' of 5 stars">'+stars+'<span class="starcount">'+n+' of 5 stars</span></div>'+
+    '<ol class="howto"><li><span class="n">1</span><span>Tap the words and say them with Lily.</span></li>'+
+    '<li><span class="n">2</span><span>Make it from things you have at home.</span></li>'+
+    '<li><span class="n">3</span><span>Earn a star. The next stop opens.</span></li></ol></div>'+
+    '<div class="stage-slot">'+ready+
+    '<section class="card garden"><h2>The garden path</h2><p class="hint">One star opens the next gate.</p><ol class="stops">'+stops+'</ol></section></div>'+
+    '<div class="grownup no-print"><button type="button" class="texty" data-reset="ask">Grown-ups: reset stars</button>'+reset+
+    '<p class="save-note">Stars are saved on this phone or tablet.</p></div></div>';
+}
+function htmlActivity(i){
+  const a=ACTIVITIES[i];
+  const segs=ACTIVITIES.map(function(_,k){
+    return '<i class="'+(k<i||state.done[k]?'on':'')+(k===i?' cur':'')+'"></i>';
+  }).join('');
+  const checks=state.checks[i]||[];
+  const need=a.need.map(function(item,j){
+    return '<label><input type="checkbox" data-check="'+i+':'+j+'" '+(checks[j]?'checked':'')+'><span>'+item+'</span></label>';
+  }).join('');
+  let finish, hint;
+  if(!state.done[i]){
+    finish='<button class="next" type="button" data-finish="'+i+'">We made it</button>';
+    hint='When it is made, Lily earns a star.';
+  }else if(i===4 && allDone(state.done)){
+    finish='<button class="next" type="button" data-go="finale">See the certificate</button>';
+    hint='You already earned this star.';
+  }else{
+    finish='<button class="next" type="button" data-go="map">Back to the path</button>';
+    hint='You already earned this star.';
+  }
+  const steps=a.steps.map(function(s,n){
+    return '<article class="step"><div class="ill" style="background:'+a.paper+'">'+s.svg+'</div><div><h3><span class="num">'+(n+1)+'</span><span>'+s.h+'</span></h3><p>'+s.d+'</p></div></article>';
+  }).join('');
+  return '<button type="button" class="skip" data-focus="steps">Skip to the steps</button>'+
+    '<header class="act-head"><button type="button" class="back" data-go="map">‹ Garden path</button>'+
+    '<div class="segs" aria-hidden="true">'+segs+'</div>'+
+    '<p class="eyebrow act-kicker">Stop '+(i+1)+' of 5</p><h1 class="act-title">'+a.title+'</h1>'+
+    '<p class="act-sub">'+a.blurb+'</p><div class="pillrow"><span class="pill">About '+a.minutes+' min</span><span class="pill">'+(a.together?'A sentence':(a.phrase?'3 phrases':(a.words.length+' words')))+'</span></div></header>'+
+    '<div class="stack"><div class="side">'+wordCards(a,i)+
+    '<section class="card block"><h2>You need</h2><div class="need">'+need+'</div></section>'+
+    '<aside class="tip"><p class="eyebrow">Grown-up tip</p><p>'+a.tip+'</p></aside></div>'+
+    '<section class="card block steps" id="steps" tabindex="-1"><h2>Make it</h2>'+steps+'</section></div>'+
+    '<div class="finish"><p>'+hint+'</p>'+finish+'</div>';
+}
+function htmlYay(i){
+  const a=ACTIVITIES[i];
+  const next=i===4?'<button class="next" type="button" data-go="finale">See the certificate</button>':'<button class="next" type="button" data-go="map">Back to the path</button>';
+  return '<div class="yay"><div class="confetti" id="confetti" aria-hidden="true"></div><section class="card yay-card">'+
+    '<div class="sticker">'+starSVG(64,true)+'</div><p class="eyebrow">Star earned</p><h1>A star for Lily</h1><p>'+a.yay+'</p>'+next+'</section></div>';
+}
+function htmlFinale(viaDemo){
+  const when=fmt(state.finishedAt||Date.now());
+  const items=ACTIVITIES.map(function(a,i){
+    const tint=['#FFE8A3','#FFD6E2','#D9F3E3','#FFE0CC','#D9E8F8'][i];
+    return '<li><span class="mini" style="background:'+tint+'">'+icon(a.icon)+'</span><span class="nm">'+a.title+'</span>'+starSVG(18,true)+'</li>';
+  }).join('');
+  return '<div class="finale-wrap"><div class="finale-actions no-print"><button type="button" class="back" data-go="map">‹ Garden path</button>'+
+    '<button type="button" class="next" data-print="1">Print certificate</button></div>'+
+    '<article class="card cert"><div class="cert-inner">'+
+    '<p class="eyebrow" style="text-align:center">Pip’s picnic</p><div class="cert-star">'+starSVG(68,true)+'</div>'+
+    '<h1 class="cert-name">Lily’s Craft Star</h1>'+
+    '<p class="cert-lead">Lily made five things for Pip the hedgehog’s garden picnic, from bits and bobs at home. She read the words out loud and wrote them on her makes.</p>'+
+    '<ul class="awards">'+items+'</ul>'+
+    '<div class="cert-foot"><p class="when">'+when+'</p><div class="sign"><div class="who">Allan</div><div class="role">Dad</div></div></div>'+
+    '</div></article></div>';
+}
+function spawnConfetti(box){
+  if(!box) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const colors=['#FF9EBB','#FFE08A','#B7E4C7','#A8D4F5','#F6C9A6','#F05454','#1A1A1A'];
+  for(let n=0;n<18;n++){
+    const el=document.createElement('i');
+    const ang=Math.random()*Math.PI*2;
+    const dist=80+Math.random()*120;
+    el.style.setProperty('--x2',(Math.cos(ang)*dist)+'px');
+    el.style.setProperty('--y2',(Math.sin(ang)*dist+20)+'px');
+    el.style.setProperty('--r',((Math.random()*200)-100)+'deg');
+    el.style.setProperty('--d',(Math.random()*0.08)+'s');
+    el.style.background=colors[n%colors.length];
+    if(n%3===0){el.style.borderRadius='50%'; el.style.width='8px'; el.style.height='8px'}
+    box.appendChild(el);
+  }
+}
+function onClick(e){
+  const t=e.target.closest('button');
+  if(!t) return;
+  if(t.dataset.focus){
+    const el=document.getElementById(t.dataset.focus);
+    if(el){ el.focus(); el.scrollIntoView({block:'start'}); }
+    return;
+  }
+  if(t.dataset.hear!=null){ playAll(Number(t.dataset.hear)); return; }
+  if(t.dataset.wi!=null){ playWord(t); return; }
+  if(t.dataset.go){ go(t.dataset.go); return; }
+  if(t.dataset.open!=null){
+    const i=Number(t.dataset.open);
+    if(!isUnlocked(i,state.done)){ toast('This stop opens after '+ACTIVITIES[i-1].title+'.'); return; }
+    go('a/'+(i+1));
+    return;
+  }
+  if(t.dataset.finish!=null){
+    const i=Number(t.dataset.finish);
+    const was=!!state.done[i];
+    state.done[i]=true;
+    if(allDone(state.done)&&!state.finishedAt) state.finishedAt=Date.now();
+    save();
+    document.getElementById('live').textContent='Star earned for '+ACTIVITIES[i].title+'.';
+    if(!was) go('yay/'+(i+1));
+    else if(i===4) go('finale');
+    else go('map');
+    return;
+  }
+  if(t.dataset.print!=null){ window.print(); return; }
+  if(t.dataset.reset==='ask'){ resetOpen=true; preserveScroll=true; render(); return; }
+  if(t.dataset.reset==='no'){ resetOpen=false; preserveScroll=true; render(); return; }
+  if(t.dataset.reset==='yes'){
+    state=emptyState(); save(); resetOpen=false;
+    document.getElementById('live').textContent='Stars cleared.';
+    toast('Stars cleared on this device.');
+    if(location.hash && location.hash!=='#map') location.hash='map';
+    else render();
+  }
+}
+function onChange(e){
+  const input=e.target;
+  if(!input.matches||!input.matches('[data-check]')) return;
+  const bits=input.dataset.check.split(':');
+  const ai=Number(bits[0]), ji=Number(bits[1]);
+  if(!state.checks[ai]) state.checks[ai]=[];
+  state.checks[ai][ji]=input.checked;
+  save();
+}
+document.body.addEventListener('click',onClick);
+document.body.addEventListener('change',onChange);
+window.addEventListener('hashchange',render);
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape' && parseView().name==='yay') go('map');
+});
+render();
+</script>
+</body>
+</html>

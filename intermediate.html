@@ -1,0 +1,1045 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Fold an origami axolotl · Intermediate</title>
+<meta name="description" content="A step-by-step intermediate guide to folding a four-legged origami axolotl with big pleated gills, using only simple folds.">
+<meta name="theme-color" content="#F5F5F7">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 10 10%22%3E%3Cpath d=%22M1 2h8L5 9z%22 fill=%22%23FF9EBB%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7; --card:#FFFFFF; --ink:#1A1A1A; --muted:#737373; --line:#E5E5EA;
+  --paper-front:#FF9EBB; --paper-back:#FFC2D1;
+  --ease:cubic-bezier(.25,1,.5,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.app{max-width:440px;margin:0 auto;padding:calc(22px + env(safe-area-inset-top)) 24px 0;min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
+.title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+h1{font-size:22px;line-height:1.25;font-weight:600;letter-spacing:-.015em;margin:0}
+.sub{font-size:14px;line-height:1.4;color:var(--muted);margin:4px 0 0}
+.kid{flex:none;display:inline-flex;align-items:center;gap:7px;border:0;background:none;padding:5px 0 5px 6px;font-size:12px;font-weight:500;color:var(--muted)}
+.kid .sw{width:28px;height:17px;border-radius:99px;background:var(--line);position:relative;transition:background .25s var(--ease)}
+.kid .sw::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.18);transition:transform .25s var(--ease)}
+.kid[aria-pressed="true"]{color:var(--ink)}
+.kid[aria-pressed="true"] .sw{background:var(--ink)}
+.kid[aria-pressed="true"] .sw::after{transform:translateX(11px)}
+
+.meta{display:flex;align-items:center;justify-content:space-between;margin-top:18px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.pill{font-size:12px;font-weight:500;line-height:1;color:var(--ink);border:1px solid var(--line);background:transparent;border-radius:99px;padding:6px 11px}
+.progress{display:flex;gap:4px;margin-top:10px}
+.seg{flex:1;height:16px;padding:0;border:0;background:none;display:flex;align-items:center}
+.seg i{display:block;width:100%;height:3px;border-radius:3px;background:var(--line);transition:background .3s var(--ease)}
+.seg.on i{background:var(--ink)}
+.seg.cur i{background:var(--ink);opacity:.45}
+
+.stage{position:relative;margin:14px auto 0;width:100%;max-width:calc(100svh - 450px);min-width:260px;aspect-ratio:1/1;background:var(--card);border-radius:28px;overflow:hidden;
+  box-shadow:0 1px 2px rgba(0,0,0,.03),0 10px 30px rgba(0,0,0,.05),0 30px 70px rgba(0,0,0,.07);touch-action:pan-y}
+.stage canvas,.stage svg.fb{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage svg.fb{display:none}
+.stage.use-svg svg.fb{display:block}
+.stage.use-svg canvas{display:none}
+.stage .hint{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:11px;color:#A1A1A6;letter-spacing:.02em;pointer-events:none;transition:opacity .6s}
+.stage .loading{position:absolute;inset:0;display:grid;place-items:center;font-size:13px;color:var(--muted);transition:opacity .4s}
+
+.scrub{margin:16px 6px 0;height:26px;display:flex;align-items:center;cursor:pointer;touch-action:none;transition:opacity .3s}
+.scrub[hidden]{display:flex;visibility:hidden;opacity:0}
+.track{position:relative;width:100%;height:4px;border-radius:4px;background:var(--line)}
+.fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--ink)}
+.thumb{position:absolute;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px var(--bg);transition:transform .15s var(--ease)}
+.scrub:active .thumb,.scrub.drag .thumb{transform:scale(1.25)}
+
+.copy{margin-top:14px;min-height:150px;transition:opacity .22s var(--ease),transform .32s var(--ease)}
+.copy.out{opacity:0;transform:translateX(calc(var(--dir,1) * -14px))}
+.copy.pre{opacity:0;transform:translateX(calc(var(--dir,1) * 14px));transition:none}
+.copy h2{font-size:18px;line-height:1.3;font-weight:600;letter-spacing:-.01em;margin:0 0 6px}
+.copy p{font-size:15px;line-height:1.5;margin:0}
+.copy .tip{font-size:14px;line-height:1.45;color:var(--muted);margin-top:10px}
+.copy .tip b{font-weight:600;color:var(--muted)}
+.list{list-style:none;margin:12px 0 0;padding:0}
+.list li{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
+.list li:first-child{border-top:0;padding-top:4px}
+.list svg{flex:none;width:22px;height:22px;margin-top:1px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.list .t{font-size:15px;font-weight:500;line-height:1.35}
+.list .d{font-size:14px;color:var(--muted);line-height:1.4;margin-top:1px}
+.sw-paper{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:-1px;margin-right:4px;background:linear-gradient(135deg,var(--paper-front) 50%,var(--paper-back) 50%)}
+.credit{font-size:12px;line-height:1.5;color:#8E8E93;margin:18px 0 0}
+.credit a{color:#6E6E73;text-decoration:underline;text-underline-offset:2px;text-decoration-color:#C7C7CC}
+
+footer.bar{position:sticky;bottom:0;margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:18px 0 calc(16px + env(safe-area-inset-bottom));background:linear-gradient(to bottom,rgba(245,245,247,0),var(--bg) 34%);z-index:5}
+.prev{border:0;background:none;padding:12px 6px 12px 0;font-size:15px;font-weight:500;color:var(--muted);border-radius:12px}
+.prev:hover{color:var(--ink)}
+.prev[hidden]{display:block;visibility:hidden}
+.next{border:0;background:var(--ink);color:#fff;border-radius:99px;padding:14px 22px;font-size:15px;font-weight:500;line-height:1;box-shadow:0 6px 16px rgba(0,0,0,.14);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.next:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(0,0,0,.16)}
+.next:active{transform:scale(.97)}
+
+/* Kid mode: bigger, friendlier text */
+body.kid-on h1{font-size:24px}
+body.kid-on .copy h2{font-size:22px}
+body.kid-on .copy p{font-size:19px;line-height:1.45}
+body.kid-on .copy .tip{font-size:16px}
+body.kid-on .next{font-size:17px;padding:16px 26px}
+body.kid-on .prev{font-size:16px}
+
+/* Confetti (restrained) */
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.confetti i{position:absolute;left:50%;top:46%;width:7px;height:10px;border-radius:2px;opacity:0;
+  animation:conf 2.2s var(--ease) forwards;animation-delay:var(--d)}
+@keyframes conf{
+  0%{opacity:0;transform:translate(-50%,-50%) rotate(0) scale(.6)}
+  8%{opacity:1}
+  45%{transform:translate(calc(-50% + var(--x1)),calc(-50% + var(--y1))) rotate(calc(var(--r) * .5)) scale(1)}
+  100%{opacity:0;transform:translate(calc(-50% + var(--x2)),calc(-50% + var(--y2))) rotate(var(--r)) scale(.9)}
+}
+@media (min-width:700px){ .app{padding-top:40px} }
+@media (prefers-reduced-motion:reduce){ .copy,.copy.out,.copy.pre{transition:none;transform:none} .confetti{display:none} }
+
+/* intermediate additions */
+.copy{min-height:170px}
+.tech{margin-top:12px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.tech summary{list-style:none;display:flex;align-items:center;gap:10px;padding:11px 2px;cursor:pointer;font-size:14px;font-weight:500;border-radius:10px}
+.tech summary::-webkit-details-marker{display:none}
+.tech summary .k{font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.tech summary .chev{margin-left:auto;width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;transition:transform .25s var(--ease)}
+.tech[open] summary .chev{transform:rotate(90deg)}
+.tech .tb{font-size:14px;line-height:1.5;color:#3A3A3C;margin:0 2px 12px}
+body.kid-on .tech summary{font-size:16px} body.kid-on .tech .tb{font-size:16px}
+.chip{display:inline-flex;align-items:center;gap:8px;margin-top:12px;border:1px solid var(--line);background:#fff;border-radius:99px;padding:7px 12px 7px 9px;font-size:13px;font-weight:500}
+.chip .dot{width:12px;height:12px;border-radius:50%;background:#F07FA2;opacity:.25;transition:opacity .2s}
+.chip[aria-pressed="true"] .dot{opacity:1}
+.levels{display:inline-flex;padding:2px;border-radius:9px;background:#EAEAEF;margin:0 0 14px}
+.levels a{font-size:12px;font-weight:500;line-height:1;color:var(--muted);text-decoration:none;padding:6px 11px;border-radius:7px;transition:background .2s,color .2s}
+.levels a[aria-current="page"]{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08),0 1px 6px rgba(0,0,0,.04)}
+.levels a:not([aria-current]):hover{color:var(--ink)}
+.stage{max-width:calc(100svh - 486px)}
+
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header>
+    <nav class="levels" aria-label="Difficulty"><a href="index.html">Beginner</a><a href="intermediate.html" aria-current="page">Intermediate</a></nav>
+    <div class="title-row">
+      <h1 id="title">Fold a four-legged axolotl</h1>
+      <button class="kid" id="kidBtn" type="button" aria-pressed="false" title="Bigger text and simpler words"><span>Kid mode</span><span class="sw" aria-hidden="true"></span></button>
+    </div>
+    <p class="sub">Four legs and frilly gills. Takes about 15 to 20 mins.</p>
+    <div class="meta">
+      <span class="eyebrow" id="eyebrow">Before you start</span>
+      <span class="pill">Intermediate</span>
+    </div>
+    <nav class="progress" id="progress" aria-label="Jump to a step"></nav>
+  </header>
+
+  <main id="main">
+    <section class="stage" id="stage" role="img" aria-label="3D model of the finished origami axolotl">
+      <canvas id="gl" aria-hidden="true"></canvas>
+      <svg class="fb" id="fb" viewBox="-1.9 -1.75 3.8 3.8" aria-hidden="true"></svg>
+      <div class="loading" id="loading">Unfolding paper…</div>
+      <div class="hint" id="hint">Drag to turn</div>
+      <div class="confetti" id="confetti" aria-hidden="true"></div>
+    </section>
+
+    <div class="scrub" id="scrub" role="slider" tabindex="0" aria-label="Fold animation. Drag to play the fold back and forth" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
+      <div class="track"><div class="fill" id="fill"></div><div class="thumb" id="thumb"></div></div>
+    </div>
+
+    <section class="copy" id="copy" aria-live="polite"></section>
+  </main>
+
+  <footer class="bar">
+    <button class="prev" id="prev" type="button">‹ Previous step</button>
+    <button class="next" id="next" type="button">Start folding ›</button>
+  </footer>
+</div>
+
+<script type="module">
+/* =====================================================================
+   Intermediate origami axolotl: a rigid flat-folding engine.
+   Paper = convex polygons with a rigid transform each. Every op splits
+   faces along its creases and moves them with exact rigid motions
+   (squash and petal folds use a spherical four-bar solver), so each
+   state follows from the one before and the model never tears.
+   ===================================================================== */
+// ===== Intermediate origami engine (frog-base axolotl) =====
+// Works in the browser (inline) and in Node (module.exports) for testing.
+const PI=Math.PI, S=1.25, EPS=0.0042;
+const vAdd=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]];
+const vSub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
+const vScale=(a,s)=>[a[0]*s,a[1]*s,a[2]*s];
+const vDot=(a,b)=>a[0]*b[0]+a[1]*b[1]+a[2]*b[2];
+const vCross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const vNorm=a=>{const l=Math.hypot(a[0],a[1],a[2])||1;return vScale(a,1/l)};
+const mulV=(m,p)=>[m[0]*p[0]+m[1]*p[1]+m[2]*p[2],m[3]*p[0]+m[4]*p[1]+m[5]*p[2],m[6]*p[0]+m[7]*p[1]+m[8]*p[2]];
+const applyA=(A,p)=>vAdd(mulV(A.m,p),A.t);
+function mulM(a,b){const r=new Array(9);for(let i=0;i<3;i++)for(let j=0;j<3;j++)r[i*3+j]=a[i*3]*b[j]+a[i*3+1]*b[3+j]+a[i*3+2]*b[6+j];return r}
+const compose=(A,B)=>({m:mulM(A.m,B.m),t:vAdd(mulV(A.m,B.t),A.t)});
+const IDT={m:[1,0,0,0,1,0,0,0,1],t:[0,0,0]};
+function rotAbout(a,u,ang){
+  const [x,y,z]=u,c=Math.cos(ang),s=Math.sin(ang),C=1-c;
+  const m=[c+x*x*C,x*y*C-z*s,x*z*C+y*s, y*x*C+z*s,c+y*y*C,y*z*C-x*s, z*x*C-y*s,z*y*C+x*s,c+z*z*C];
+  return {m,t:vSub(a,mulV(m,a))};
+}
+const rotVec=(u,ang,v)=>mulV(rotAbout([0,0,0],u,ang).m,v);
+function frameRot(V,u1,v1,u2,v2){
+  const e1=vNorm(u1),e2=vNorm(vSub(v1,vScale(e1,vDot(v1,e1)))),e3=vCross(e1,e2);
+  const f1=vNorm(u2),f2=vNorm(vSub(v2,vScale(f1,vDot(v2,f1)))),f3=vCross(f1,f2);
+  const m=new Array(9);for(let i=0;i<3;i++)for(let j=0;j<3;j++)m[i*3+j]=f1[i]*e1[j]+f2[i]*e2[j]+f3[i]*e3[j];
+  return {m,t:vSub(V,mulV(m,V))};
+}
+const toWorld=(v,h=0)=>[v[0]*S,h,v[1]*S];
+const wdir=v=>vNorm([v[0],0,v[1]]);
+const toView=w=>[w[0]/S,w[2]/S];
+function side2(line,q){const a=line[0],b=line[1];const dx=b[0]-a[0],dy=b[1]-a[1];return (dx*(q[1]-a[1])-dy*(q[0]-a[0]))/Math.hypot(dx,dy)}
+const easeOutQuart=t=>1-Math.pow(1-t,4);
+const smooth=t=>t<=0?0:t>=1?1:t*t*(3-2*t);
+const seg=(p,a,b)=>smooth((p-a)/(b-a));
+
+function faceVerts(f){return f.poly.map(q=>applyA(f.M,[q[0],q[1],0]))}
+function centroid2(pts){let x=0,y=0;pts.forEach(p=>{x+=p[0];y+=p[1]});return [x/pts.length,y/pts.length]}
+function viewCentroid(f){return centroid2(faceVerts(f).map(toView))}
+function paperCentroid(f){return centroid2(f.poly)}
+function pageOf(f){const c=paperCentroid(f);let a=Math.atan2(c[1],c[0]);if(a<0)a+=2*PI;return Math.floor(a/(PI/4)+1e-9)%8}
+const has=(f,t)=>f.tags.includes(t);
+
+function splitFaces(faces,line,pred){
+  const out=[],E=1e-7;
+  for(const f of faces){
+    if(pred&&!pred(f)){out.push(f);continue}
+    const d=faceVerts(f).map(toView).map(q=>side2(line,q));
+    if(!(d.some(x=>x>E)&&d.some(x=>x<-E))){out.push(f);continue}
+    const A=[],B=[],n=f.poly.length;
+    for(let i=0;i<n;i++){
+      const j=(i+1)%n,pi=f.poly[i],pj=f.poly[j],di=d[i],dj=d[j];
+      if(di>=-E)A.push(pi); if(di<=E)B.push(pi);
+      if((di>E&&dj<-E)||(di<-E&&dj>E)){const t=di/(di-dj);const m=[pi[0]+(pj[0]-pi[0])*t,pi[1]+(pj[1]-pi[1])*t];A.push(m);B.push(m)}
+    }
+    out.push({...f,poly:A,tags:f.tags.slice()},{...f,poly:B,tags:f.tags.slice()});
+  }
+  return out;
+}
+function initFaces(){
+  const base={m:[S,0,0, 0,0,-S, 0,S,0],t:[0,0,0]};
+  const M=compose(rotAbout([0,0,0],[0,1,0],PI/4),base);
+  // split the square into its 8 "pages" straight away so every face has a single page id
+  let faces=[{poly:[[0,-1],[1,0],[0,1],[-1,0]],M,L:0,tags:[]}];
+  const v=faceVerts(faces[0]); const n=vCross(vSub(v[1],v[0]),vSub(v[2],v[0]));
+  if(n[1]<0) faces[0].poly=faces[0].poly.slice().reverse();
+  return faces;
+}
+// ---- generic motion helpers ----
+// sign so that rotating `pt` (view) about the view line (a->b) by +90° lifts it (world y up)
+function liftSign(line,pt){const a=toWorld(line[0]);const u=vNorm(vSub(toWorld(line[1]),a));const q=applyA(rotAbout(a,u,PI/2),toWorld(pt));return q[1]>0?1:-1}
+function hinge(line,ang){const a=toWorld(line[0]);const u=vNorm(vSub(toWorld(line[1]),a));return {a,u,ang}}
+// four-bar spherical linkage around vertex V (world). static —d1— A —d2— B —d3— C —d4— static
+// A = R(d1,theta); C = R(d4,phi); B maps (d2,d3)->(d2',d3'). Returns table-driven function of p.
+function fourBar(V,d1,d2,d3,d4,thetaOf,phiEnd,N=400){
+  const c23=vDot(d2,d3), c34=vDot(d3,d4), perp=vSub(d3,vScale(d4,c34)), cr=vCross(d4,d3);
+  const roots=th=>{
+    const d2p=rotVec(d1,th,d2);
+    const A=vDot(d2p,perp),B=vDot(d2p,cr),C=c23-c34*vDot(d2p,d4);
+    const r=Math.hypot(A,B); if(r<1e-9) return null;
+    const x=Math.max(-1,Math.min(1,C/r)); const b=Math.atan2(B,A),d=Math.acos(x);
+    return [b+d,b-d];
+  };
+  const tab=new Array(N+1); let prev=phiEnd;
+  for(let i=N;i>=0;i--){
+    const th=thetaOf(i/N); const rs=roots(th);
+    if(!rs){tab[i]=prev;continue}
+    let best=null,bd=1e9;
+    for(let r of rs){ // unwrap near prev
+      r+=2*PI*Math.round((prev-r)/(2*PI)); const dd=Math.abs(r-prev); if(dd<bd){bd=dd;best=r}
+    }
+    tab[i]=best; prev=best;
+  }
+  const phiOf=p=>{const x=Math.max(0,Math.min(1,p))*N;const i=Math.min(N-1,Math.floor(x)),t=x-i;return tab[i]*(1-t)+tab[i+1]*t};
+  return p=>{
+    const th=thetaOf(p), ph=phiOf(p);
+    const A=rotAbout(V,d1,th), C=rotAbout(V,d4,ph);
+    const d2p=rotVec(d1,th,d2), d3p=rotVec(d4,ph,d3);
+    const B=frameRot(V,d2,d3,d2p,d3p);
+    return {A,B,C,th,ph};
+  };
+}
+
+// ===== op constructors (shared by browser + node) =====
+// Each op.prepare(faces) -> {faces, mot:[fn(p)->affine | null], Lnew:[...], lift:[...]}.
+const TAN22=Math.tan(PI/8);
+function rankLayers(faces){const vals=[...new Set(faces.map(f=>f.L))].sort((a,b)=>a-b);const r=new Map(vals.map((v,i)=>[v,i]));faces.forEach(f=>f.L=r.get(f.L))}
+function selIdx(faces,pred){const out=[];faces.forEach((f,i)=>{if(pred(f,viewCentroid(f),i))out.push(i)});return out}
+function sideOfLine(line,c){return Math.sign(side2(line,c))}
+// pages present on one side of the axis x=0, sorted top (highest L) first
+function stackOn(faces,sgn){
+  const m=new Map();
+  for(const f of faces){const c=viewCentroid(f);if(Math.sign(c[0])!==sgn||Math.abs(c[0])<1e-6)continue;const p=pageOf(f);m.set(p,Math.max(m.has(p)?m.get(p):-1e9,f.L))}
+  return [...m.entries()].sort((a,b)=>b[1]-a[1]).map(e=>e[0]);
+}
+const OP={
+  spin(angle){return {type:'spin',prepare(faces){
+    const R=p=>rotAbout([0,0,0],[0,1,0],angle*p);
+    return {faces,mot:faces.map(()=>R),Lnew:faces.map(f=>f.L)};
+  }}},
+  turn(extra={}){return {type:'turn',...extra,prepare(faces){
+    const Ls=faces.map(f=>f.L),mx=Math.max(...Ls),mn=Math.min(...Ls);
+    let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;faces.forEach(f=>faceVerts(f).forEach(v=>{const q=toView(v);x0=Math.min(x0,q[0]);x1=Math.max(x1,q[0]);y0=Math.min(y0,q[1]);y1=Math.max(y1,q[1])}));
+    const cx=(x0+x1)/2*S,cz=(y0+y1)/2*S,ext=Math.max(x1-x0,y1-y0);
+    const R=p=>rotAbout([0,0,0],[0,0,1],PI*p);
+    return {faces,mot:faces.map(()=>R),Lnew:faces.map(f=>mx-f.L+mn),turn:{lift:S*(0.1+0.32*Math.min(1,ext/2)),c:[0,0,cz],yaw:0.25+0.35*Math.min(1,ext/2)}};
+  }}},
+  // plain valley / mountain fold (or fold-and-unfold) of the selected faces on one side of a line
+  fold(o){return {type:o.unfold?'foldUnfold':'fold',...o,prepare(faces){
+    faces=splitFaces(faces,o.line,o.splitSel);
+    const sref=sideOfLine(o.line,o.side);
+    const idx=selIdx(faces,(f,c)=>sideOfLine(o.line,c)===sref&&(!o.sel||o.sel(f,c)));
+    const sgn=liftSign(o.line,o.side)*(o.dir==='mountain'?-1:1);
+    const g=hinge(o.line,(o.angle||PI)*sgn);
+    const Ls=faces.map(f=>f.L),mx=Math.max(...Ls),mn=Math.min(...Ls);
+    const movL=idx.map(i=>faces[i].L),movMax=Math.max(...movL),movMin=Math.min(...movL);
+    const mot=faces.map(()=>null),Lnew=faces.map(f=>f.L);
+    const fn=p=>rotAbout(g.a,g.u,g.ang*(o.unfold?(p<0.5?smooth(p*2):smooth((1-p)*2)):p));
+    idx.forEach(i=>{mot[i]=fn;
+      if(o.unfold) return;
+      if(o.layer==='keep') Lnew[i]=faces[i].L;
+      else if(o.layer==='keepRev') Lnew[i]=movMax+movMin-faces[i].L;
+      else if(o.dir==='mountain') Lnew[i]=mn-1-(faces[i].L-movMin);
+      else Lnew[i]=mx+1+(movMax-faces[i].L);
+      if(o.tag) faces[i].tags.push(o.tag);
+    });
+    if(o.tagStatic) faces.forEach((f,i)=>{if(!mot[i])f.tags.push(o.tagStatic)});
+    return {faces,mot,Lnew,soft:o.layer==='keep'||o.layer==='keepRev'};
+  }}},
+  // partial bend for final shaping (no layer change)
+  bend(o){return {type:'bend',...o,prepare(faces){
+    for(const g of o.groups) faces=splitFaces(faces,g.line,g.splitSel);
+    const mot=faces.map(()=>null),Lnew=faces.map(f=>f.L);
+    o.groups.forEach(g=>{
+      const sref=sideOfLine(g.line,g.side);
+      const sgn=liftSign(g.line,g.side)*(g.dir==='mountain'?-1:1);
+      const h=hinge(g.line,g.angle*sgn);
+      const fn=p=>rotAbout(h.a,h.u,h.ang*p);
+      faces.forEach((f,i)=>{const c=viewCentroid(f);if(!mot[i]&&sideOfLine(g.line,c)===sref&&(!g.sel||g.sel(f,c)))mot[i]=fn});
+    });
+    return {faces,mot,Lnew,bend:true};
+  }}},
+  // squash fold: flap hinged on the axis line (V + t*aDir); its outer edge (spine) runs along eDir.
+  squash(o){return {type:'squash',...o,prepare(faces){
+    const aD=o.aDir,eD=o.eDir; const bD=(()=>{const x=aD[0]+eD[0],y=aD[1]+eD[1],l=Math.hypot(x,y);return [x/l,y/l]})();
+    const V=o.V, axisLine=[V,[V[0]+aD[0],V[1]+aD[1]]], bisLine=[V,[V[0]+bD[0],V[1]+bD[1]]];
+    faces=splitFaces(faces,bisLine);
+    const flapSide=sideOfLine(axisLine,[V[0]+eD[0],V[1]+eD[1]]);
+    const r1Side=sideOfLine(bisLine,[V[0]+aD[0],V[1]+aD[1]]);
+    const outer=selIdx(faces,(f,c)=>o.outer(f,c)&&sideOfLine(axisLine,c)===flapSide);
+    const inner=selIdx(faces,(f,c)=>o.inner(f,c)&&sideOfLine(axisLine,c)===flapSide);
+    const isR1=i=>sideOfLine(bisLine,viewCentroid(faces[i]))===r1Side;
+    const s=liftSign(axisLine,[V[0]+eD[0],V[1]+eD[1]]);
+    const Vw=toWorld(V), d1=vScale(wdir(aD),s), d2=wdir(bD), d3=wdir(eD), d4=wdir(bD);
+    const thO=p=>p<0.3?(PI/2)*seg(p,0,0.3):PI/2+(PI/2)*seg(p,0.3,1);
+    const thI=p=>p<0.3?(PI/2)*seg(p,0,0.3):(PI/2)*(1-seg(p,0.3,1));
+    // C (inner r2) must swing up over the bisector: pick the branch with C's test point above the D frame
+    const testC=toWorld([V[0]+eD[0]*0.3+aD[0]*0.05,V[1]+eD[1]*0.3+aD[1]*0.05]);
+    const lift=liftSign(bisLine,[V[0]+eD[0]*0.3,V[1]+eD[1]*0.3]);
+    const fb=fourBar(Vw,d1,d2,d3,d4,p=>thO(p)-thI(p),PI*lift);
+    const Q=p=>rotAbout(Vw,d1,thI(p));
+    const cache=new Map(); const get=p=>{if(!cache.has(p)){if(cache.size>64)cache.clear();cache.set(p,fb(p))}return cache.get(p)};
+    const mot=faces.map(()=>null),Lnew=faces.map(f=>f.L);
+    const Ls=faces.map(f=>f.L),mx=Math.max(...Ls);
+    outer.forEach(i=>{const r1=isR1(i);faces[i].tags=faces[i].tags.filter(t=>t!=='r1'&&t!=='r2');faces[i].tags.push(r1?'r1':'r2');
+      mot[i]=r1?(p=>compose(Q(p),get(p).A)):(p=>compose(Q(p),get(p).B)); Lnew[i]=mx+(r1?1:2)});
+    inner.forEach(i=>{const r1=isR1(i);faces[i].tags=faces[i].tags.filter(t=>t!=='r1'&&t!=='r2');faces[i].tags.push(r1?'r1':'r2');
+      mot[i]=r1?(p=>Q(p)):(p=>compose(Q(p),get(p).C)); Lnew[i]=r1?faces[i].L:mx+1});
+    return {faces,mot,Lnew,dbg:{fb,thO,thI}};
+  }}},
+  // petal fold (frog-base variation) of the plain front kite: top page on each side must show its r1 part.
+  // r1 middle -> R_h (the petal), r1 side -> R_h R_k (tucked under), hidden r2 triangle X,P,R' flips across X-R'.
+  petal(o){return {type:'petal',...o,prepare(faces){
+    const B=[0,1],hy=0.5,xX=TAN22*0.5,xP=1-1/(1+TAN22),yP=1/(1+TAN22),yR=yP;
+    const hLine=[[-1,hy],[1,hy]];
+    faces=splitFaces(faces,hLine);
+    const kL=[B,[-xX,hy]],kR=[B,[xX,hy]],qL=[[-xX,hy],[0,yR]],qR=[[xX,hy],[0,yR]];
+    for(const l of [kL,kR,qL,qR]) faces=splitFaces(faces,l);
+    const pages=[stackOn(faces,-1)[0],stackOn(faces,1)[0]];
+    const s=liftSign(hLine,[0,0.8]);
+    const thA=p=>s*PI*p;
+    const mk=(sg)=>{const X=[sg*xX,hy],P=[sg*xP,yP];
+      const d2=wdir([B[0]-X[0],B[1]-X[1]]),d3=wdir([P[0]-X[0],P[1]-X[1]]),d4=wdir([0-X[0],yR-X[1]]);
+      return fourBar(toWorld(X),[1,0,0],d2,d3,d4,thA,PI*liftSign([X,[0,yR]],[sg*0.25,0.65]));};
+    const fbs={'-1':mk(-1),'1':mk(1)};
+    const mot=faces.map(()=>null),Lnew=faces.map(f=>f.L);
+    const mx=Math.max(...faces.map(f=>f.L));
+    const bad=[];
+    faces.forEach((f,i)=>{
+      const pg=pageOf(f); if(!pages.includes(pg)) return;
+      const c=viewCentroid(f); if(c[1]<hy) return;
+      const sg=Math.sign(c[0]); const fb=fbs[sg];
+      if(has(f,'r1')){
+        const outside=sideOfLine(sg<0?kL:kR,c)===sideOfLine(sg<0?kL:kR,[sg*0.5,0.8]);
+        if(!outside){mot[i]=p=>rotAbout(toWorld([0,hy]),[1,0,0],thA(p));Lnew[i]=mx+3;}
+        else {mot[i]=p=>fb(p).B;Lnew[i]=mx+2;}
+        f.tags.push('petal'+o.id);
+      } else if(has(f,'r2')){
+        const outside=sideOfLine(sg<0?qL:qR,c)===sideOfLine(sg<0?qL:qR,[sg*0.3,0.7]);
+        if(outside){mot[i]=p=>fb(p).C;Lnew[i]=mx+1;f.tags.push('flip'+o.id)}
+      }
+    });
+    return {faces,mot,Lnew};
+  }}},
+  // flip the top n pages on side `from` (+1 right, -1 left) across the centre line
+  book(o){return OP.fold({line:[[0,-2],[0,2]],side:[o.from*0.3,0.5],dir:'valley',
+    sel:(()=>{let chosen=null;return (f)=>{return o._pages.includes(pageOf(f))}})(),...o,
+    prepare:undefined})},
+  face(){return {type:'face',prepare(faces){return {faces,mot:faces.map(()=>null),Lnew:faces.map(f=>f.L)}}}}
+};
+// book needs the live stack: wrap
+OP.book=function(o){const base={type:'fold',book:true,...o};base.prepare=function(faces){
+  const pages=stackOn(faces,o.from).slice(0,o.n||1);
+  const inner=OP.fold({line:[[0,-2],[0,2]],side:[o.from*0.3,0.6],dir:'valley',sel:f=>pages.includes(pageOf(f))});
+  return inner.prepare(faces);};return base};
+
+function buildSnapshots(OPS){
+  let faces=initFaces();
+  const snaps=[];
+  for(const op of OPS){
+    const r=op.prepare(faces);
+    faces=r.faces;
+    const base=faces.map(faceVerts);
+    const snap={op,faces,mot:r.mot,Lnew:r.Lnew,base,maxL:Math.max(...faces.map(f=>f.L)),turn:r.turn||null,soft:!!r.soft,bend:!!r.bend,dbg:r.dbg};
+    snap.edges=computeEdges(snap);
+    snaps.push(snap);
+    faces=faces.map((f,i)=>{
+      if(!r.mot[i]&&r.Lnew[i]===f.L) return {...f,tags:f.tags.slice()};
+      let M=f.M; if(r.mot[i]&&op.type!=='foldUnfold'){M=compose(r.mot[i](1),f.M); M=cleanM(M)}
+      return {...f,M,L:op.type==='foldUnfold'?f.L:r.Lnew[i],tags:f.tags.slice()};
+    });
+    rankLayers(faces);
+  }
+  const final={op:{type:'final'},faces,mot:faces.map(()=>null),Lnew:faces.map(f=>f.L),base:faces.map(faceVerts),maxL:Math.max(...faces.map(f=>f.L))};
+  final.edges=computeEdges(final);
+  return {snaps,final};
+}
+function cleanM(M){const m=M.m.map(x=>Math.abs(x)<1e-9?0:x);const t=M.t.map(x=>Math.abs(x)<1e-9?0:x);return {m,t}}
+const keyOf=p=>p[0].toFixed(5)+','+p[1].toFixed(5);
+function sameT(snap,a,b){const A=snap.faces[a],B=snap.faces[b];for(let i=0;i<9;i++)if(Math.abs(A.M.m[i]-B.M.m[i])>1e-6)return false;for(let i=0;i<3;i++)if(Math.abs(A.M.t[i]-B.M.t[i])>1e-6)return false;return A.L===B.L&&snap.mot[a]===snap.mot[b]&&snap.Lnew[a]===snap.Lnew[b]}
+function computeEdges(snap){
+  const map=new Map();
+  snap.faces.forEach((f,fi)=>f.poly.forEach((p,i)=>{const q=f.poly[(i+1)%f.poly.length];const k=[keyOf(p),keyOf(q)].sort().join('|');if(!map.has(k))map.set(k,[]);map.get(k).push([fi,i])}));
+  const edges=[];
+  for(const [,list] of map){
+    for(const [fi,i] of list){
+      const others=list.filter(o=>o[0]!==fi);
+      const hidden=others.some(([gi])=>sameT(snap,fi,gi));
+      if(!hidden){edges.push([fi,i]);break}
+    }
+  }
+  return edges;
+}
+// world vertices of every face for snapshot s at progress p
+function evalSnap(s,p,noOff){
+  const t=s.op.type;
+  if(t==='face'||t==='final') p=1;
+  const cache=new Map();
+  const k=t==='foldUnfold'?0:(s.soft?smooth(p):p);
+  return s.faces.map((f,i)=>{
+    const fn=s.mot[i],base=s.base[i];
+    let T=IDT;
+    if(fn){T=cache.get(fn);if(!T){T=fn(p);cache.set(fn,T)}}
+    if(noOff) return fn?base.map(v=>applyA(T,v)):base;
+    const off0=fn?mulV(T.m,[0,f.L*EPS,0]):[0,f.L*EPS,0];
+    let off=vAdd(vScale(off0,1-k),[0,s.Lnew[i]*EPS*k,0]);
+    if(fn&&!s.bend&&!s.turn&&t!=='spin') off[1]+=Math.sin(PI*p)*0.05;
+    if(s.turn) off[1]+=Math.sin(PI*p)*s.turn.lift;
+    if(t==='foldUnfold'&&fn) off=vAdd(off,[0,(s.maxL+1)*EPS*Math.min(1,p*4)*Math.min(1,(1-p)*4),0]);
+    const vs=base.map(v=>vAdd(applyA(T,v),off));
+    if(s.turn){const Y=rotAbout(s.turn.c,[0,1,0],s.turn.yaw*Math.sin(PI*p));return vs.map(v=>applyA(Y,v))}
+    return vs;
+  });
+}
+function verifySnaps(SNAPS,ps=[0,0.25,0.5,0.75,1]){
+  const problems=[];
+  SNAPS.forEach((s,si)=>{
+    for(const p of ps){
+      const W=evalSnap(s,p,true);
+      const map=new Map();
+      s.faces.forEach((f,fi)=>f.poly.forEach((q,i)=>{const r=f.poly[(i+1)%f.poly.length];const k=[keyOf(q),keyOf(r)].sort().join('|');(map.get(k)||map.set(k,[]).get(k)).push([fi,i])}));
+      let worst=0,wk='';
+      for(const [k,list] of map){ if(list.length<2) continue;
+        for(let a=0;a<list.length;a++)for(let b=a+1;b<list.length;b++){
+          const [fa,ia]=list[a],[fb,ib]=list[b];
+          const pa=[W[fa][ia],W[fa][(ia+1)%W[fa].length]], pb=[W[fb][ib],W[fb][(ib+1)%W[fb].length]];
+          const dist=(x,y)=>Math.hypot(x[0]-y[0],x[1]-y[1],x[2]-y[2]);
+          const d=Math.min(Math.max(dist(pa[0],pb[0]),dist(pa[1],pb[1])),Math.max(dist(pa[0],pb[1]),dist(pa[1],pb[0])));
+          if(d>worst){worst=d;wk=k}
+        }}
+      if(worst>1e-5) problems.push(`op ${si} (${s.op.type}${s.op.name?' '+s.op.name:''}) p=${p} gap ${worst.toFixed(4)} at ${wk}`);
+    }
+  });
+  return problems;
+}
+// fold-and-unfold of several creases at once (pre-creasing)
+OP.creases=function(o){return {type:'foldUnfold',...o,prepare(faces){
+  const groups=o.groups(faces);
+  for(const g of groups) faces=splitFaces(faces,g.line);
+  const mot=faces.map(()=>null),Lnew=faces.map(f=>f.L);
+  groups.forEach(g=>{const sref=sideOfLine(g.line,g.side);const sgn=liftSign(g.line,g.side);const h=hinge(g.line,PI*0.999*sgn);
+    const fn=p=>rotAbout(h.a,h.u,h.ang*(p<0.5?smooth(p*2):smooth((1-p)*2)));
+    faces.forEach((f,i)=>{const c=viewCentroid(f);if(!mot[i]&&sideOfLine(g.line,c)===sref&&g.sel(f,c))mot[i]=fn});});
+  return {faces,mot,Lnew};
+}}};
+OP.spinC=function(angle,c){return {type:'spin',prepare(faces){
+  const C=toWorld(c);const R=p=>rotAbout(C,[0,1,0],angle*p);
+  return {faces,mot:faces.map(()=>R),Lnew:faces.map(f=>f.L)};
+}}};
+// pages sorted top-first among faces matching pred
+function stackWhere(faces,pred){const m=new Map();for(const f of faces){const c=viewCentroid(f);if(!pred(f,c))continue;const p=pageOf(f);m.set(p,Math.max(m.has(p)?m.get(p):-1e9,f.L))}return [...m.entries()].sort((a,b)=>b[1]-a[1]).map(e=>e[0])}
+// deferred op: build the real op from the live faces
+OP.live=function(name,make,extra={}){return {type:'live',name,...extra,prepare(faces){const op=make(faces);this.type=op.type;Object.assign(this,{guide:op.guide,guides:op.guides,mountain:op.mountain});return op.prepare(faces)}}};
+// several independent valley/mountain folds at once (e.g. left + right gill)
+OP.multi=function(o){return {type:'fold',...o,prepare(faces){
+  for(const g of o.groups) faces=splitFaces(faces,g.line,g.splitSel);
+  const Ls=faces.map(f=>f.L),mx=Math.max(...Ls);
+  const mot=faces.map(()=>null),Lnew=faces.map(f=>f.L);
+  o.groups.forEach(g=>{
+    const sref=sideOfLine(g.line,g.side);
+    const idx=selIdx(faces,(f,c,i)=>!mot[i]&&sideOfLine(g.line,c)===sref&&(!g.sel||g.sel(f,c)));
+    if(!idx.length) return;
+    const sgn=liftSign(g.line,g.side)*(g.dir==='mountain'?-1:1);
+    const h=hinge(g.line,PI*sgn); const fn=p=>rotAbout(h.a,h.u,h.ang*p);
+    const movMax=Math.max(...idx.map(i=>faces[i].L));
+    idx.forEach(i=>{mot[i]=fn;Lnew[i]=mx+1+(movMax-faces[i].L);if(g.tag)faces[i].tags.push(g.tag)});
+  });
+  return {faces,mot,Lnew};
+}}};
+
+// ===== Easy-intermediate axolotl: top corner to the centre, side corners just past it, tips folded back out as legs, tapered tail with folded-out back legs, pleated gills =====
+const nm=(o,n)=>Object.assign(o,{name:n});
+const PAR=(typeof process!=='undefined'&&process.env&&process.env.PAR)?JSON.parse(process.env.PAR):{};
+const CC=PAR.CC??0.45;                 // side corners fold in along x=±CC (tips cross the centre)
+const HT=PAR.HT??-0.5;                // head top edge: top corner folds to the centre
+const WY=PAR.WY??0.25;                // tail kite runs from the bottom point to (±0.5, WY)
+const LEGX=PAR.LEGX??0.24;            // front legs: tip folded back out across x=±LEGX
+const PHI=(PAR.PHI??50)*PI/180;       // back legs: hinge from W at angle PHI below horizontal
+const GILL=PAR.GILL??0.30;            // gill size (along the diagonal from the head corner)
+const mirX=p=>[-p[0],p[1]];
+const LA=(PAR.LA??0)*PI/180; // front-leg fold tilt (leg points back)
+const legLine=sg=>{const P=[sg*LEGX,0],d=[sg*Math.sin(LA),Math.cos(LA)];return [[P[0]-d[0]*1.2,P[1]-d[1]*1.2],[P[0]+d[0]*1.2,P[1]+d[1]*1.2]]};
+const OPS=[
+  nm(OP.spin(-PI/4),'spin'),
+  nm(OP.fold({line:[[0,-1],[0,1]],side:[-0.5,0],dir:'valley',unfold:true}),'crease v'),
+  nm(OP.fold({line:[[-1,0],[1,0]],side:[0,-0.5],dir:'valley',unfold:true}),'crease h'),
+  nm(OP.fold({line:[[-1,HT],[1,HT]],side:[0,-0.95],dir:'valley',tag:'Tf'}),'T in'),
+  nm(OP.fold({line:[[-CC,-1],[-CC,1]],side:[-0.9,0],dir:'valley',tag:'Lf'}),'L in'),
+  nm(OP.fold({line:legLine(-1),side:[-LEGX+0.06,0],dir:'valley',sel:f=>has(f,'Lf'),splitSel:f=>has(f,'Lf'),tag:'legFL'}),'front leg L'),
+  nm(OP.fold({line:[[CC,-1],[CC,1]],side:[0.9,0],dir:'valley',tag:'Rf'}),'R in'),
+  nm(OP.fold({line:legLine(1),side:[LEGX-0.06,0],dir:'valley',sel:f=>has(f,'Rf'),splitSel:f=>has(f,'Rf'),tag:'legFR'}),'front leg R'),
+  nm(OP.fold({line:[[0,1],[-CC,WY]],side:[-0.45,0.62],dir:'valley',sel:(f,c)=>c[1]>WY-0.06&&!has(f,'legFL'),splitSel:f=>!has(f,'legFL'),tag:'tailL'}),'tail L'),
+  nm(OP.fold({line:[[0,1],[CC,WY]],side:[0.45,0.62],dir:'valley',sel:(f,c)=>c[1]>WY-0.06&&!has(f,'legFR'),splitSel:f=>!has(f,'legFR'),tag:'tailR'}),'tail R'),
+];
+const WL=[-CC,WY], ld=[Math.cos(PHI),Math.sin(PHI)];
+const backLegLine=sg=>[[sg*WL[0],WL[1]],[sg*(WL[0]+ld[0]),WL[1]+ld[1]]];
+OPS.push(
+  nm(OP.fold({line:backLegLine(1),side:[0.0,0.42],dir:'valley',sel:f=>has(f,'tailL'),splitSel:f=>has(f,'tailL'),tag:'legBL'}),'back leg L'),
+  nm(OP.fold({line:backLegLine(-1),side:[0.0,0.42],dir:'valley',sel:f=>has(f,'tailR'),splitSel:f=>has(f,'tailR'),tag:'legBR'}),'back leg R'),
+  nm(OP.turn(),'turn'),
+);
+// gills: big head-corner flaps. Hinge runs from the top edge (GA1 in from the corner) down the side (GB1 below the corner)
+const GA1=PAR.GA1??0.3, GB1=PAR.GB1??0.42;
+const gLen=Math.hypot(GA1,GB1);
+const gN=sg=>[sg*GB1/gLen,-GA1/gLen];           // unit normal pointing to the corner
+const gT=sg=>[sg*GA1/gLen,GB1/gLen];
+const gH=GA1*GB1/gLen;                         // corner-to-hinge distance
+const diagLine=(sg,k)=>{const C=[sg*CC,HT],n=gN(sg),t=gT(sg);const P=[C[0]-n[0]*k,C[1]-n[1]*k];
+  return {line:[[P[0]-t[0]*0.7,P[1]-t[1]*0.7],[P[0]+t[0]*0.7,P[1]+t[1]*0.7]],toCorner:[P[0]+n[0]*0.02,P[1]+n[1]*0.02],away:[P[0]-n[0]*0.02,P[1]-n[1]*0.02]};};
+const headCorner=sg=>(f,c)=>{c=c||viewCentroid(f);return Math.sign(c[0])===sg&&c[1]<0&&!has(f,'legFL')&&!has(f,'legFR')};
+const PL1=PAR.PL1??0.1, PLW=PAR.PLW??0.05;
+OPS.push(
+  nm(OP.multi({groups:[-1,1].map(sg=>{const d=diagLine(sg,PL1);return {line:d.line,side:d.toCorner,dir:'valley',sel:headCorner(sg),splitSel:headCorner(sg),tag:'gp'+sg}})}),'gill pleat a'),
+  nm(OP.multi({groups:[-1,1].map(sg=>{const d=diagLine(sg,PL1+PLW);return {line:d.line,side:d.away,dir:'valley',sel:(f,c)=>has(f,'gp'+sg),splitSel:f=>has(f,'gp'+sg),tag:'gq'+sg}})}),'gill pleat b'),
+);
+const gillBend=sg=>{const d=diagLine(sg,gH);return {line:d.line,side:d.toCorner,dir:'valley',angle:PAR.GA??0.9,sel:headCorner(sg),splitSel:headCorner(sg)}};
+OPS.push(nm(OP.bend({groups:[gillBend(-1),gillBend(1)]}),'lift gills'));
+// legs down: front legs hinge on the body edge x=±0.5 ; back legs hinge on the tail edge W->B
+const legTag=(f)=>f.tags.find(t=>/^leg/.test(t));
+const frontBend=sg=>({line:[[sg*CC,-1],[sg*CC,1]],side:[sg*(CC+0.1),0],dir:'mountain',angle:PAR.FA??0.2,sel:(f,c)=>/^legF/.test(legTag(f)||'')&&Math.sign(c[0])===sg,splitSel:f=>/^legF/.test(legTag(f)||'')});
+const backBend=sg=>({line:[[sg*CC,WY],[0,1]],side:[sg*0.45,0.55],dir:'mountain',angle:PAR.BA??0.2,sel:(f,c)=>/^legB/.test(legTag(f)||'')&&Math.sign(c[0])===sg,splitSel:f=>/^legB/.test(legTag(f)||'')});
+OPS.push(nm(OP.bend({groups:[frontBend(-1),frontBend(1),backBend(-1),backBend(1)]}),'legs down'));
+const TC=PAR.TC??0.84;
+OPS.push(nm(OP.bend({groups:[{line:[[-0.5,TC],[0.5,TC]],side:[0,TC+0.1],dir:'valley',angle:PAR.TA??0.3,sel:(f,c)=>c[1]>TC&&!legTag(f),splitSel:f=>!legTag(f)}]}),'curl tail'));
+OPS.push(nm(OP.face(),'face'));
+// presentation settings read by the template
+const FACE_DEF={eyes:[[-0.15,-0.33],[0.15,-0.33]],cheeks:[[-0.25,-0.24],[0.25,-0.24]],smile:[[-0.075,-0.25],[0,-0.205],[0.075,-0.25]]};
+const FACE_SCALE=2.0, FINAL_YAW=0, FINAL_SWAY=[-0.1,0.45], FACE_STEP_YAW=0.0, SVG_FLIP=false;
+
+// ---------- content: 17 steps; n = how many engine ops each step plays in sequence ----------
+const TECH={
+  pleat:{name:'Pleat',body:'A pleat is two folds side by side, like one step of a paper fan. Fold the tip in, then fold it back out a little way along. The tip ends up a bit shorter, with a neat step in the edge. That step is what makes the gills look frilly.',kb:'Fold the tip in, then fold it back out. It makes a little step, like a fan.'},
+};
+const STEPS=[
+ {n:1,t:'Start pale side up',b:'Lay your square pale side up and turn it so a corner points towards you, like a diamond.',tip:'A 15 to 20 cm square of origami paper (kami) is ideal. Thin paper makes neat legs.',
+  kt:'Pale side up',kb:'Put the pale side up. Turn the paper so a corner points at you.',a:'A square of paper, pale side up, turning into a diamond.'},
+ {n:2,t:'Fold in half both ways',b:'Fold the left corner to the right corner and unfold. Then fold the top corner to the bottom corner and unfold. The creases cross in the centre.',tip:'The centre point is your target for the next three folds, so line the corners up carefully.',
+  kt:'Make a plus sign',kb:'Fold in half and open. Fold in half the other way and open. Now there is a cross.',a:'The diamond folds in half side to side and opens, then top to bottom and opens, leaving two crossing creases.'},
+ {n:1,t:'Top corner to the centre',b:'Fold the top corner down so its tip touches the centre point. The top edge is now straight.',tip:'This straight edge will be the top of the head.',
+  kt:'Top corner down',kb:'Fold the top corner down to the middle.',a:'The top corner folds down so its tip meets the centre, making a straight top edge.'},
+ {n:1,t:'Left corner in',b:'Fold the left corner over so its tip goes about 1 cm past the centre crease. Keep the fold straight up and down, parallel to the centre crease.',tip:'Going a little past the centre makes a slim body.',
+  kt:'Left corner in',kb:'Fold the left corner in, just past the middle line.',a:'The left corner folds in so its tip crosses the centre crease by about a centimetre.'},
+ {n:1,t:'Left front leg',b:'Fold the tip of that flap back out, so it pokes past the left edge. The fold runs straight up and down, about halfway between the edge and the centre crease.',tip:'Aim for a point that sticks out about a finger-width.',
+  kt:'Make a front leg',kb:'Fold the tip back out past the edge. That is a leg!',a:'The tip of the left flap folds back out so it pokes past the left edge as a front leg.'},
+ {n:1,t:'Right corner in',b:'Fold the right corner over the same way, so its tip goes about 1 cm past the centre crease and lies on top.',tip:'Line the new fold up so both sides are the same width.',
+  kt:'Right corner in',kb:'Fold the right corner in, just past the middle too.',a:'The right corner folds in on top, crossing the centre crease by about a centimetre.'},
+ {n:1,t:'Right front leg',b:'Fold the tip of the right flap back out past the right edge, to match the left leg.',tip:'Hold it up to the light to check both legs are the same size.',
+  kt:'The other front leg',kb:'Fold the tip back out on this side too.',a:'The tip of the right flap folds back out past the right edge, making the second front leg.'},
+ {n:1,t:'Narrow the tail, left side',b:'Fold the lower-left edge in towards the centre crease. The fold starts at the bottom point and ends on the left edge, just below the front leg.',tip:'Keep the leg sticking out. Don\u2019t catch it in this fold.',
+  kt:'Make the tail thin',kb:'Fold the bottom-left edge in towards the middle.',a:'The lower-left edge folds in towards the centre, making the tail narrower.'},
+ {n:1,t:'Narrow the tail, right side',b:'Do the same on the right. The bottom point is now a slim, tapered tail.',tip:'The two folds should meet neatly at the bottom point.',
+  kt:'Other side of the tail',kb:'Fold the bottom-right edge in too. Now the tail is thin.',a:'The lower-right edge folds in too, so the tail tapers to a point.'},
+ {n:1,t:'Left back leg',b:'Fold the corner of the small left tail flap back out, so a little point pokes past the edge of the tail.',tip:'The fold starts where the tail fold meets the side edge.',
+  kt:'Make a back leg',kb:'Fold the corner of the little left flap out. Another leg!',a:'The corner of the small left tail flap folds back out to make a back leg.'},
+ {n:1,t:'Right back leg',b:'Do the same on the right. That makes four legs.',tip:'Back legs are a bit smaller than front legs, just like a real axolotl.',
+  kt:'Four legs!',kb:'Do the same on the right side. Now it has four legs.',a:'The right tail flap folds out to match, making the fourth leg.'},
+ {n:1,t:'Turn it over',b:'Flip the paper over from side to side. Now it is pink all over, with four legs peeking out.',tip:'Keep the straight edge at the top. That is the axolotl\u2019s head.',
+  kt:'Flip it over',kb:'Turn the paper over. Hello, pink axolotl!',a:'The model turns over to show the plain pink side, with the legs peeking out.'},
+ {n:2,t:'Pleat the gills',b:'The two top corners are the gills. Fold each corner tip in a little along a slanted line, then fold it back out just above. This pleat gives each gill a frilly step.',tip:'Make the slanted line run from the top edge to the side edge, and do both corners the same size.',tech:'pleat',
+  kt:'Make frilly gills',kb:'Fold each top corner in, then fold the tip back out. It makes a frill.',a:'Each top corner folds in and its tip folds back out, making a pleat that gives the gills a frilly edge.'},
+ {n:1,t:'Lift the gills',b:'Bend each top corner up along a slanted line from the top edge, about a third of the way in, down to the side edge. The gills stand up on each side of the head.',tip:'Bend, don\u2019t crease flat. Let them fan out a little.',
+  kt:'Lift the gills',kb:'Bend the two top corners up. Those are the gills!',a:'The two pleated corners bend up so the gills stand beside the head.'},
+ {n:1,t:'Bend the legs down',b:'Softly bend all four legs down a little at the edge of the body.',tip:'Just a small bend, so the legs still show from above.',
+  kt:'Legs down',kb:'Bend all four legs down a little, so it can stand.',a:'All four legs bend down a little along the sides of the body.'},
+ {n:1,t:'Curl the tail',b:'Bend the end of the tail up slightly for a swishy tail.',tip:'Roll the tail tip around a pencil for an extra curl.',
+  kt:'Lift the tail',kb:'Lift the end of the tail a tiny bit. Swish!',a:'The tip of the tail bends up into a gentle curl.'},
+ {n:1,t:'Draw a happy face',b:'Add two dot eyes just below the top edge, between the gills, and a little smile under them. Pink cheeks are optional.',tip:'A pink pencil makes lovely rosy cheeks.',
+  kt:'Draw a face',kb:'Draw two eyes and a smile near the top. Pink cheeks are extra cute!',a:'The finished axolotl gets two dot eyes, a smile and pink cheeks.'}
+];
+
+const {snaps:SNAPS,final:FINAL}=buildSnapshots(OPS);
+const N=STEPS.length;
+const STEP_OPS=[];{let k=0;STEPS.forEach(s=>{STEP_OPS.push(SNAPS.slice(k,k+s.n));k+=s.n});if(k!==SNAPS.length)console.error('step/op count mismatch',k,SNAPS.length)}
+const W8=s=>s.op.type==='turn'?1.15:s.op.type==='spin'?0.8:s.op.type==='face'?0.8:1;
+function stepScene(step,p){
+  const subs=STEP_OPS[step],ws=subs.map(W8),tot=ws.reduce((a,b)=>a+b,0);let x=p*tot;
+  for(let j=0;j<subs.length;j++){if(x<=ws[j]||j===subs.length-1)return {snap:subs[j],p:Math.max(0,Math.min(1,x/ws[j])),sub:j};x-=ws[j]}
+}
+function verify(){return verifySnaps(SNAPS)}
+
+// ---------- automatic crease lines and arrows for every op ----------
+function pip(pt,poly){let c=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const a=poly[i],b=poly[j];if(((a[1]>pt[1])!==(b[1]>pt[1]))&&(pt[0]<(b[0]-a[0])*(pt[1]-a[1])/(b[1]-a[1])+a[0]))c=!c}return c}
+function faceN(vs){return vNorm(vCross(vSub(vs[1],vs[0]),vSub(vs[2],vs[0])))}
+function cen3(vs){let x=0,y=0,z=0;vs.forEach(v=>{x+=v[0];y+=v[1];z+=v[2]});return [x/vs.length,y/vs.length,z/vs.length]}
+function area2(poly){let a=0;for(let i=0;i<poly.length;i++){const p=poly[i],q=poly[(i+1)%poly.length];a+=p[0]*q[1]-q[0]*p[1]}return Math.abs(a)/2}
+function annotate(s){
+  if(s._ann) return s._ann;
+  const t=s.op.type, out={creases:[],arrows:[]}; s._ann=out;
+  if(t==='spin'||t==='face'||t==='final') return out;
+  const W0=evalSnap(s,0,true);
+  if(t==='turn'){
+    let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;W0.forEach(vs=>vs.forEach(v=>{const q=toView(v);x0=Math.min(x0,q[0]);x1=Math.max(x1,q[0]);y0=Math.min(y0,q[1]);y1=Math.max(y1,q[1])}));
+    const cy=y0+(y1-y0)*0.6,w=Math.max(0.25,x1-x0);
+    out.arrows.push({A:[(x0-0.04)*S,0.03,cy*S],B:[(x1+0.04)*S,0.03,cy*S],h:0.35+0.45*w});
+    return out;
+  }
+  const pv=t==='foldUnfold'?0.25:t==='squash'||t==='petal'?0.6:0.5, pe=t==='foldUnfold'?0.5:1;
+  const Wv=evalSnap(s,pv,true),W1=evalSnap(s,pe,true);
+  const VP=W0.map(vs=>vs.map(toView));
+  const topAt=pt=>{let b=-1e9;VP.forEach((poly,fi)=>{if(pip(pt,poly))b=Math.max(b,s.faces[fi].L)});return b};
+  const map=new Map();
+  s.faces.forEach((f,fi)=>f.poly.forEach((q,i)=>{const r=f.poly[(i+1)%f.poly.length];const k=[keyOf(q),keyOf(r)].sort().join('|');(map.get(k)||map.set(k,[]).get(k)).push([fi,i])}));
+  const segs=[];
+  for(const [,list] of map){
+    if(list.length<2) continue;
+    let pair=null;
+    for(let a=0;a<list.length&&!pair;a++)for(let b=a+1;b<list.length;b++){const fa=list[a][0],fb=list[b][0];if(s.mot[fa]===s.mot[fb])continue;
+      const na=faceN(Wv[fa]),nb=faceN(Wv[fb]);if(Math.hypot(...vCross(na,nb))<1e-3&&vDot(na,nb)>0)continue;pair=[list[a],list[b]];break}
+    if(!pair) continue;
+    const [[fa,ia],[fb]]=pair; const n=VP[fa].length;
+    const a=VP[fa][ia],b=VP[fa][(ia+1)%n];
+    const m=[(a[0]+b[0])/2,(a[1]+b[1])/2],dx=b[0]-a[0],dy=b[1]-a[1],l=Math.hypot(dx,dy); if(l<1e-4) continue;
+    const nx=-dy/l*1e-3,ny=dx/l*1e-3;
+    const tl=Math.max(topAt([m[0]+nx,m[1]+ny]),topAt([m[0]-nx,m[1]-ny]));
+    if(Math.max(s.faces[fa].L,s.faces[fb].L)<tl) continue;
+    // valley or mountain, seen from above
+    const ref=s.mot[fb]?fb:(s.mot[fa]?fa:fb), mov=ref===fa?fb:fa;
+    const T=s.mot[ref]?s.mot[ref](pv):IDT;
+    const nRef=mulV(T.m,[0,1,0]);
+    const mid=cen3([Wv[fa][ia],Wv[fa][(ia+1)%n]]);
+    const mountain=vDot(vSub(cen3(Wv[mov]),mid),nRef)<0;
+    segs.push({a,b,mountain});
+  }
+  // merge collinear pieces into long lines
+  const groups=new Map();
+  for(const sg of segs){let dx=sg.b[0]-sg.a[0],dy=sg.b[1]-sg.a[1];const l=Math.hypot(dx,dy);dx/=l;dy/=l;if(dx<-1e-9||(Math.abs(dx)<1e-9&&dy<0)){dx=-dx;dy=-dy}
+    const off=-dy*sg.a[0]+dx*sg.a[1];const k=Math.round(Math.atan2(dy,dx)*500)+'|'+Math.round(off*500)+'|'+sg.mountain;
+    const t0=dx*sg.a[0]+dy*sg.a[1],t1=dx*sg.b[0]+dy*sg.b[1];
+    (groups.get(k)||groups.set(k,{dx,dy,off,mountain:sg.mountain,iv:[]}).get(k)).iv.push([Math.min(t0,t1),Math.max(t0,t1)])}
+  for(const g of groups.values()){
+    g.iv.sort((p,q)=>p[0]-q[0]);let cur=null;const done=[];
+    for(const iv of g.iv){if(cur&&iv[0]<=cur[1]+0.004)cur[1]=Math.max(cur[1],iv[1]);else{if(cur)done.push(cur);cur=iv.slice()}}
+    if(cur)done.push(cur);
+    done.forEach(([t0,t1])=>{if(t1-t0<0.03)return;const P=t=>[g.dx*t-g.dy*g.off,g.dy*t+g.dx*g.off];out.creases.push({seg:[P(t0),P(t1)],mountain:g.mountain})});
+  }
+  // arrows: one per moving group (bends: per hinge)
+  const movers=s.faces.map((f,i)=>i).filter(i=>s.mot[i]);
+  const bucket=new Map();
+  movers.forEach(i=>{const k=t==='bend'?s.mot[i]:'all';(bucket.get(k)||bucket.set(k,[]).get(k)).push(i)});
+  for(const ids of bucket.values()){
+    const mx=Math.max(...ids.map(i=>s.faces[i].L));const top=ids.filter(i=>s.faces[i].L>=mx-(t==='bend'?99:0));
+    let wA=0,A=[0,0,0],B=[0,0,0];
+    top.forEach(i=>{const w=area2(VP[i])+1e-6;wA+=w;A=vAdd(A,vScale(cen3(W0[i]),w));B=vAdd(B,vScale(cen3(W1[i]),w))});
+    A=vScale(A,1/wA);B=vScale(B,1/wA);
+    const d=Math.hypot(...vSub(B,A)); if(d<0.06) continue;
+    const sh=0.04; out.arrows.push({A:vAdd(A,[0,sh,0]),B:vAdd(vAdd(A,vScale(vSub(B,A),0.92)),[0,sh,0]),h:Math.min(0.5,0.1+0.32*d)});
+  }
+  return out;
+}
+// camera focus per step: bounding box of every state the step passes through
+const FOCUS=STEPS.map((st,i)=>{
+  let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9,h=0;
+  STEP_OPS[i].forEach(s=>[0,0.5,1].forEach(p=>{if(s.op.type==='turn'&&p===0.5)return;evalSnap(s,p,true).forEach(vs=>vs.forEach(v=>{const q=toView(v);x0=Math.min(x0,q[0]);x1=Math.max(x1,q[0]);y0=Math.min(y0,q[1]);y1=Math.max(y1,q[1]);h=Math.max(h,v[1])}))}));
+  const size=Math.max(x1-x0,(y1-y0)*1.08);
+  return st.focus||{c:[(x0+x1)/2,(y0+y1)/2-0.05*(y1-y0)-0.25*h/S],f:Math.max(0.34,Math.min(1,(size+0.16+0.5*h)/2.1)),h};
+});
+const FOCUS_INTRO=(()=>{let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9;FINAL.base.forEach(vs=>vs.forEach(v=>{const q=toView(v);x0=Math.min(x0,q[0]);x1=Math.max(x1,q[0]);y0=Math.min(y0,q[1]);y1=Math.max(y1,q[1])}));const size=Math.max(x1-x0,(y1-y0)*1.08);return {c:[(x0+x1)/2,(y0+y1)/2],f:Math.max(0.37,(size+0.22)/2.1)}})();
+
+// face on the head: find the paper surface height under each mark
+const WF=evalSnap(FINAL,1);
+function headHeight(x,y){let best=-1;WF.forEach(vs=>{const n=faceN(vs);if(Math.abs(n[1])<0.9)return;if(pip([x,y],vs.map(toView)))best=Math.max(best,cen3(vs)[1])});return best}
+const FACE=(typeof FACE_DEF!=='undefined')?FACE_DEF:{eyes:[[-0.046,0.114],[0.046,0.114]],cheeks:[[-0.071,0.086],[0.071,0.086]],smile:[[-0.032,0.072],[0,0.056],[0.032,0.072]]};
+const FSC=(typeof FACE_SCALE!=='undefined')?FACE_SCALE:1;
+const YAW0=(typeof FINAL_YAW!=='undefined')?FINAL_YAW:PI, SWAY=(typeof FINAL_SWAY!=='undefined')?FINAL_SWAY:[-0.55,0.75], FACE_YAW=(typeof FACE_STEP_YAW!=='undefined')?FACE_STEP_YAW:-0.25, FLIP_SVG=(typeof SVG_FLIP!=='undefined')?SVG_FLIP:true;
+const faceY=Math.max(...[...FACE.eyes,...FACE.cheeks,FACE.smile[1]].map(p=>headHeight(p[0],p[1])))+0.004;
+
+const CREDIT='<p class="credit">Method: an easy design made for this guide from basic folds. The top corner folds to the centre and the side corners fold in just past it, their tips fold back out as front legs, a kite-style fold tapers the tail and its corners fold out as back legs, and a simple pleat makes the gills frilly. Pleats explained: <a href="https://www.origamiway.com/origami-pleat-fold/" target="_blank" rel="noopener">Origami Way</a>. Ready for more? Try <a href="https://hoang-tuan-origami-shop.myshopify.com/products/origami-axolotl-diagram-instruction-axolotl-salamander-ebook" target="_blank" rel="noopener">Ph\u1ea1m Ho\u00e0ng Tu\u1ea5n\u2019s Axolotl</a>.</p>';
+const ICON={
+  paper:'<svg viewBox="0 0 24 24"><rect x="4.5" y="4.5" width="15" height="15" rx="1.5"/><path d="M4.5 19.5 19.5 4.5"/></svg>',
+  pen:'<svg viewBox="0 0 24 24"><path d="M15.5 4.5l4 4L9 19H5v-4z"/><path d="M13.5 6.5l4 4"/></svg>',
+  clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 2"/></svg>',
+  learn:'<svg viewBox="0 0 24 24"><path d="M4 9.5 12 5l8 4.5-8 4.5z"/><path d="M7.5 11.5v4c1.2 1.3 2.8 2 4.5 2s3.3-.7 4.5-2v-4"/></svg>',
+  eye:'<svg viewBox="0 0 24 24"><circle cx="8.5" cy="11" r="1.6"/><circle cx="15.5" cy="11" r="1.6"/><path d="M9 15.5c1.8 1.3 4.2 1.3 6 0"/></svg>',
+  family:'<svg viewBox="0 0 24 24"><rect x="3.5" y="9" width="7" height="7" rx="1" transform="rotate(45 7 12.5)"/><rect x="13" y="7.5" width="8" height="8" rx="1" transform="rotate(45 17 11.5)"/></svg>',
+  pond:'<svg viewBox="0 0 24 24"><path d="M3.5 14c2 0 2-1.5 4.2-1.5S9.8 14 12 14s2-1.5 4.2-1.5S18.3 14 20.5 14"/><path d="M3.5 18c2 0 2-1.5 4.2-1.5S9.8 18 12 18s2-1.5 4.2-1.5S18.3 18 20.5 18"/><path d="M12 10V5m0 0-2 2m2-2 2 2"/></svg>',
+  chev:'<svg class="chev" viewBox="0 0 16 16" aria-hidden="true"><path d="M6 3.5 10.5 8 6 12.5"/></svg>'
+};
+
+// ---------- state ----------
+const PREFIX='axolotl-fold-int:';
+const store={get(k,d){try{const v=localStorage.getItem(PREFIX+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem(PREFIX+k,JSON.stringify(v))}catch(e){}}};
+let view=store.get('view',-1); if(typeof view!=='number'||view<-1||view>N) view=-1;
+let kid=!!store.get('kid',false), cheeks=store.get('cheeks',true)!==false;
+let progress=1, playing=false, playStart=0, playDur=1700, dragging=false;
+const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const $=s=>document.querySelector(s);
+const copyEl=$('#copy'),eyebrow=$('#eyebrow'),prevBtn=$('#prev'),nextBtn=$('#next'),scrub=$('#scrub'),fill=$('#fill'),thumb=$('#thumb'),stage=$('#stage'),progressEl=$('#progress'),kidBtn=$('#kidBtn'),hint=$('#hint');
+for(let i=0;i<N;i++){const b=document.createElement('button');b.className='seg';b.type='button';b.setAttribute('aria-label','Go to step '+(i+1)+': '+STEPS[i].t);b.innerHTML='<i></i>';b.addEventListener('click',()=>go(i));progressEl.appendChild(b)}
+
+function techHTML(key){const T=TECH[key];return `<details class="tech"><summary><span class="k">New technique</span><span>${T.name}</span>${ICON.chev}</summary><p class="tb">${kid?T.kb:T.body}</p></details>`}
+function copyHTML(){
+  if(view===-1){
+    return `<h2>What you\u2019ll need</h2>
+    <ul class="list">
+      <li>${ICON.paper}<div><div class="t">One square of thin paper</div><div class="d"><span class="sw-paper" aria-hidden="true"></span>15 to 20 cm. Origami paper (kami) works best.</div></div></li>
+      <li>${ICON.learn}<div><div class="t">New techniques</div><div class="d">Just one: a pleat, for the frilly gills. Everything else is a simple valley fold.</div></div></li>
+      <li>${ICON.clock}<div><div class="t">15 to 20 minutes \u00b7 ${N} steps</div><div class="d">No scissors or glue. A pen for the face is optional.</div></div></li>
+    </ul>${CREDIT}`;
+  }
+  if(view===N){
+    return `<h2>${kid?'You did it!':'Meet your axolotl!'}</h2>
+    <p>${kid?'Four legs, frilly gills and a big smile. Brilliant folding!':'Four legs, frilly gills and a tapered tail, all from one uncut square. Ideas for what to do next:'}</p>
+    <button class="chip" id="cheekBtn" type="button" aria-pressed="${cheeks}"><span class="dot" aria-hidden="true"></span>Pink cheeks</button>
+    <ul class="list">
+      <li>${ICON.family}<div><div class="t">Fold a family</div><div class="d">Real axolotls come in pink, gold, grey and black.</div></div></li>
+      <li>${ICON.pond}<div><div class="t">Build a pond</div><div class="d">Blue card makes a pond, and paper strips make weeds.</div></div></li>
+    </ul>${CREDIT}`;
+  }
+  const s=STEPS[view];
+  return `<h2>${kid?s.kt:s.t}</h2><p>${kid?s.kb:s.b}</p>${s.tip&&!kid?`<p class="tip"><b>Tip:</b> ${s.tip}</p>`:''}${s.tech?techHTML(s.tech):''}`;
+}
+let lastView=null;
+function bindCopy(){const cb=$('#cheekBtn');if(cb)cb.addEventListener('click',()=>{cheeks=!cheeks;store.set('cheeks',cheeks);cb.setAttribute('aria-pressed',String(cheeks))})}
+function render(dir){
+  document.body.classList.toggle('kid-on',kid);
+  kidBtn.setAttribute('aria-pressed',String(kid));
+  eyebrow.textContent=view===-1?'Before you start':view===N?'All done':`Step ${view+1} of ${N}`;
+  [...progressEl.children].forEach((b,i)=>{b.classList.toggle('on',view===N||i<view);b.classList.toggle('cur',i===view);b.toggleAttribute('aria-current',i===view)});
+  prevBtn.hidden=view===-1;
+  nextBtn.textContent=view===-1?'Start folding \u203a':view===N?'Fold another \u21ba':view===N-1?'Finish \u203a':'Next step \u203a';
+  scrub.hidden=!(view>=0&&view<N);
+  stage.setAttribute('aria-label',view>=0&&view<N?`Diagram for step ${view+1}: ${STEPS[view].a}`:view===N?'The finished four-legged pink origami axolotl with frilly gills, slowly turning.':'A 3D model of the finished four-legged pink origami axolotl, slowly turning.');
+  const html=copyHTML();
+  if(lastView===null||reduceMotion){copyEl.innerHTML=html;bindCopy()}
+  else{
+    copyEl.style.setProperty('--dir',dir||1);
+    copyEl.classList.add('out');
+    setTimeout(()=>{copyEl.innerHTML=html;bindCopy();copyEl.classList.remove('out');copyEl.classList.add('pre');void copyEl.offsetWidth;copyEl.classList.remove('pre')},170);
+  }
+  lastView=view;
+}
+function go(v,dir){
+  v=Math.max(-1,Math.min(N,v));
+  if(v===view&&lastView!==null){if(view>=0&&view<N)replay();return}
+  const d=dir||(v>view?1:-1);
+  view=v; store.set('view',view);
+  render(d);
+  if(view>=0&&view<N) replay(); else {progress=1;playing=false;updateScrub()}
+  if(view===N) confetti();
+}
+function replay(){progress=0;playing=true;playStart=performance.now();playDur=Math.min(5200,1500*STEP_OPS[view].map(W8).reduce((a,b)=>a+b,0));if(reduceMotion){progress=1;playing=false}updateScrub()}
+function updateScrub(){const pc=(progress*100);fill.style.width=pc+'%';thumb.style.left=pc+'%';scrub.setAttribute('aria-valuenow',Math.round(pc))}
+
+prevBtn.addEventListener('click',()=>go(view-1,-1));
+nextBtn.addEventListener('click',()=>{if(view===N)go(0,1);else go(view+1,1)});
+kidBtn.addEventListener('click',()=>{kid=!kid;store.set('kid',kid);render(0)});
+document.addEventListener('keydown',e=>{
+  if(e.target===scrub||e.metaKey||e.ctrlKey||e.altKey||e.target.closest&&e.target.closest('summary')) return;
+  if(e.key==='ArrowRight'){e.preventDefault();if(view<N)go(view+1,1)}
+  else if(e.key==='ArrowLeft'){e.preventDefault();if(view>-1)go(view-1,-1)}
+});
+function scrubAt(x){const r=scrub.querySelector('.track').getBoundingClientRect();progress=Math.max(0,Math.min(1,(x-r.left)/r.width));playing=false;updateScrub()}
+scrub.addEventListener('pointerdown',e=>{dragging=true;scrub.classList.add('drag');scrub.setPointerCapture(e.pointerId);scrubAt(e.clientX)});
+scrub.addEventListener('pointermove',e=>{if(dragging)scrubAt(e.clientX)});
+const endDrag=()=>{dragging=false;scrub.classList.remove('drag')};
+scrub.addEventListener('pointerup',endDrag);scrub.addEventListener('pointercancel',endDrag);
+scrub.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowUp'){progress=Math.min(1,progress+0.04);playing=false;updateScrub();e.preventDefault()}
+  if(e.key==='ArrowLeft'||e.key==='ArrowDown'){progress=Math.max(0,progress-0.04);playing=false;updateScrub();e.preventDefault()}
+  if(e.key==='Home'){progress=0;updateScrub();e.preventDefault()} if(e.key==='End'){progress=1;updateScrub();e.preventDefault()}
+  if(e.key===' '||e.key==='Enter'){replay();e.preventDefault()}
+});
+let sx=null,sy=null;
+document.addEventListener('touchstart',e=>{if(e.target.closest('#stage,#scrub')){sx=null;return}sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;sx=null;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.4){if(dx<0&&view<N)go(view+1,1);else if(dx>0&&view>-1)go(view-1,-1)}},{passive:true});
+
+function confetti(){
+  if(reduceMotion) return;
+  const box=$('#confetti'); box.innerHTML='';
+  const cols=['#FF9EBB','#FFC2D1','#FF9EBB','#1A1A1A','#C7C7CC','#E5E5EA'];
+  for(let i=0;i<46;i++){
+    const el=document.createElement('i');
+    const ang=Math.random()*PI*2, r=70+Math.random()*120;
+    const x1=Math.cos(ang)*r, y1=Math.sin(ang)*r*0.8-60;
+    el.style.cssText=`background:${cols[i%cols.length]};--x1:${x1.toFixed(0)}px;--y1:${y1.toFixed(0)}px;--x2:${(x1*1.25).toFixed(0)}px;--y2:${(y1+170+Math.random()*80).toFixed(0)}px;--r:${(Math.random()*720-360).toFixed(0)}deg;--d:${(Math.random()*0.15).toFixed(2)}s;width:${5+Math.random()*4}px;height:${7+Math.random()*6}px`;
+    box.appendChild(el);
+  }
+  setTimeout(()=>{box.innerHTML=''},2800);
+}
+
+// ---------- which snapshot / progress to draw ----------
+function currentScene(){
+  if(view>=0&&view<N){const sc=stepScene(view,progress);return {...sc,step:view}}
+  return {snap:FINAL,p:1,step:N};
+}
+function faceAmount(step,p){return step===N?1:step===N-1?easeOutQuart(p):0}
+function focusFor(step){return step>=0&&step<N?FOCUS[step]:FOCUS_INTRO}
+function guideFade(snap,p){return snap.op.type==='foldUnfold'?Math.min(1,(1-p)*3):1-smooth(Math.min(1,p*1.25))}
+function arrowFade(p){return 1-smooth(Math.min(1,p*1.6))}
+
+// ---------- SVG fallback ----------
+const fb=$('#fb');
+let svgFocus=null;
+function drawSVG(){
+  const {snap,p,step}=currentScene();
+  const F=focusFor(step); if(!svgFocus) svgFocus={...F,c:F.c.slice()};
+  const k=reduceMotion?1:0.12; svgFocus.c[0]+=(F.c[0]-svgFocus.c[0])*k; svgFocus.c[1]+=(F.c[1]-svgFocus.c[1])*k; svgFocus.f+=(F.f-svgFocus.f)*k;
+  const vb=3.6*svgFocus.f; fb.setAttribute('viewBox',`${(svgFocus.c[0]-vb/2).toFixed(4)} ${(svgFocus.c[1]-vb/2+0.04*svgFocus.f).toFixed(4)} ${vb.toFixed(4)} ${vb.toFixed(4)}`);
+  const W=evalSnap(snap,p);
+  const items=W.map((vs,i)=>{const n=vCross(vSub(vs[1],vs[0]),vSub(vs[2],vs[0]));const shade=Math.abs(vNorm(n)[1]);return {vs,i,col:n[1]>0?'#FFC2D1':'#FF9EBB',shade,y:vs.reduce((a,v)=>a+v[1],0)/vs.length}}).sort((a,b)=>a.y-b.y);
+  const P=v=>`${(v[0]/S).toFixed(4)},${(v[2]/S-v[1]*0.35/S).toFixed(4)}`;
+  const sw=0.006*svgFocus.f/0.6;
+  let h=`<defs><marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1A1A1A"/></marker></defs>`;
+  const edgeSet=new Map(); snap.edges.forEach(([fi,i])=>{(edgeSet.get(fi)||edgeSet.set(fi,[]).get(fi)).push(i)});
+  for(const it of items){
+    h+=`<polygon points="${it.vs.map(P).join(' ')}" fill="${it.col}" style="filter:brightness(${(0.86+0.14*it.shade).toFixed(3)})"/>`;
+    (edgeSet.get(it.i)||[]).forEach(e=>{const a=P(it.vs[e]).split(','),b=P(it.vs[(e+1)%it.vs.length]).split(',');h+=`<line x1="${a[0]}" y1="${a[1]}" x2="${b[0]}" y2="${b[1]}" stroke="#9c4a64" stroke-opacity=".35" stroke-width="${(sw*1.2).toFixed(4)}"/>`});
+  }
+  if(step<N){
+    const ann=annotate(snap), gf=guideFade(snap,p), af=0.8*arrowFade(p);
+    ann.creases.forEach(g=>{h+=`<line x1="${g.seg[0][0]}" y1="${g.seg[0][1]}" x2="${g.seg[1][0]}" y2="${g.seg[1][1]}" stroke="#1A1A1A" stroke-opacity="${(0.7*gf).toFixed(3)}" stroke-width="${(sw*2).toFixed(4)}" stroke-dasharray="${g.mountain?`${sw*9} ${sw*4} ${sw*1.6} ${sw*4}`:`${sw*9} ${sw*6}`}"/>`});
+    if(af>0.01) ann.arrows.forEach(a=>{const q=v=>[v[0]/S,v[2]/S-v[1]*0.35/S];const A=q(a.A),B=q(a.B);const mx=(A[0]+B[0])/2,my=(A[1]+B[1])/2-a.h*0.6;h+=`<path d="M${A[0]} ${A[1]} Q${mx} ${my} ${B[0]} ${B[1]}" fill="none" stroke="#1A1A1A" stroke-opacity="${af.toFixed(3)}" stroke-width="${(sw*2.4).toFixed(4)}" marker-end="url(#ah)"/>`});
+  }
+  const fk=faceAmount(step,p);
+  if(fk>0.01){
+    const q=pt=>[pt[0],pt[1]-faceY*0.35/S];
+    FACE.eyes.forEach(e=>{const c=q(e);h+=`<circle cx="${c[0]}" cy="${c[1]}" r="${0.015*FSC*fk}" fill="#1A1A1A"/>`});
+    if(cheeks) FACE.cheeks.forEach(e=>{const c=q(e);h+=`<circle cx="${c[0]}" cy="${c[1]}" r="${0.016*FSC*fk}" fill="#F07FA2" opacity=".85"/>`});
+    const [s0,s1,s2]=FACE.smile.map(q);h+=`<path d="M${s0[0]} ${s0[1]} Q${s1[0]} ${s1[1]} ${s2[0]} ${s2[1]}" stroke="#1A1A1A" stroke-width="${(sw*1.6*Math.max(1,FSC*0.8)).toFixed(4)}" fill="none" stroke-linecap="round" opacity="${fk}"/>`;
+  }
+  // face the viewer on the face step, the finished screen and the intro (like the 3D view)
+  if(FLIP_SVG&&step>=N-1){const cx=FOCUS_INTRO.c[0],cy=FOCUS_INTRO.c[1];h=h.replace(/(<\/defs>)([\s\S]*)$/,`$1<g transform="rotate(180 ${cx.toFixed(4)} ${cy.toFixed(4)})">$2</g>`)}
+  fb.innerHTML=h;
+}
+
+// ---------- WebGL (Three.js) ----------
+let gl=null;
+async function initGL(){
+  if(new URLSearchParams(location.search).has('svg')) throw new Error('forced svg');
+  const test=document.createElement('canvas');
+  if(!(test.getContext('webgl2')||test.getContext('webgl'))) throw new Error('no webgl');
+  let THREE;
+  try{THREE=await import('https://unpkg.com/three@0.160.0/build/three.module.js')}
+  catch(e){THREE=await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js')}
+  const canvas=$('#gl');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));
+  renderer.outputColorSpace=THREE.SRGBColorSpace;
+  renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(30,1,0.05,60);
+  const CAM_OFF=new THREE.Vector3(0,4.63,3.04);
+
+  scene.add(new THREE.HemisphereLight(0xffffff,0xf3e9ec,2.1));
+  const key=new THREE.DirectionalLight(0xffffff,1.25);
+  key.position.set(-2.2,7,3.2); key.castShadow=true;
+  key.shadow.mapSize.set(2048,2048); key.shadow.radius=6; key.shadow.bias=-0.0003;
+  Object.assign(key.shadow.camera,{left:-2.2,right:2.2,top:2.2,bottom:-2.2,near:1,far:20});
+  scene.add(key); scene.add(key.target);
+  const rim=new THREE.DirectionalLight(0xffffff,0.35); rim.position.set(3,2,-3); scene.add(rim);
+  const Y0=0.1;
+  const ground=new THREE.Mesh(new THREE.PlaneGeometry(14,14),new THREE.ShadowMaterial({opacity:0.075}));
+  ground.rotation.x=-PI/2; ground.receiveShadow=true; scene.add(ground);
+  const bc=document.createElement('canvas'); bc.width=bc.height=128; const bx=bc.getContext('2d');
+  const gr=bx.createRadialGradient(64,64,0,64,64,64); gr.addColorStop(0,'rgba(0,0,0,0.16)'); gr.addColorStop(0.55,'rgba(0,0,0,0.06)'); gr.addColorStop(1,'rgba(0,0,0,0)');
+  bx.fillStyle=gr; bx.fillRect(0,0,128,128);
+  const blob=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(bc),transparent:true,depthWrite:false}));
+  blob.rotation.x=-PI/2; blob.position.y=0.002; scene.add(blob);
+
+  const pivot=new THREE.Group(); pivot.position.y=Y0; scene.add(pivot);
+  const group=new THREE.Group(); pivot.add(group);
+  const geo=new THREE.BufferGeometry();
+  const common={roughness:0.94,metalness:0,flatShading:true,polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1,shadowSide:THREE.DoubleSide};
+  const matPale=new THREE.MeshStandardMaterial({...common,color:0xFFC2D1,side:THREE.FrontSide});
+  const matPink=new THREE.MeshStandardMaterial({...common,color:0xFF9EBB,side:THREE.BackSide});
+  const meshA=new THREE.Mesh(geo,matPale), meshB=new THREE.Mesh(geo,matPink);
+  meshA.castShadow=meshB.castShadow=true; group.add(meshA,meshB);
+  const egeo=new THREE.BufferGeometry();
+  const edgeMat=new THREE.LineBasicMaterial({color:0x8a3a55,transparent:true,opacity:0.3});
+  group.add(new THREE.LineSegments(egeo,edgeMat));
+
+  const guideGroup=new THREE.Group(); group.add(guideGroup);
+  const ink=0x1A1A1A;
+  const guideMat=new THREE.MeshBasicMaterial({color:ink,transparent:true,opacity:0.7,depthWrite:false,side:THREE.DoubleSide});
+  const arrowMat=new THREE.MeshBasicMaterial({color:ink,transparent:true,opacity:0.8,depthWrite:false});
+  function dashGeom(seg,h,mountain,sc){
+    const a=toWorld(seg[0],h),b=toWorld(seg[1],h); const d=vSub(b,a); const len=Math.hypot(d[0],d[2]); const u=[d[0]/len,0,d[2]/len]; const n=[-u[2],0,u[0]];
+    const w=0.0105*sc, dash=0.085*sc, gap=0.05*sc; const pos=[];
+    const pattern=[];let s=0;while(s<len){if(mountain){pattern.push([s,Math.min(len,s+dash)]);s+=dash+0.04*sc;if(s<len)pattern.push([s,Math.min(len,s+0.016*sc)]);s+=0.056*sc}else{pattern.push([s,Math.min(len,s+dash)]);s+=dash+gap}}
+    for(const [s0,s1] of pattern){
+      const p0=vAdd(a,vScale(u,s0)),p1=vAdd(a,vScale(u,s1));
+      const q=[vAdd(p0,vScale(n,w)),vSub(p0,vScale(n,w)),vSub(p1,vScale(n,w)),vAdd(p1,vScale(n,w))];
+      pos.push(...q[0],...q[1],...q[2],...q[0],...q[2],...q[3]);
+    }
+    const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); return g;
+  }
+  let builtFor=null;
+  function buildGuides(snap,step,sc){
+    guideGroup.children.forEach(c=>c.geometry&&c.geometry.dispose()); guideGroup.clear();
+    if(step>=N) return;
+    const ann=annotate(snap);
+    const top=(snap.maxL+1)*EPS+0.006;
+    ann.creases.forEach(g=>{const m=new THREE.Mesh(dashGeom(g.seg,top,g.mountain,sc),guideMat);m.renderOrder=3;guideGroup.add(m)});
+    ann.arrows.forEach(ar=>{
+      const A=new THREE.Vector3(ar.A[0],Math.max(ar.A[1],top)+0.01,ar.A[2]),B=new THREE.Vector3(ar.B[0],Math.max(ar.B[1],top)+0.01,ar.B[2]);
+      const M=A.clone().add(B).multiplyScalar(0.5); M.y+=ar.h*S*0.7;
+      const curve=new THREE.QuadraticBezierCurve3(A,M,B);
+      const tan=curve.getTangent(1).normalize();
+      const end=B.clone().sub(tan.clone().multiplyScalar(0.07*sc));
+      const tube=new THREE.Mesh(new THREE.TubeGeometry(new THREE.QuadraticBezierCurve3(A,M,end),48,0.0115*sc,8,false),arrowMat);
+      const cone=new THREE.Mesh(new THREE.ConeGeometry(0.034*sc,0.09*sc,16),arrowMat);
+      cone.position.copy(end.clone().add(tan.clone().multiplyScalar(0.045*sc)));
+      cone.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),tan);
+      tube.renderOrder=cone.renderOrder=4; guideGroup.add(tube,cone);
+    });
+  }
+  // the pen face (eyes, smile, optional cheeks)
+  const faceGroup=new THREE.Group(); group.add(faceGroup);
+  const penMat=new THREE.MeshBasicMaterial({color:ink});
+  const cheekMat=new THREE.MeshBasicMaterial({color:0xF07FA2,transparent:true,opacity:0.9});
+  const disc=(r,mat,x,y,h)=>{const g=new THREE.CircleGeometry(r,28);g.rotateX(-PI/2);const m=new THREE.Mesh(g,mat);m.position.set(x*S,h,y*S);faceGroup.add(m);return m};
+  FACE.eyes.forEach(e=>{disc(0.0185*FSC,penMat,e[0],e[1],faceY);disc(0.0055*FSC,new THREE.MeshBasicMaterial({color:0xffffff}),e[0]+0.004*FSC,e[1]+0.005*FSC,faceY+0.0008)});
+  const cheekMeshes=FACE.cheeks.map(c=>disc(0.019*FSC,cheekMat,c[0],c[1],faceY-0.0004));
+  const sm=FACE.smile.map(p=>new THREE.Vector3(p[0]*S,faceY,p[1]*S));
+  faceGroup.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.QuadraticBezierCurve3(sm[0],sm[1],sm[2]),24,0.0048,6,false),penMat));
+
+  let yaw=0,yawVel=0,dragX=null,lastDrag=0;
+  canvas.addEventListener('pointerdown',e=>{dragX=e.clientX;canvas.setPointerCapture(e.pointerId);hint.style.opacity=0});
+  canvas.addEventListener('pointermove',e=>{if(dragX===null)return;const dx=e.clientX-dragX;dragX=e.clientX;yaw+=dx*0.012;yawVel=dx*0.012;lastDrag=performance.now()});
+  const up=()=>{dragX=null};
+  canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);
+  canvas.style.touchAction='pan-y';
+  function resize(){const r=stage.getBoundingClientRect();const s=Math.max(1,Math.round(r.width));renderer.setSize(s,s,false);camera.aspect=1;camera.updateProjectionMatrix()}
+  new ResizeObserver(resize).observe(stage); resize();
+
+  let curSnap=null,triCount=0;
+  function setSnap(snap){
+    curSnap=snap; triCount=snap.faces.reduce((a,f)=>a+f.poly.length-2,0);
+    geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(triCount*9),3));
+    geo.setAttribute('normal',new THREE.BufferAttribute(new Float32Array(triCount*9),3));
+    egeo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(snap.edges.length*6),3));
+  }
+  const F0=focusFor(view); const cam={x:F0.c[0],y:F0.c[1],f:F0.f};
+  let spinAngle=0,lastT=performance.now();
+  function frame(now){
+    const dt=Math.min(0.05,(now-lastT)/1000); lastT=now;
+    if(playing){const k=Math.min(1,(now-playStart)/playDur);progress=easeOutQuart(k);if(k>=1){playing=false}updateScrub()}
+    const {snap,p,step}=currentScene();
+    if(snap!==curSnap) setSnap(snap);
+    // camera follows the step's focus
+    const F=focusFor(step); const kk=reduceMotion?1:1-Math.pow(0.02,dt);
+    cam.x+=(F.c[0]-cam.x)*kk; cam.y+=(F.c[1]-cam.y)*kk; cam.f+=(F.f-cam.f)*kk;
+    const tx=cam.x*S,tz=cam.y*S;
+    camera.position.set(tx+CAM_OFF.x*cam.f,0.1+CAM_OFF.y*cam.f,tz+0.16*cam.f+CAM_OFF.z*cam.f);
+    camera.lookAt(tx,0.1+0.06*cam.f,tz+0.16*cam.f*0.3);
+    pivot.position.set(tx,Y0,tz); group.position.set(-tx,0,-tz);
+    blob.position.set(tx,0.002,tz); blob.scale.set(3.1*cam.f,3.1*cam.f,1);
+    key.position.set(tx-2.2,7,tz+3.2); key.target.position.set(tx,0,tz);
+    const sc=Math.max(0.45,cam.f);
+    const bkey=snap; if(builtFor!==bkey){buildGuides(snap,step,Math.max(0.45,F.f));builtFor=bkey}
+    const W=evalSnap(snap,p);
+    const pos=geo.attributes.position.array; let o=0;
+    for(const vs of W){for(let i=1;i<vs.length-1;i++){for(const v of [vs[0],vs[i],vs[i+1]]){pos[o++]=v[0];pos[o++]=v[1];pos[o++]=v[2]}}}
+    geo.attributes.position.needsUpdate=true; geo.computeVertexNormals(); geo.computeBoundingSphere();
+    const ep=egeo.attributes.position.array; o=0;
+    for(const [fi,i] of snap.edges){const vs=W[fi];const a=vs[i],b=vs[(i+1)%vs.length];ep[o++]=a[0];ep[o++]=a[1]+0.001;ep[o++]=a[2];ep[o++]=b[0];ep[o++]=b[1]+0.001;ep[o++]=b[2]}
+    egeo.attributes.position.needsUpdate=true; egeo.computeBoundingSphere();
+    edgeMat.opacity=0.22+0.12*(1-cam.f);
+    guideMat.opacity=0.7*guideFade(snap,p);
+    arrowMat.opacity=0.8*arrowFade(p);
+    const fk=faceAmount(step,p);
+    faceGroup.visible=fk>0.01; faceGroup.children.forEach(c=>c.scale.setScalar(Math.max(0.001,fk)));
+    cheekMeshes.forEach(m=>m.visible=cheeks);
+    if(dragX===null){yaw+=yawVel;yawVel*=0.92}
+    // intro / finished: sway around a three-quarter front view so the face shows; steps: back to the folding view
+    const target=(step>=N||view===-1)?YAW0+SWAY[0]+SWAY[1]*Math.sin(now/1000*0.32):step===N-1?YAW0+FACE_YAW:0;
+    {let d=target-spinAngle;d=Math.atan2(Math.sin(d),Math.cos(d));spinAngle+=d*(1-Math.pow(step>=N||view===-1?0.2:0.03,dt))}
+    const idle=(step>=N)?0:Math.sin(now/1000*0.55)*0.08;
+    pivot.rotation.y=spinAngle+idle+yaw;
+    if(step<N&&dragX===null&&now-lastDrag>2500) yaw*=Math.pow(0.16,dt);
+    renderer.render(scene,camera);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  return {renderer};
+}
+
+render(0);
+if(view>=0&&view<N) replay();
+if(view===N) setTimeout(confetti,400);
+initGL().then(r=>{gl=r;$('#loading').style.opacity=0;window.__axoMode='webgl'}).catch(err=>{
+  console.warn('Using SVG fallback:',err&&err.message);
+  stage.classList.add('use-svg'); $('#loading').style.opacity=0; hint.style.display='none'; window.__axoMode='svg';
+  (function loop(now){if(playing){const k=Math.min(1,(now-playStart)/playDur);progress=easeOutQuart(k);if(k>=1)playing=false;updateScrub()}drawSVG();requestAnimationFrame(loop)})(performance.now());
+});
+setTimeout(()=>{hint.style.opacity=0},6000);
+window.__axo={verify,SNAPS,FINAL,STEPS,go,setProgress:p=>{progress=p;playing=false;updateScrub()},get view(){return view},annotate,STEP_OPS};
+</script>
+</body>
+</html>

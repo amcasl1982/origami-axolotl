@@ -1,0 +1,754 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Let's fold an origami axolotl</title>
+<meta name="description" content="A calm, step-by-step guide to folding a simple origami axolotl from one square of paper.">
+<meta name="theme-color" content="#F5F5F7">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 10 10%22%3E%3Cpath d=%22M1 2h8L5 9z%22 fill=%22%23FF9EBB%22/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#F5F5F7; --card:#FFFFFF; --ink:#1A1A1A; --muted:#737373; --line:#E5E5EA;
+  --paper-front:#FF9EBB; --paper-back:#FFC2D1;
+  --ease:cubic-bezier(.25,1,.5,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+html,body{margin:0;background:var(--bg);color:var(--ink)}
+body{font-family:-apple-system,BlinkMacSystemFont,"SF Pro Text","Inter","Segoe UI",Roboto,Helvetica,Arial,sans-serif;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;-webkit-tap-highlight-color:transparent}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--ink);outline-offset:3px;border-radius:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+.app{max-width:440px;margin:0 auto;padding:calc(22px + env(safe-area-inset-top)) 24px 0;min-height:100vh;min-height:100svh;display:flex;flex-direction:column}
+.title-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+h1{font-size:22px;line-height:1.25;font-weight:600;letter-spacing:-.015em;margin:0}
+.sub{font-size:14px;line-height:1.4;color:var(--muted);margin:4px 0 0}
+.kid{flex:none;display:inline-flex;align-items:center;gap:7px;border:0;background:none;padding:5px 0 5px 6px;font-size:12px;font-weight:500;color:var(--muted)}
+.kid .sw{width:28px;height:17px;border-radius:99px;background:var(--line);position:relative;transition:background .25s var(--ease)}
+.kid .sw::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px rgba(0,0,0,.18);transition:transform .25s var(--ease)}
+.kid[aria-pressed="true"]{color:var(--ink)}
+.kid[aria-pressed="true"] .sw{background:var(--ink)}
+.kid[aria-pressed="true"] .sw::after{transform:translateX(11px)}
+
+.meta{display:flex;align-items:center;justify-content:space-between;margin-top:18px}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted)}
+.pill{font-size:12px;font-weight:500;line-height:1;color:var(--ink);border:1px solid var(--line);background:transparent;border-radius:99px;padding:6px 11px}
+.progress{display:flex;gap:4px;margin-top:10px}
+.seg{flex:1;height:16px;padding:0;border:0;background:none;display:flex;align-items:center}
+.seg i{display:block;width:100%;height:3px;border-radius:3px;background:var(--line);transition:background .3s var(--ease)}
+.seg.on i{background:var(--ink)}
+.seg.cur i{background:var(--ink);opacity:.45}
+
+.stage{position:relative;margin:14px auto 0;width:100%;max-width:calc(100svh - 450px);min-width:260px;aspect-ratio:1/1;background:var(--card);border-radius:28px;overflow:hidden;
+  box-shadow:0 1px 2px rgba(0,0,0,.03),0 10px 30px rgba(0,0,0,.05),0 30px 70px rgba(0,0,0,.07);touch-action:pan-y}
+.stage canvas,.stage svg.fb{position:absolute;inset:0;width:100%;height:100%;display:block}
+.stage svg.fb{display:none}
+.stage.use-svg svg.fb{display:block}
+.stage.use-svg canvas{display:none}
+.stage .hint{position:absolute;left:0;right:0;bottom:12px;text-align:center;font-size:11px;color:#A1A1A6;letter-spacing:.02em;pointer-events:none;transition:opacity .6s}
+.stage .loading{position:absolute;inset:0;display:grid;place-items:center;font-size:13px;color:var(--muted);transition:opacity .4s}
+
+.scrub{margin:16px 6px 0;height:26px;display:flex;align-items:center;cursor:pointer;touch-action:none;transition:opacity .3s}
+.scrub[hidden]{display:flex;visibility:hidden;opacity:0}
+.track{position:relative;width:100%;height:4px;border-radius:4px;background:var(--line)}
+.fill{position:absolute;left:0;top:0;bottom:0;border-radius:4px;background:var(--ink)}
+.thumb{position:absolute;top:50%;width:14px;height:14px;margin:-7px 0 0 -7px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 3px var(--bg);transition:transform .15s var(--ease)}
+.scrub:active .thumb,.scrub.drag .thumb{transform:scale(1.25)}
+
+.copy{margin-top:14px;min-height:150px;transition:opacity .22s var(--ease),transform .32s var(--ease)}
+.copy.out{opacity:0;transform:translateX(calc(var(--dir,1) * -14px))}
+.copy.pre{opacity:0;transform:translateX(calc(var(--dir,1) * 14px));transition:none}
+.copy h2{font-size:18px;line-height:1.3;font-weight:600;letter-spacing:-.01em;margin:0 0 6px}
+.copy p{font-size:15px;line-height:1.5;margin:0}
+.copy .tip{font-size:14px;line-height:1.45;color:var(--muted);margin-top:10px}
+.copy .tip b{font-weight:600;color:var(--muted)}
+.list{list-style:none;margin:12px 0 0;padding:0}
+.list li{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-top:1px solid var(--line)}
+.list li:first-child{border-top:0;padding-top:4px}
+.list svg{flex:none;width:22px;height:22px;margin-top:1px;stroke:var(--ink);fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round}
+.list .t{font-size:15px;font-weight:500;line-height:1.35}
+.list .d{font-size:14px;color:var(--muted);line-height:1.4;margin-top:1px}
+.sw-paper{display:inline-block;width:11px;height:11px;border-radius:2px;vertical-align:-1px;margin-right:4px;background:linear-gradient(135deg,var(--paper-front) 50%,var(--paper-back) 50%)}
+.credit{font-size:12px;line-height:1.5;color:#8E8E93;margin:18px 0 0}
+.credit a{color:#6E6E73;text-decoration:underline;text-underline-offset:2px;text-decoration-color:#C7C7CC}
+
+footer.bar{position:sticky;bottom:0;margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:18px 0 calc(16px + env(safe-area-inset-bottom));background:linear-gradient(to bottom,rgba(245,245,247,0),var(--bg) 34%);z-index:5}
+.prev{border:0;background:none;padding:12px 6px 12px 0;font-size:15px;font-weight:500;color:var(--muted);border-radius:12px}
+.prev:hover{color:var(--ink)}
+.prev[hidden]{display:block;visibility:hidden}
+.next{border:0;background:var(--ink);color:#fff;border-radius:99px;padding:14px 22px;font-size:15px;font-weight:500;line-height:1;box-shadow:0 6px 16px rgba(0,0,0,.14);transition:transform .2s var(--ease),box-shadow .2s var(--ease)}
+.next:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(0,0,0,.16)}
+.next:active{transform:scale(.97)}
+
+/* Kid mode: bigger, friendlier text */
+body.kid-on h1{font-size:24px}
+body.kid-on .copy h2{font-size:22px}
+body.kid-on .copy p{font-size:19px;line-height:1.45}
+body.kid-on .copy .tip{font-size:16px}
+body.kid-on .next{font-size:17px;padding:16px 26px}
+body.kid-on .prev{font-size:16px}
+
+/* Confetti (restrained) */
+.confetti{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+.confetti i{position:absolute;left:50%;top:46%;width:7px;height:10px;border-radius:2px;opacity:0;
+  animation:conf 2.2s var(--ease) forwards;animation-delay:var(--d)}
+@keyframes conf{
+  0%{opacity:0;transform:translate(-50%,-50%) rotate(0) scale(.6)}
+  8%{opacity:1}
+  45%{transform:translate(calc(-50% + var(--x1)),calc(-50% + var(--y1))) rotate(calc(var(--r) * .5)) scale(1)}
+  100%{opacity:0;transform:translate(calc(-50% + var(--x2)),calc(-50% + var(--y2))) rotate(var(--r)) scale(.9)}
+}
+@media (min-width:700px){ .app{padding-top:40px} }
+@media (prefers-reduced-motion:reduce){ .copy,.copy.out,.copy.pre{transition:none;transform:none} .confetti{display:none} }
+/* level switch (links to the intermediate guide) */
+.levels{display:inline-flex;padding:2px;border-radius:9px;background:#EAEAEF;margin:0 0 14px}
+.levels a{font-size:12px;font-weight:500;line-height:1;color:var(--muted);text-decoration:none;padding:6px 11px;border-radius:7px;transition:background .2s,color .2s}
+.levels a[aria-current="page"]{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.08),0 1px 6px rgba(0,0,0,.04)}
+.levels a:not([aria-current]):hover{color:var(--ink)}
+.stage{max-width:calc(100svh - 486px)}
+</style>
+</head>
+<body>
+<div class="app" id="app">
+  <header>
+    <nav class="levels" aria-label="Difficulty"><a href="index.html" aria-current="page">Beginner</a><a href="intermediate.html">Intermediate</a></nav>
+    <div class="title-row">
+      <h1 id="title">Let's fold an origami axolotl!</h1>
+      <button class="kid" id="kidBtn" type="button" aria-pressed="false" title="Bigger text and simpler words"><span>Kid mode</span><span class="sw" aria-hidden="true"></span></button>
+    </div>
+    <p class="sub">Beginner-friendly, about 10 to 15 mins.</p>
+    <div class="meta">
+      <span class="eyebrow" id="eyebrow">Before you start</span>
+      <span class="pill">Beginner</span>
+    </div>
+    <nav class="progress" id="progress" aria-label="Jump to a step"></nav>
+  </header>
+
+  <main id="main">
+    <section class="stage" id="stage" role="img" aria-label="3D model of the finished origami axolotl">
+      <canvas id="gl" aria-hidden="true"></canvas>
+      <svg class="fb" id="fb" viewBox="-1.9 -1.75 3.8 3.8" aria-hidden="true"></svg>
+      <div class="loading" id="loading">Unfolding paper…</div>
+      <div class="hint" id="hint">Drag to turn</div>
+      <div class="confetti" id="confetti" aria-hidden="true"></div>
+    </section>
+
+    <div class="scrub" id="scrub" role="slider" tabindex="0" aria-label="Fold animation. Drag to play the fold back and forth" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" hidden>
+      <div class="track"><div class="fill" id="fill"></div><div class="thumb" id="thumb"></div></div>
+    </div>
+
+    <section class="copy" id="copy" aria-live="polite"></section>
+  </main>
+
+  <footer class="bar">
+    <button class="prev" id="prev" type="button">‹ Previous step</button>
+    <button class="next" id="next" type="button">Start folding ›</button>
+  </footer>
+</div>
+
+<script type="module">
+/* =====================================================================
+   Origami axolotl: a tiny flat-folding engine.
+   The paper is a set of convex polygons (in paper coordinates) with a
+   rigid 3D transform each. Every step splits faces along its crease and
+   rotates the chosen faces about that crease, so each state is derived
+   from the previous one and the diagrams can't contradict each other.
+   ===================================================================== */
+const PI = Math.PI;
+const S = 1.25;          // world units per paper unit (paper is a diamond of half-diagonal 1)
+const EPS = 0.0075;      // layer spacing
+const Y0 = 0.17;         // model hover height over the "table"
+const R2 = Math.SQRT2;
+const KX = 2 - R2, KY = 1 - R2;                // kite side corners (±KX, KY)
+const FY = 3 - 2 * R2;                         // where the top point lands; leg creases meet here too
+const EX = 0.5;                                // where the leg crease starts on the flap's top edge
+const GX1 = 0.47, GY2 = -0.32, GX2 = KX * (1 - (GY2 - KY) / R2); // gill bend line
+
+// ---------- vector / affine helpers ----------
+const vAdd=(a,b)=>[a[0]+b[0],a[1]+b[1],a[2]+b[2]];
+const vSub=(a,b)=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];
+const vScale=(a,s)=>[a[0]*s,a[1]*s,a[2]*s];
+const vCross=(a,b)=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]];
+const vNorm=a=>{const l=Math.hypot(a[0],a[1],a[2])||1;return vScale(a,1/l)};
+const mulV=(m,p)=>[m[0]*p[0]+m[1]*p[1]+m[2]*p[2],m[3]*p[0]+m[4]*p[1]+m[5]*p[2],m[6]*p[0]+m[7]*p[1]+m[8]*p[2]];
+const applyA=(A,p)=>vAdd(mulV(A.m,p),A.t);
+function mulM(a,b){const r=new Array(9);for(let i=0;i<3;i++)for(let j=0;j<3;j++)r[i*3+j]=a[i*3]*b[j]+a[i*3+1]*b[3+j]+a[i*3+2]*b[6+j];return r}
+const compose=(A,B)=>({m:mulM(A.m,B.m),t:vAdd(mulV(A.m,B.t),A.t)});
+function rotAbout(a,u,ang){
+  const [x,y,z]=u,c=Math.cos(ang),s=Math.sin(ang),C=1-c;
+  const m=[c+x*x*C,x*y*C-z*s,x*z*C+y*s, y*x*C+z*s,c+y*y*C,y*z*C-x*s, z*x*C-y*s,z*y*C+x*s,c+z*z*C];
+  return {m,t:vSub(a,mulV(m,a))};
+}
+const toWorld=(v,h=0)=>[v[0]*S,h,v[1]*S];
+const toView=w=>[w[0]/S,w[2]/S];
+function side2(line,q){const a=line[0],b=line[1];const dx=b[0]-a[0],dy=b[1]-a[1];return (dx*(q[1]-a[1])-dy*(q[0]-a[0]))/Math.hypot(dx,dy)}
+const easeOutQuart=t=>1-Math.pow(1-t,4);
+const smooth=t=>t*t*(3-2*t);
+
+// ---------- faces ----------
+function faceVerts(f){return f.poly.map(q=>applyA(f.M,[q[0],q[1],0]))}
+function centroid2(pts){let x=0,y=0;pts.forEach(p=>{x+=p[0];y+=p[1]});return [x/pts.length,y/pts.length]}
+function viewCentroid(f){return centroid2(faceVerts(f).map(toView))}
+function paperCentroid(f){return centroid2(f.poly)}
+
+function splitFaces(faces,line){
+  const out=[], E=1e-7;
+  for(const f of faces){
+    const d=faceVerts(f).map(toView).map(q=>side2(line,q));
+    if(!(d.some(x=>x>E)&&d.some(x=>x<-E))){out.push(f);continue}
+    const A=[],B=[],n=f.poly.length;
+    for(let i=0;i<n;i++){
+      const j=(i+1)%n,pi=f.poly[i],pj=f.poly[j],di=d[i],dj=d[j];
+      if(di>=-E)A.push(pi); if(di<=E)B.push(pi);
+      if((di>E&&dj<-E)||(di<-E&&dj>E)){const t=di/(di-dj);const m=[pi[0]+(pj[0]-pi[0])*t,pi[1]+(pj[1]-pi[1])*t];A.push(m);B.push(m)}
+    }
+    out.push({...f,poly:A},{...f,poly:B});
+  }
+  return out;
+}
+
+// initial paper: a square (diamond in paper coords), shown turned 45° so step 1 can spin it
+function initFaces(){
+  const base={m:[S,0,0, 0,0,-S, 0,S,0],t:[0,0,0]};       // paper (x,y,0) -> world (Sx, 0, Sy)
+  const M=compose(rotAbout([0,0,0],[0,1,0],PI/4),base);
+  let poly=[[0,-1],[1,0],[0,1],[-1,0]];
+  const f={poly,M,off:[0,0,0],L:0};
+  const v=faceVerts(f); const n=vCross(vSub(v[1],v[0]),vSub(v[2],v[0]));
+  if(n[1]<0) f.poly=poly.slice().reverse();               // front-facing winding = pale (back) side, facing up
+  return [f];
+}
+
+// ---------- the folding sequence ----------
+const LEFT_FLAP=[[0,1],[-KX,KY]], RIGHT_FLAP=[[0,1],[KX,KY]];
+const inFlap=(line,ref)=>f=>Math.sign(side2(line,paperCentroid(f)))===Math.sign(side2(line,ref));
+
+const OPS=[
+  {type:'spin',angle:-PI/4},
+  {type:'foldUnfold',line:[[0,-1],[0,1]],side:[-0.5,0],dir:'valley',guide:[[0,-1],[0,1]],
+    arrows:[{a:[-0.62,0.12,0.02],b:[0.62,0.12,0.02],h:0.55}]},
+  {type:'fold',line:[[0,1],[-KX,KY]],side:[-0.9,0],dir:'valley',guide:[[0,1],[-KX,KY]],ref:[[0,-1],[0,1]],
+    arrows:[{a:[-0.82,-0.03,0.02],b:[-0.1,-0.34,0.03],h:0.42}]},
+  {type:'fold',line:[[0,1],[KX,KY]],side:[0.9,0],dir:'valley',guide:[[0,1],[KX,KY]],ref:[[0,-1],[0,1]],
+    arrows:[{a:[0.82,-0.03,0.02],b:[0.1,-0.34,0.06],h:0.42}]},
+  {type:'fold',line:[[-EX,KY],[0,FY]],side:[-0.06,-0.38],dir:'valley',select:inFlap(LEFT_FLAP,[-1,0]),guide:[[-EX,KY],[0,FY]],
+    arrows:[{a:[-0.08,-0.33,0.06],b:[-0.52,0.04,0.07],h:0.3}]},
+  {type:'fold',line:[[EX,KY],[0,FY]],side:[0.06,-0.38],dir:'valley',select:inFlap(RIGHT_FLAP,[1,0]),guide:[[EX,KY],[0,FY]],
+    arrows:[{a:[0.08,-0.33,0.06],b:[0.52,0.04,0.07],h:0.3}]},
+  {type:'fold',line:[[-KX,KY],[KX,KY]],side:[0,-0.8],dir:'valley',guide:[[-KX,KY],[KX,KY]],
+    arrows:[{a:[0,-0.84,0.02],b:[0,0.08,0.08],h:0.5}]},
+  {type:'turn',arrows:[{a:[-0.75,0.32,0.05],b:[0.75,0.32,0.05],h:0.95}]},
+  {type:'bend',groups:[
+      {line:[[-GX1,KY],[-GX2,GY2]],side:[-0.54,-0.39],angle:1.2,dir:'valley',filter:c=>c[0]<0},
+      {line:[[GX1,KY],[GX2,GY2]],side:[0.54,-0.39],angle:1.2,dir:'valley',filter:c=>c[0]>0}],
+    guides:[[[-GX1,KY],[-GX2,GY2]],[[GX1,KY],[GX2,GY2]]],
+    arrows:[{a:[-0.47,-0.3,0.04],b:[-0.62,-0.5,0.3],h:0.06},{a:[0.47,-0.3,0.04],b:[0.62,-0.5,0.3],h:0.06}]},
+  {type:'bend',groups:[
+      {line:[[-KX,KY],[0,1]],side:[-0.62,-0.02],angle:0.38,dir:'mountain',filter:c=>c[0]<0&&c[1]>-0.36&&c[1]<0.32},
+      {line:[[KX,KY],[0,1]],side:[0.62,-0.02],angle:0.38,dir:'mountain',filter:c=>c[0]>0&&c[1]>-0.36&&c[1]<0.32}],
+    guides:[[[-0.524,-0.264],[-0.368,0.113]],[[0.524,-0.264],[0.368,0.113]]],mountain:true,
+    arrows:[{a:[-0.58,-0.12,0.1],b:[-0.64,0.1,-0.05],h:0.04},{a:[0.58,-0.12,0.1],b:[0.64,0.1,-0.05],h:0.04}]},
+  {type:'bend',groups:[{line:[[-1,0.56],[1,0.56]],side:[0,0.9],angle:0.36,dir:'valley'}],
+    guides:[[[-0.27,0.56],[0.27,0.56]]],
+    arrows:[{a:[0.12,0.98,0.04],b:[0.12,0.8,0.32],h:0.06}]},
+  {type:'face'}
+];
+
+function makeGroup(line,sideRef,dir,ang,kind){
+  const a=toWorld(line[0]); const u=vNorm(vSub(toWorld(line[1]),a));
+  const test=applyA(rotAbout(a,u,PI/2),toWorld(sideRef));
+  const up=test[1]>0; const sign=(up===(dir==='valley'))?1:-1;
+  return {a,u,ang:ang*sign,kind};
+}
+
+function buildSnapshots(){
+  let faces=initFaces();
+  const snaps=[];
+  for(const op of OPS){
+    const lines=op.type==='fold'||op.type==='foldUnfold'?[op.line]:op.type==='bend'?op.groups.map(g=>g.line):[];
+    for(const l of lines) faces=splitFaces(faces,l);
+    const Ls=faces.map(f=>f.L), maxL=Math.max(...Ls), minL=Math.min(...Ls);
+    const info=faces.map(()=>({g:-1,Lnew:null}));
+    const groups=[];
+    if(op.type==='spin'){groups.push({a:[0,0,0],u:[0,1,0],ang:op.angle,kind:'spin'});info.forEach(i=>i.g=0)}
+    if(op.type==='turn'){groups.push({a:[0,0,0],u:[0,0,1],ang:PI,kind:'turn'});faces.forEach((f,i)=>{info[i].g=0;info[i].Lnew=maxL-f.L+minL})}
+    if(op.type==='fold'||op.type==='foldUnfold'){
+      groups.push(makeGroup(op.line,op.side,op.dir,op.angle||PI,op.type));
+      const sref=Math.sign(side2(op.line,op.side));
+      const mov=[];
+      faces.forEach((f,i)=>{if(Math.sign(side2(op.line,viewCentroid(f)))===sref&&(!op.select||op.select(f))){info[i].g=0;mov.push(i)}});
+      const movMax=Math.max(...mov.map(i=>faces[i].L));
+      mov.forEach(i=>info[i].Lnew=op.type==='fold'?maxL+1+(movMax-faces[i].L):faces[i].L);
+    }
+    if(op.type==='bend'){
+      op.groups.forEach((g,gi)=>{
+        groups.push(makeGroup(g.line,g.side,g.dir,g.angle,'bend'));
+        const sref=Math.sign(side2(g.line,g.side));
+        faces.forEach((f,i)=>{const c=viewCentroid(f);if(info[i].g<0&&Math.sign(side2(g.line,c))===sref&&(!g.filter||g.filter(c)))info[i].g=gi});
+      });
+    }
+    const snap={op,faces,info,groups,base:faces.map(faceVerts),maxL};
+    snap.edges=computeEdges(snap);
+    snaps.push(snap);
+    // apply the full step to get the next state
+    faces=faces.map((f,i)=>{
+      const inf=info[i]; if(inf.g<0||op.type==='foldUnfold') return f;
+      const g=groups[inf.g]; const R=rotAbout(g.a,g.u,g.ang);
+      const M=compose(R,f.M);
+      if(g.kind==='fold'||g.kind==='turn') return {...f,M,off:[0,inf.Lnew*EPS,0],L:inf.Lnew};
+      return {...f,M,off:mulV(R.m,f.off)};
+    });
+  }
+  const final={op:{type:'final'},faces,info:faces.map(()=>({g:-1})),groups:[],base:faces.map(faceVerts),maxL:Math.max(...faces.map(f=>f.L))};
+  final.edges=computeEdges(final);
+  return {snaps,final};
+}
+
+const keyOf=p=>p[0].toFixed(5)+','+p[1].toFixed(5);
+function sameT(a,b){for(let i=0;i<9;i++)if(Math.abs(a.M.m[i]-b.M.m[i])>1e-6)return false;for(let i=0;i<3;i++)if(Math.abs(a.M.t[i]-b.M.t[i])>1e-6)return false;return a.L===b.L}
+function computeEdges(snap){
+  const map=new Map();
+  snap.faces.forEach((f,fi)=>f.poly.forEach((p,i)=>{const q=f.poly[(i+1)%f.poly.length];const k=[keyOf(p),keyOf(q)].sort().join('|');if(!map.has(k))map.set(k,[]);map.get(k).push([fi,i])}));
+  const edges=[];
+  for(const [,list] of map){
+    for(const [fi,i] of list){
+      const others=list.filter(o=>o[0]!==fi);
+      const hidden=others.some(([gi])=>sameT(snap.faces[fi],snap.faces[gi])&&snap.info[fi].g===snap.info[gi].g);
+      if(!hidden){edges.push([fi,i]);break}   // draw each visible edge once
+    }
+  }
+  return edges;
+}
+
+// evaluate world vertices of every face for snapshot s at progress p (0..1)
+function evalSnap(s,p,noOff){
+  const t=s.op.type;
+  let frac=p;
+  if(t==='foldUnfold') frac=p<0.5?smooth(p*2):smooth((1-p)*2);
+  if(t==='face'||t==='final') frac=1;
+  const Rs=s.groups.map(g=>rotAbout(g.a,g.u,g.ang*frac));
+  return s.faces.map((f,i)=>{
+    const inf=s.info[i],base=s.base[i];
+    if(noOff){ if(inf.g<0) return base; const R0=Rs[inf.g]; return base.map(v=>applyA(R0,v)); }
+    if(inf.g<0) return base.map(v=>vAdd(v,f.off));
+    const g=s.groups[inf.g],R=Rs[inf.g];
+    let off;
+    if(g.kind==='fold'||g.kind==='turn'){
+      off=vAdd(vScale(mulV(R.m,f.off),1-frac),[0,inf.Lnew*EPS*frac,0]);
+      off[1]+=g.kind==='turn'?Math.sin(PI*frac)*S*0.42:Math.sin(PI*frac)*0.07;
+    }else if(g.kind==='foldUnfold'){
+      off=vAdd(mulV(R.m,f.off),[0,(s.maxL+1)*EPS*Math.min(1,frac*4)+Math.sin(PI*frac)*0.05,0]);
+    }else off=mulV(R.m,f.off);
+    if(g.kind==='turn'){ // swing it a little towards the viewer mid-flip so it never goes edge-on
+      const Y=rotAbout([0,0,0],[0,1,0],0.6*Math.sin(PI*frac));
+      return base.map(v=>applyA(Y,vAdd(applyA(R,v),off)));
+    }
+    return base.map(v=>vAdd(applyA(R,v),off));
+  });
+}
+
+const {snaps:SNAPS,final:FINAL}=buildSnapshots();
+
+// Self-check: neighbouring faces must stay joined along their shared edges (no tearing) at the start, middle and end of each step.
+function verify(){
+  const problems=[];
+  const check=(s,label,p)=>{
+    const W=evalSnap(s,p,true);
+    const map=new Map();
+    s.faces.forEach((f,fi)=>f.poly.forEach((q,i)=>{const r=f.poly[(i+1)%f.poly.length];const k=[keyOf(q),keyOf(r)].sort().join('|');(map.get(k)||map.set(k,[]).get(k)).push([fi,i])}));
+    for(const [k,list] of map){ if(list.length<2) continue;
+      for(let a=0;a<list.length;a++)for(let b=a+1;b<list.length;b++){
+        const [fa,ia]=list[a],[fb,ib]=list[b];
+        const pa=[W[fa][ia],W[fa][(ia+1)%W[fa].length]], pb=[W[fb][ib],W[fb][(ib+1)%W[fb].length]];
+        // compare ignoring the tiny layer offsets
+        const dist=(x,y)=>Math.hypot(x[0]-y[0],x[1]-y[1],x[2]-y[2]);
+        const d=Math.min(Math.max(dist(pa[0],pb[0]),dist(pa[1],pb[1])),Math.max(dist(pa[0],pb[1]),dist(pa[1],pb[0])));
+        const dy=Math.min(Math.max(Math.abs(pa[0][1]-pb[0][1]),Math.abs(pa[1][1]-pb[1][1])),Math.max(Math.abs(pa[0][1]-pb[1][1]),Math.abs(pa[1][1]-pb[0][1])));
+        if(d>1e-6) problems.push(label+' p='+p+' edge '+k+' gap '+d.toFixed(4)+' dy '+dy.toFixed(3));
+      }}
+  };
+  SNAPS.forEach((s,i)=>{[0,0.5,1].forEach(p=>check(s,'step '+(i+1),p))});
+  return problems;
+}
+
+// ---------- content ----------
+const STEPS=[
+  {t:'Start pale side up',b:'Lay your square pale side up, then turn it so one corner points towards you, like a diamond.',tip:'Thin origami paper (kami) folds best. A 20 cm square is easiest for small hands.',
+   kt:'Pale side up',kb:'Put the pale side up. Turn the paper so a corner points at you, like a diamond.',
+   a:'A square of paper, pale side up, turning into a diamond shape.'},
+  {t:'Fold in half, then unfold',b:'Bring the left corner over to the right corner and crease down the middle. Then open it again.',tip:'This centre crease is your guide line for the next two folds.',
+   kt:'Fold in half, then open',kb:'Fold the left corner over to the right corner. Press the fold flat, then open it again.',
+   a:'The left half folds over to the right along the vertical dashed line, then opens again, leaving a centre crease.'},
+  {t:'Fold the left edge to the centre',b:'Fold the lower-left edge in so it lies exactly along the centre crease. The fold starts at the bottom point.',tip:'Line the edge up first, then smooth the crease from the bottom point upwards.',
+   kt:'Left edge to the middle',kb:'Fold the bottom-left edge to the middle line.',
+   a:'The lower-left edge folds over along a dashed valley line to meet the centre crease, showing the pink side.'},
+  {t:'Fold the right edge to the centre',b:'Repeat on the right so the two edges meet on the crease. You now have a kite shape.',tip:'The two edges should touch without overlapping.',
+   kt:'Right edge to the middle',kb:'Now fold the right edge to the middle too. It looks like a kite!',
+   a:'The lower-right edge folds to the centre, making a kite with two pink flaps.'},
+  {t:'Make the left leg',b:'Fold the top corner of the left flap outwards and down, so its tip pokes out past the edge of the kite.',tip:'Aim for a little point that sticks out about a finger-width.',
+   kt:'Make a leg',kb:'Fold the top corner of the left flap out, so it pokes out of the side. That is a leg!',
+   a:'The top corner of the left flap folds out along a slanted dashed line so its tip sticks out past the left edge.'},
+  {t:'Make the right leg',b:'Do the same with the right flap, so both front legs match.',tip:'Hold the paper up to the light to check that both legs are the same size.',
+   kt:'Make the other leg',kb:'Do the same on the right side. Now there are two legs.',
+   a:'The top corner of the right flap folds out to make a matching leg on the right.'},
+  {t:'Fold the top point down',b:'Fold the top point down over the legs. The crease runs straight across between the two side corners.',tip:'The tip lands right where the two leg folds meet. Those side corners will become the gills.',
+   kt:'Top point down',kb:'Fold the top point down. The fold goes from one side corner to the other.',
+   a:'The top triangle folds down along a horizontal dashed line between the two side corners.'},
+  {t:'Turn it over',b:'Flip the paper over from side to side. Now it is pink all over, with the legs peeking out.',tip:'Keep the wide edge at the top. That is the axolotl\u2019s head.',
+   kt:'Flip it over',kb:'Turn the paper over. Hello, pink axolotl!',
+   a:'The whole model flips over sideways, showing the plain pink side with two legs sticking out.'},
+  {t:'Lift the gills',b:'Gently bend the two top corners up a little. These are the axolotl\u2019s feathery gills.',tip:'Optional: with a grown-up, snip two tiny cuts into each gill to give it three frills.',
+   kt:'Lift the gills',kb:'Bend the two top corners up a little. Those are the gills!',
+   a:'The two top corners bend upwards along short dashed lines to become gills.'},
+  {t:'Bend the legs down',b:'Softly bend each leg down along the side of the body, so your axolotl can stand.',tip:'Just a small bend. Don\u2019t crease it flat.',
+   kt:'Legs down',kb:'Bend both legs down a little, so it can stand up.',
+   a:'Both legs bend down along the body edge, shown with dash-dot mountain lines.'},
+  {t:'Curl the tail',b:'Bend the end of the tail up slightly for a swishy tail.',tip:'Roll the tail around a pencil for an extra-curly tail.',
+   kt:'Lift the tail',kb:'Lift the end of the tail a tiny bit. Swish!',
+   a:'The tail tip bends up along a horizontal dashed line near the bottom.'},
+  {t:'Draw a happy face',b:'Add two dot eyes just below the top edge and a little smile between them.',tip:'A pink pencil makes lovely rosy cheeks.',
+   kt:'Draw a face',kb:'Draw two eyes and a smile near the top.',
+   a:'The finished axolotl with two black dot eyes and a small smile.'}
+];
+const N=STEPS.length;
+
+const ICON={
+  paper:'<svg viewBox="0 0 24 24"><rect x="4.5" y="4.5" width="15" height="15" rx="1.5"/><path d="M4.5 19.5 19.5 4.5"/></svg>',
+  pen:'<svg viewBox="0 0 24 24"><path d="M15.5 4.5l4 4L9 19H5v-4z"/><path d="M13.5 6.5l4 4"/></svg>',
+  clock:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7.5V12l3 2"/></svg>',
+  heart:'<svg viewBox="0 0 24 24"><path d="M12 19s-7-4.4-7-9.5A3.8 3.8 0 0 1 12 7a3.8 3.8 0 0 1 7 2.5C19 14.6 12 19 12 19z"/></svg>',
+  eye:'<svg viewBox="0 0 24 24"><circle cx="8.5" cy="11" r="1.6"/><circle cx="15.5" cy="11" r="1.6"/><path d="M9 15.5c1.8 1.3 4.2 1.3 6 0"/></svg>',
+  family:'<svg viewBox="0 0 24 24"><rect x="3.5" y="9" width="7" height="7" rx="1" transform="rotate(45 7 12.5)"/><rect x="13" y="7.5" width="8" height="8" rx="1" transform="rotate(45 17 11.5)"/></svg>',
+  pond:'<svg viewBox="0 0 24 24"><path d="M3.5 14c2 0 2-1.5 4.2-1.5S9.8 14 12 14s2-1.5 4.2-1.5S18.3 14 20.5 14"/><path d="M3.5 18c2 0 2-1.5 4.2-1.5S9.8 18 12 18s2-1.5 4.2-1.5S18.3 18 20.5 18"/><path d="M12 10V5m0 0-2 2m2-2 2 2"/></svg>'
+};
+const CREDIT='<p class="credit">Folding method: an original, simplified kite-base design made for this guide, inspired by beginner axolotl write-ups such as <a href="https://olinchan.com/how-to-make-origami-axolotl-po1214/" target="_blank" rel="noopener">olinchan.com</a>. Ready for a challenge? Try <a href="https://hoang-tuan-origami-shop.myshopify.com/products/origami-axolotl-diagram-instruction-axolotl-salamander-ebook" target="_blank" rel="noopener">Ph\u1ea1m Ho\u00e0ng Tu\u1ea5n\u2019s Axolotl</a> or <a href="https://oriwiki.com/showModel.php?ModelID=58451" target="_blank" rel="noopener">Muneji Fuchimoto\u2019s Axolotl</a>.</p>';
+
+// ---------- state ----------
+const store={get(k,d){try{const v=localStorage.getItem('axolotl-fold:'+k);return v===null?d:JSON.parse(v)}catch(e){return d}},set(k,v){try{localStorage.setItem('axolotl-fold:'+k,JSON.stringify(v))}catch(e){}}};
+// view: -1 = intro, 0..N-1 = steps, N = finished
+let view=store.get('view',-1); if(typeof view!=='number'||view<-1||view>N) view=-1;
+let kid=!!store.get('kid',false);
+let progress=1, playing=false, playStart=0, playDur=1700, dragging=false;
+const reduceMotion=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const $=s=>document.querySelector(s);
+const copyEl=$('#copy'),eyebrow=$('#eyebrow'),prevBtn=$('#prev'),nextBtn=$('#next'),scrub=$('#scrub'),fill=$('#fill'),thumb=$('#thumb'),stage=$('#stage'),progressEl=$('#progress'),kidBtn=$('#kidBtn'),hint=$('#hint');
+
+for(let i=0;i<N;i++){const b=document.createElement('button');b.className='seg';b.type='button';b.setAttribute('aria-label','Go to step '+(i+1)+': '+STEPS[i].t);b.innerHTML='<i></i>';b.addEventListener('click',()=>go(i));progressEl.appendChild(b)}
+
+function copyHTML(){
+  if(view===-1){
+    return `<h2>What you\u2019ll need</h2>
+    <ul class="list">
+      <li>${ICON.paper}<div><div class="t">One square of paper</div><div class="d"><span class="sw-paper" aria-hidden="true"></span>15 cm or 20 cm. Pink is perfect.</div></div></li>
+      <li>${ICON.pen}<div><div class="t">A pen <span style="color:var(--muted);font-weight:400">(optional)</span></div><div class="d">For drawing the eyes and smile.</div></div></li>
+      <li>${ICON.clock}<div><div class="t">10 to 15 minutes \u00b7 ${N} steps</div><div class="d">Beginner level. No glue, and cutting is optional.</div></div></li>
+    </ul>${CREDIT}`;
+  }
+  if(view===N){
+    return `<h2>${kid?'You did it!':'Meet your axolotl!'}</h2>
+    <p>${kid?'Your axolotl is ready to swim. What next?':'Lovely folding. A few ideas for what to do next:'}</p>
+    <ul class="list">
+      <li>${ICON.eye}<div><div class="t">Give it a face</div><div class="d">Dot eyes, a smile and pink-pencil cheeks.</div></div></li>
+      <li>${ICON.family}<div><div class="t">Fold a family</div><div class="d">Try white, gold or black paper for different axolotl colours.</div></div></li>
+      <li>${ICON.pond}<div><div class="t">Build a pond</div><div class="d">Blue card makes a pond, and paper strips make weeds.</div></div></li>
+    </ul>${CREDIT}`;
+  }
+  const s=STEPS[view];
+  return `<h2>${kid?s.kt:s.t}</h2><p>${kid?s.kb:s.b}</p>${s.tip&&!kid?`<p class="tip"><b>Tip:</b> ${s.tip}</p>`:''}`;
+}
+
+let lastView=null;
+function render(dir){
+  document.body.classList.toggle('kid-on',kid);
+  kidBtn.setAttribute('aria-pressed',String(kid));
+  eyebrow.textContent=view===-1?'Before you start':view===N?'All done':`Step ${view+1} of ${N}`;
+  [...progressEl.children].forEach((b,i)=>{b.classList.toggle('on',view===N||i<view);b.classList.toggle('cur',i===view);b.toggleAttribute('aria-current',i===view)});
+  prevBtn.hidden=view===-1;
+  nextBtn.textContent=view===-1?'Start folding \u203a':view===N?'Fold another \u21ba':view===N-1?'Finish \u203a':'Next step \u203a';
+  scrub.hidden=!(view>=0&&view<N);
+  stage.setAttribute('aria-label',view>=0&&view<N?`Diagram for step ${view+1}: ${STEPS[view].a}`:view===N?'The finished pink origami axolotl, slowly turning.':'A 3D model of the finished pink origami axolotl, slowly turning.');
+  const html=copyHTML();
+  if(lastView===null||reduceMotion){copyEl.innerHTML=html}
+  else{
+    copyEl.style.setProperty('--dir',dir||1);
+    copyEl.classList.add('out');
+    setTimeout(()=>{copyEl.innerHTML=html;copyEl.classList.remove('out');copyEl.classList.add('pre');void copyEl.offsetWidth;copyEl.classList.remove('pre')},170);
+  }
+  lastView=view;
+}
+
+function go(v,dir){
+  v=Math.max(-1,Math.min(N,v));
+  if(v===view&&lastView!==null){replay();return}
+  const d=dir||(v>view?1:-1);
+  view=v; store.set('view',view);
+  render(d);
+  if(view>=0&&view<N) replay(); else {progress=1;playing=false;updateScrub()}
+  if(view===N) confetti();
+  onViewChange&&onViewChange();
+}
+function replay(){progress=0;playing=true;playStart=performance.now();playDur=OPS[view].type==='turn'?2000:OPS[view].type==='foldUnfold'?2200:1700;if(reduceMotion){progress=1;playing=false}updateScrub()}
+function updateScrub(){const pc=(progress*100);fill.style.width=pc+'%';thumb.style.left=pc+'%';scrub.setAttribute('aria-valuenow',Math.round(pc))}
+
+prevBtn.addEventListener('click',()=>go(view-1,-1));
+nextBtn.addEventListener('click',()=>{if(view===N)go(0,1);else go(view+1,1)});
+kidBtn.addEventListener('click',()=>{kid=!kid;store.set('kid',kid);render(0)});
+document.addEventListener('keydown',e=>{
+  if(e.target===scrub||e.metaKey||e.ctrlKey||e.altKey) return;
+  if(e.key==='ArrowRight'){e.preventDefault();if(view<N)go(view+1,1)}
+  else if(e.key==='ArrowLeft'){e.preventDefault();if(view>-1)go(view-1,-1)}
+});
+// scrubber
+function scrubAt(x){const r=scrub.querySelector('.track').getBoundingClientRect();progress=Math.max(0,Math.min(1,(x-r.left)/r.width));playing=false;updateScrub()}
+scrub.addEventListener('pointerdown',e=>{dragging=true;scrub.classList.add('drag');scrub.setPointerCapture(e.pointerId);scrubAt(e.clientX)});
+scrub.addEventListener('pointermove',e=>{if(dragging)scrubAt(e.clientX)});
+const endDrag=()=>{dragging=false;scrub.classList.remove('drag')};
+scrub.addEventListener('pointerup',endDrag);scrub.addEventListener('pointercancel',endDrag);
+scrub.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowUp'){progress=Math.min(1,progress+0.05);playing=false;updateScrub();e.preventDefault()}
+  if(e.key==='ArrowLeft'||e.key==='ArrowDown'){progress=Math.max(0,progress-0.05);playing=false;updateScrub();e.preventDefault()}
+  if(e.key==='Home'){progress=0;updateScrub();e.preventDefault()} if(e.key==='End'){progress=1;updateScrub();e.preventDefault()}
+  if(e.key===' '||e.key==='Enter'){replay();e.preventDefault()}
+});
+// swipe (anywhere except the 3D stage and scrubber)
+let sx=null,sy=null;
+document.addEventListener('touchstart',e=>{if(e.target.closest('#stage,#scrub')){sx=null;return}sx=e.touches[0].clientX;sy=e.touches[0].clientY},{passive:true});
+document.addEventListener('touchend',e=>{if(sx===null)return;const dx=e.changedTouches[0].clientX-sx,dy=e.changedTouches[0].clientY-sy;sx=null;if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.4){if(dx<0&&view<N)go(view+1,1);else if(dx>0&&view>-1)go(view-1,-1)}},{passive:true});
+
+function confetti(){
+  if(reduceMotion) return;
+  const box=$('#confetti'); box.innerHTML='';
+  const cols=['#FF9EBB','#FFC2D1','#FF9EBB','#1A1A1A','#C7C7CC','#E5E5EA'];
+  for(let i=0;i<46;i++){
+    const el=document.createElement('i');
+    const ang=Math.random()*PI*2, r=70+Math.random()*120;
+    const x1=Math.cos(ang)*r, y1=Math.sin(ang)*r*0.8-60;
+    el.style.cssText=`background:${cols[i%cols.length]};--x1:${x1.toFixed(0)}px;--y1:${y1.toFixed(0)}px;--x2:${(x1*1.25).toFixed(0)}px;--y2:${(y1+170+Math.random()*80).toFixed(0)}px;--r:${(Math.random()*720-360).toFixed(0)}deg;--d:${(Math.random()*0.15).toFixed(2)}s;width:${5+Math.random()*4}px;height:${7+Math.random()*6}px`;
+    box.appendChild(el);
+  }
+  setTimeout(()=>{box.innerHTML=''},2800);
+}
+
+// ---------- which snapshot / progress to draw ----------
+function currentScene(){
+  if(view>=0&&view<N) return {snap:SNAPS[view],p:progress,step:view};
+  return {snap:FINAL,p:1,step:N};
+}
+
+// ---------- drawing helpers shared by WebGL and SVG ----------
+const TOP_EYE_Y=()=>(FINAL.maxL+1)*EPS+0.002;
+function guidesFor(snap){
+  const op=snap.op; const out=[];
+  if(op.guide) out.push({seg:op.guide,mountain:false});
+  if(op.guides) op.guides.forEach(g=>out.push({seg:g,mountain:!!op.mountain}));
+  return out;
+}
+
+// ---------- SVG fallback ----------
+const fb=$('#fb');
+function drawSVG(){
+  const {snap,p,step}=currentScene();
+  const W=evalSnap(snap,p);
+  const items=W.map((vs,i)=>{
+    const n=vCross(vSub(vs[1],vs[0]),vSub(vs[2],vs[0]));
+    const shade=Math.abs(vNorm(n)[1]);
+    const col=n[1]>0?'#FFC2D1':'#FF9EBB';
+    return {vs,i,col,shade,y:vs.reduce((a,v)=>a+v[1],0)/vs.length};
+  }).sort((a,b)=>a.y-b.y);
+  const P=v=>`${(v[0]/S).toFixed(4)},${(v[2]/S-v[1]*0.35/S).toFixed(4)}`;
+  let h=`<ellipse cx="0" cy="0.05" rx="1.05" ry="1.05" fill="url(#sh)"/>`;
+  h=`<defs><radialGradient id="sh"><stop offset="0" stop-color="#000" stop-opacity=".06"/><stop offset="1" stop-color="#000" stop-opacity="0"/></radialGradient>
+     <marker id="ah" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#1A1A1A"/></marker></defs>`+h;
+  const edgeSet=new Map(); snap.edges.forEach(([fi,i])=>{(edgeSet.get(fi)||edgeSet.set(fi,[]).get(fi)).push(i)});
+  for(const it of items){
+    const pts=it.vs.map(P).join(' ');
+    h+=`<polygon points="${pts}" fill="${it.col}" style="filter:brightness(${(0.86+0.14*it.shade).toFixed(3)})"/>`;
+    (edgeSet.get(it.i)||[]).forEach(e=>{const a=it.vs[e],b=it.vs[(e+1)%it.vs.length];h+=`<line x1="${P(a).split(',')[0]}" y1="${P(a).split(',')[1]}" x2="${P(b).split(',')[0]}" y2="${P(b).split(',')[1]}" stroke="#9c4a64" stroke-opacity=".35" stroke-width=".008"/>`});
+  }
+  if(step<N){
+    const op=snap.op; const fade=op.type==='foldUnfold'?1:1-0.85*smooth(Math.min(1,p*1.3));
+    guidesFor(snap).forEach(g=>{h+=`<line x1="${g.seg[0][0]}" y1="${g.seg[0][1]}" x2="${g.seg[1][0]}" y2="${g.seg[1][1]}" stroke="#1A1A1A" stroke-opacity="${(0.7*fade).toFixed(3)}" stroke-width=".014" stroke-dasharray="${g.mountain?'.06 .03 .012 .03':'.06 .04'}"/>`});
+    if(op.ref) h+=`<line x1="${op.ref[0][0]}" y1="${op.ref[0][1]}" x2="${op.ref[1][0]}" y2="${op.ref[1][1]}" stroke="#1A1A1A" stroke-opacity=".18" stroke-width=".006"/>`;
+    const af=0.8*(1-smooth(Math.min(1,p*1.6)));
+    (op.arrows||[]).forEach(a=>{const mx=(a.a[0]+a.b[0])/2,my=(a.a[1]+a.b[1])/2-a.h*0.6;h+=`<path d="M${a.a[0]} ${a.a[1]} Q${mx} ${my} ${a.b[0]} ${a.b[1]}" fill="none" stroke="#1A1A1A" stroke-opacity="${af.toFixed(3)}" stroke-width=".016" marker-end="url(#ah)"/>`});
+  }
+  if(step>=N-1){const k=step===N?1:easeOutQuart(p);if(k>0.01){const ey=-0.29;h+=`<circle cx="-0.17" cy="${ey}" r="${0.042*k}" fill="#1A1A1A"/><circle cx="0.17" cy="${ey}" r="${0.042*k}" fill="#1A1A1A"/><path d="M-0.07 -0.2 Q0 ${-0.2+0.07*k} 0.07 -0.2" stroke="#1A1A1A" stroke-width=".016" fill="none" stroke-linecap="round" opacity="${k}"/>`}}
+  fb.innerHTML=h;
+}
+
+// ---------- WebGL (Three.js) ----------
+let onViewChange=null;
+let gl=null;
+async function initGL(){
+  const force=new URLSearchParams(location.search).has('svg');
+  if(force) throw new Error('forced svg');
+  const test=document.createElement('canvas');
+  if(!(test.getContext('webgl2')||test.getContext('webgl'))) throw new Error('no webgl');
+  let THREE;
+  try{THREE=await import('https://unpkg.com/three@0.160.0/build/three.module.js')}
+  catch(e){THREE=await import('https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js')}
+  const canvas=$('#gl');
+  const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:'high-performance'});
+  renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));
+  renderer.outputColorSpace=THREE.SRGBColorSpace;
+  renderer.shadowMap.enabled=true; renderer.shadowMap.type=THREE.PCFSoftShadowMap;
+  const scene=new THREE.Scene();
+  const camera=new THREE.PerspectiveCamera(30,1,0.1,60);
+  camera.position.set(0,4.75,3.2); camera.lookAt(0,0.12,0.16);
+
+  scene.add(new THREE.HemisphereLight(0xffffff,0xf3e9ec,2.1));
+  const key=new THREE.DirectionalLight(0xffffff,1.25);
+  key.position.set(-2.2,7,3.2); key.castShadow=true;
+  key.shadow.mapSize.set(2048,2048); key.shadow.radius=7; key.shadow.bias=-0.0004;
+  Object.assign(key.shadow.camera,{left:-3,right:3,top:3,bottom:-3,near:1,far:20});
+  scene.add(key);
+  const rim=new THREE.DirectionalLight(0xffffff,0.35); rim.position.set(3,2,-3); scene.add(rim);
+
+  // ground: soft contact shadow + soft blob
+  const ground=new THREE.Mesh(new THREE.PlaneGeometry(14,14),new THREE.ShadowMaterial({opacity:0.075}));
+  ground.rotation.x=-PI/2; ground.receiveShadow=true; scene.add(ground);
+  const bc=document.createElement('canvas'); bc.width=bc.height=128; const bx=bc.getContext('2d');
+  const gr=bx.createRadialGradient(64,64,0,64,64,64); gr.addColorStop(0,'rgba(0,0,0,0.16)'); gr.addColorStop(0.55,'rgba(0,0,0,0.06)'); gr.addColorStop(1,'rgba(0,0,0,0)');
+  bx.fillStyle=gr; bx.fillRect(0,0,128,128);
+  const blob=new THREE.Mesh(new THREE.PlaneGeometry(1,1),new THREE.MeshBasicMaterial({map:new THREE.CanvasTexture(bc),transparent:true,depthWrite:false}));
+  blob.rotation.x=-PI/2; blob.position.y=0.002; blob.scale.set(3.0,3.0,1); scene.add(blob);
+
+  const group=new THREE.Group(); group.position.y=Y0; scene.add(group);
+  const geo=new THREE.BufferGeometry();
+  const common={roughness:0.94,metalness:0,flatShading:true,polygonOffset:true,polygonOffsetFactor:1,polygonOffsetUnits:1,shadowSide:THREE.DoubleSide};
+  const matPale=new THREE.MeshStandardMaterial({...common,color:0xFFC2D1,side:THREE.FrontSide});
+  const matPink=new THREE.MeshStandardMaterial({...common,color:0xFF9EBB,side:THREE.BackSide});
+  const meshA=new THREE.Mesh(geo,matPale), meshB=new THREE.Mesh(geo,matPink);
+  meshA.castShadow=meshB.castShadow=true; group.add(meshA,meshB);
+  const egeo=new THREE.BufferGeometry();
+  const edges=new THREE.LineSegments(egeo,new THREE.LineBasicMaterial({color:0x8a3a55,transparent:true,opacity:0.28}));
+  group.add(edges);
+
+  // guides & arrows (rebuilt per step)
+  const guideGroup=new THREE.Group(); group.add(guideGroup);
+  const ink=0x1A1A1A;
+  const guideMat=new THREE.MeshBasicMaterial({color:ink,transparent:true,opacity:0.7,depthWrite:false});
+  const refMat=new THREE.MeshBasicMaterial({color:ink,transparent:true,opacity:0.16,depthWrite:false});
+  const arrowMat=new THREE.MeshBasicMaterial({color:ink,transparent:true,opacity:0.8,depthWrite:false});
+  function dashGeom(seg,h,mountain,solid){
+    const a=toWorld(seg[0],h),b=toWorld(seg[1],h); const d=vSub(b,a); const len=Math.hypot(d[0],d[2]); const u=[d[0]/len,0,d[2]/len]; const n=[-u[2],0,u[0]];
+    const w=solid?0.006:0.0105; const pos=[];
+    const pattern=solid?[[0,len]]:(()=>{const out=[];let s=0;const dash=0.085,gap=0.05;while(s<len){if(mountain){out.push([s,Math.min(len,s+dash)]);s+=dash+0.04;if(s<len)out.push([s,Math.min(len,s+0.016)]);s+=0.016+0.04}else{out.push([s,Math.min(len,s+dash)]);s+=dash+gap}}return out})();
+    for(const [s0,s1] of pattern){
+      const p0=vAdd(a,vScale(u,s0)),p1=vAdd(a,vScale(u,s1));
+      const q=[vAdd(p0,vScale(n,w)),vSub(p0,vScale(n,w)),vSub(p1,vScale(n,w)),vAdd(p1,vScale(n,w))];
+      pos.push(...q[0],...q[1],...q[2],...q[0],...q[2],...q[3]);
+    }
+    const g=new THREE.BufferGeometry(); g.setAttribute('position',new THREE.Float32BufferAttribute(pos,3)); return g;
+  }
+  let guideMeshes=[],arrowMeshes=[],builtFor=null;
+  function buildGuides(snap,step){
+    guideGroup.clear(); guideMeshes=[]; arrowMeshes=[];
+    if(step>=N) return;
+    const top=(snap.maxL+1)*EPS+0.006;
+    guidesFor(snap).forEach(g=>{const m=new THREE.Mesh(dashGeom(g.seg,top,g.mountain),guideMat);m.side=THREE.DoubleSide;m.renderOrder=3;guideGroup.add(m);guideMeshes.push(m)});
+    if(snap.op.ref){const m=new THREE.Mesh(dashGeom(snap.op.ref,top-0.002,false,true),refMat);m.renderOrder=2;guideGroup.add(m)}
+    (snap.op.arrows||[]).forEach(ar=>{
+      const A=new THREE.Vector3(ar.a[0]*S,top+ar.a[2],ar.a[1]*S),B=new THREE.Vector3(ar.b[0]*S,top+ar.b[2],ar.b[1]*S);
+      const M=A.clone().add(B).multiplyScalar(0.5); M.y+=ar.h*S;
+      const curve=new THREE.QuadraticBezierCurve3(A,M,B);
+      const tan=curve.getTangent(1).normalize();
+      const end=B.clone().sub(tan.clone().multiplyScalar(0.07));
+      const curve2=new THREE.QuadraticBezierCurve3(A,M,end);
+      const tube=new THREE.Mesh(new THREE.TubeGeometry(curve2,48,0.0115,8,false),arrowMat);
+      const cone=new THREE.Mesh(new THREE.ConeGeometry(0.034,0.09,16),arrowMat);
+      cone.position.copy(end.clone().add(tan.clone().multiplyScalar(0.045)));
+      cone.quaternion.setFromUnitVectors(new THREE.Vector3(0,1,0),tan);
+      tube.renderOrder=cone.renderOrder=4;
+      guideGroup.add(tube,cone); arrowMeshes.push(tube,cone);
+    });
+  }
+  // face (pen drawing)
+  const faceGroup=new THREE.Group(); group.add(faceGroup);
+  const penMat=new THREE.MeshBasicMaterial({color:ink});
+  const eyeGeo=new THREE.CircleGeometry(0.052,32); eyeGeo.rotateX(-PI/2);
+  const shineMat=new THREE.MeshBasicMaterial({color:0xffffff});
+  const shineGeo=new THREE.CircleGeometry(0.014,16); shineGeo.rotateX(-PI/2);
+  const ey=TOP_EYE_Y();
+  [-1,1].forEach(sx=>{
+    const e=new THREE.Mesh(eyeGeo,penMat); e.position.set(sx*0.17*S,ey,-0.29*S); faceGroup.add(e);
+    const sh=new THREE.Mesh(shineGeo,shineMat); sh.position.set(sx*0.17*S+0.018,ey+0.001,-0.29*S-0.02); faceGroup.add(sh);
+  });
+  const smileCurve=new THREE.QuadraticBezierCurve3(new THREE.Vector3(-0.075*S,ey,-0.2*S),new THREE.Vector3(0,ey,-0.13*S),new THREE.Vector3(0.075*S,ey,-0.2*S));
+  const smile=new THREE.Mesh(new THREE.TubeGeometry(smileCurve,24,0.0085,6,false),penMat); faceGroup.add(smile);
+
+  // drag to turn
+  let yaw=0,yawVel=0,dragX=null,lastDrag=0;
+  canvas.addEventListener('pointerdown',e=>{dragX=e.clientX;canvas.setPointerCapture(e.pointerId);hint.style.opacity=0});
+  canvas.addEventListener('pointermove',e=>{if(dragX===null)return;const dx=e.clientX-dragX;dragX=e.clientX;yaw+=dx*0.012;yawVel=dx*0.012;lastDrag=performance.now()});
+  const up=()=>{dragX=null};
+  canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);
+  canvas.style.touchAction='pan-y';
+
+  function resize(){const r=stage.getBoundingClientRect();const s=Math.max(1,Math.round(r.width));renderer.setSize(s,s,false);camera.aspect=1;camera.updateProjectionMatrix()}
+  new ResizeObserver(resize).observe(stage); resize();
+
+  let curSnap=null,triCount=0;
+  function setSnap(snap){
+    curSnap=snap;
+    triCount=snap.faces.reduce((a,f)=>a+f.poly.length-2,0);
+    geo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(triCount*9),3));
+    geo.setAttribute('normal',new THREE.BufferAttribute(new Float32Array(triCount*9),3));
+    egeo.setAttribute('position',new THREE.BufferAttribute(new Float32Array(snap.edges.length*6),3));
+  }
+  let spinAngle=0,lastT=performance.now();
+  function frame(now){
+    const dt=Math.min(0.05,(now-lastT)/1000); lastT=now;
+    if(playing){const k=Math.min(1,(now-playStart)/playDur);progress=easeOutQuart(k);if(k>=1){playing=false}updateScrub()}
+    const {snap,p,step}=currentScene();
+    if(snap!==curSnap) setSnap(snap);
+    const key=snap===FINAL?'final':step;
+    if(builtFor!==key){buildGuides(snap,step);builtFor=key}
+    const W=evalSnap(snap,p);
+    const pos=geo.attributes.position.array; let o=0;
+    for(const vs of W){for(let i=1;i<vs.length-1;i++){for(const v of [vs[0],vs[i],vs[i+1]]){pos[o++]=v[0];pos[o++]=v[1];pos[o++]=v[2]}}}
+    geo.attributes.position.needsUpdate=true; geo.computeVertexNormals(); geo.computeBoundingSphere();
+    const ep=egeo.attributes.position.array; o=0;
+    for(const [fi,i] of snap.edges){const vs=W[fi];const a=vs[i],b=vs[(i+1)%vs.length];ep[o++]=a[0];ep[o++]=a[1]+0.0015;ep[o++]=a[2];ep[o++]=b[0];ep[o++]=b[1]+0.0015;ep[o++]=b[2]}
+    egeo.attributes.position.needsUpdate=true; egeo.computeBoundingSphere();
+    // guides fade as the fold completes
+    const op=snap.op;
+    guideMat.opacity=op.type==='foldUnfold'?0.7:0.7*(1-0.85*smooth(Math.min(1,p*1.3)));
+    arrowMat.opacity=0.8*(1-smooth(Math.min(1,p*1.6)));
+    // pen face
+    const fk=step===N?1:step===N-1?easeOutQuart(p):0;
+    faceGroup.visible=fk>0.01; faceGroup.children.forEach(c=>c.scale.setScalar(Math.max(0.001,fk)));
+    // motion
+    if(dragX===null){yaw+=yawVel;yawVel*=0.92}
+    if(step>=N||view===-1){spinAngle+=dt*0.35}else{spinAngle=Math.atan2(Math.sin(spinAngle),Math.cos(spinAngle))*Math.pow(0.004,dt)}
+    const idle=(step>=N)?0:Math.sin(now/1000*0.55)*0.09;
+    group.rotation.y=spinAngle+idle+yaw;
+    if(step<N&&dragX===null&&now-lastDrag>2500) yaw*=Math.pow(0.16,dt);
+    renderer.render(scene,camera);
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+  return {renderer};
+}
+
+render(0);
+if(view>=0&&view<N) replay();
+if(view===N) setTimeout(confetti,400);
+
+initGL().then(r=>{gl=r;$('#loading').style.opacity=0;window.__axoMode='webgl'}).catch(err=>{
+  console.warn('Using SVG fallback:',err&&err.message);
+  stage.classList.add('use-svg'); $('#loading').style.opacity=0; hint.style.display='none'; window.__axoMode='svg';
+  (function loop(now){if(playing){const k=Math.min(1,(now-playStart)/playDur);progress=easeOutQuart(k);if(k>=1)playing=false;updateScrub()}drawSVG();requestAnimationFrame(loop)})(performance.now());
+});
+setTimeout(()=>{hint.style.opacity=0},6000);
+
+window.__axo={verify,SNAPS,FINAL,go,setProgress:p=>{progress=p;playing=false;updateScrub()},get view(){return view}};
+</script>
+</body>
+</html>

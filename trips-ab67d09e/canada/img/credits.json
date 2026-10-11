@@ -1,0 +1,44 @@
+{
+ "hero": {
+  "title": "File:Canadian in Jasper.jpg",
+  "artist": "Martin Cathrae from Charlottetown, PE, Canada",
+  "license": "CC BY-SA 2.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Canadian_in_Jasper.jpg"
+ },
+ "dome": {
+  "title": "File:VIA Rail Canada Park Car and Skyline (Dome) at Pacific Central Station, Vancouver.jpg",
+  "artist": "Cjstepney",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:VIA_Rail_Canada_Park_Car_and_Skyline_(Dome)_at_Pacific_Central_Station,_Vancouver.jpg"
+ },
+ "louise": {
+  "title": "File:Lake Louise Winter - panoramio.jpg",
+  "artist": "Jack Borno",
+  "license": "CC BY-SA 3.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Lake_Louise_Winter_-_panoramio.jpg"
+ },
+ "niagara": {
+  "title": "File:Niagara Falls water and ice winter.jpg",
+  "artist": "Daymonday",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Niagara_Falls_water_and_ice_winter.jpg"
+ },
+ "icefields": {
+  "title": "File:Mt Jimmy Simpson Icefields Parkway Snow Winter (crop).jpg",
+  "artist": "Amine Abassir",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Mt_Jimmy_Simpson_Icefields_Parkway_Snow_Winter_(crop).jpg"
+ },
+ "banff": {
+  "title": "File:Mist Over Banff Avenue (Unsplash).jpg",
+  "artist": "Tj Holowaychuk tjholowaychuk",
+  "license": "CC0",
+  "page": "https://commons.wikimedia.org/wiki/File:Mist_Over_Banff_Avenue_(Unsplash).jpg"
+ },
+ "jasper": {
+  "title": "File:Jasper National Park Pyramid Lake canoes in winter.jpg",
+  "artist": "Chaplain143",
+  "license": "CC BY-SA 4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Jasper_National_Park_Pyramid_Lake_canoes_in_winter.jpg"
+ }
+}
